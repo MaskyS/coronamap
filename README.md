@@ -1,4 +1,4 @@
-# coronamap
+# coronamapp
 
 A new Flutter project.
 

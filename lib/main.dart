@@ -1,4 +1,4 @@
-import 'package:coronamap/symptoms_form.dart';
+import 'package:coronamapp/symptoms_form.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Corona Map',
+      title: 'Corona Mapp',
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
