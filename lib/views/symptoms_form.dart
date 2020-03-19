@@ -20,7 +20,7 @@ class _SymptomsFormState extends State<SymptomsForm> {
           if (_currentStep == 1) {
             Navigator.pushReplacementNamed(
               context,
-              Routes.THANK_YOU_PAGE,
+              Routes.thankYouPage,
             );
           } else
             setState(() => _currentStep++);

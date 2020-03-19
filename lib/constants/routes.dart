@@ -1,6 +1,6 @@
 class Routes {
-  static const HOME_PAGE = '/';
-  static const SPLASH_PAGE = '/splash';
-  static const FORM_PAGE = '/form';
-  static const THANK_YOU_PAGE = '/thank-you';
+  static const homePage = '/';
+  static const splashPage = '/splash';
+  static const formPage = '/form';
+  static const thankYouPage = '/thank-you';
 }

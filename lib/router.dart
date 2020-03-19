@@ -8,13 +8,13 @@ import 'package:flutter/material.dart';
 class Router {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
-      case Routes.HOME_PAGE:
+      case Routes.homePage:
         return MaterialPageRoute(builder: (_) => HomePage());
-      case Routes.THANK_YOU_PAGE:
+      case Routes.thankYouPage:
         return MaterialPageRoute(builder: (_) => ThankYouForm());
-      case Routes.FORM_PAGE:
+      case Routes.formPage:
         return MaterialPageRoute(builder: (_) => SymptomsForm());
-      case Routes.SPLASH_PAGE:
+      case Routes.splashPage:
         return MaterialPageRoute(builder: (_) => Splash());
       default:
         return MaterialPageRoute(

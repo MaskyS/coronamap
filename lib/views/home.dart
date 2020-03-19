@@ -24,7 +24,7 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: FloatingActionButton.extended(
         icon: Icon(Icons.warning),
         onPressed: () => Navigator.pushNamed(
-            context, Routes.FORM_PAGE),
+            context, Routes.formPage),
         tooltip: 'Report Symptômes',
         label: Text("Mo Ena Symptômes"),
         backgroundColor: Colors.orange,
