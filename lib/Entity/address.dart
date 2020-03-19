@@ -1,31 +1,35 @@
 class Address {
-  String city;
+  String region;
   String country;
   String firstLine;
   String secondLine;
   String postalCode;
+  String district;
 
   Address({
-    this.city,
+    this.region,
     this.country,
     this.firstLine,
     this.secondLine,
     this.postalCode,
+    this.district,
   });
 
   factory Address.fromJson(Map<String, dynamic> json) => Address(
-    city: json["city"],
+    region: json["region"],
     country: json["country"],
     firstLine: json["firstLine"],
     secondLine: json["secondLine"],
     postalCode: json["postalCode"],
+    district: json["district"],
   );
 
   Map<String, dynamic> toJson() => {
-    "city": city,
+    "region": region,
     "country": country,
     "firstLine": firstLine,
     "secondLine": secondLine,
     "postalCode": postalCode,
+    "district": district,
   };
 }
