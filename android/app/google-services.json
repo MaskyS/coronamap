@@ -1,12 +1,40 @@
 {
-  "type": "service_account",
-  "project_id": "corona-map",
-  "private_key_id": "29a79cf16451f40076a8dfa2e2f031cccb7c8677",
-  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDBJTGMo37+UAFQ\n2+Qa82bMVeHVlKTAUCgCDJd446rSt5RSHan/P29b5lxr2T6e1T/G2acEc/DyjzdR\nTJYzahB5GsaUAeLSL6mY65p75YXrYj8eujA7ixhxoDxZbTp78sDLRQbDTWle3cNr\nPjodIaoLO4BlxNFOjK+nVkNMa+pCBzyIo73bUO8kzUSC+LeHb299IvpvEvlsou2Z\nCUjf+mH3TpIaEK1NMAkMWK+pzdd0h6m6GoayF7TkmS/VuPNEN7fZtHx0vQipvDF4\nOmeUmdYD44hOET2gkJt2WdSlIxgrk+0XbzF01C5OzkYJdN6YnIRL5ybGkx3vkrxF\n4dAO9xUbAgMBAAECggEAQ2pTCC7NFcEhJHMMBGgu2mWjpOP0OXgA7u4sNLLqnhAb\nwim+e2xN1zrpyW8Tj2cJksPHqyM418ErYsIjryB3TX4OD/00iX6/aLPbwSEVBFrP\ng08jpLThPE/coK4ier75kjmuqZ6sh8NKAXW/3QkyDCehomP3Vr5+VR8j8Fm+c3rt\nkYxASg2M3/6CljrvQcCKqxDfU4qvg8F3azbinAu+6bpFOXc9FF0wmi25spc4507/\njCv2V9M7LDbTcIO6J1xBvd9FCEAlglH78yFb3/3Zk8rmg2KLqlBMQ2KJqy3Cqj1/\nd4KwNYAjXGpeQ+4t8Mu2sOE+3ynoQRQdo3GqJvqlCQKBgQDtj8eFVneZcAv3Bkvz\nW8qXM9LUPCWvlqqXNgm2i+wrxMIyBSDF89B5NZPQADNCIYXevc9DgGXy3K7LlF+6\nlVpttrgl8PzA+qmYXMLe3WJGQSzuADUZT9wwbxABZ1sTxxRYiKSRTHylGJBFNF4X\nhj6lu5+knFWJpmrozvT4qSLs7wKBgQDQIuKrNBsYbYeVNvVs+MJw5+u0CyFzQstH\njPksExj0rbTBAEL+ILV9HKHkJYxDn0PsdOhcDWItS0xUhxoM7Jz46LlQiF7/QpFh\nfEdvGFDCBkfffxnOHE7Fywlw9n/Ys6+VN8zVW9Q7AysX9hwBYONufNod4CVM/IZf\neNucg2uylQKBgQCuwBJD+mw2GZ8jkqUyGja37S5MYwZR2OIaI20XtGwBclZr1yvZ\nkdWsJAZcfpk2L1S7miKqA/x6n22RYc7dgNopVLy3ZEN5bapt4uaSbIXLKkxzswFc\nYkuV8Uzzy2TK8qn7ymBMZdhW1e/iiHgik+Tno1H3E+00OY/xO7Qmary/TwKBgQC/\nrDCz2zNMpqlih48ygE+H7HxKfKmcXJmZVcCtjxS/VyyLRDNtli+sfO61jMKED6pc\nmjjVdNnBvoMXoKcj2c6hBqiJ+lwJlIMPlISwUWMlmuUbdBAOmFEOo3EZX1fS936t\n2wo+PefPRJat5U5bEp+/QykWtDGFmVQhncoYc4p9lQKBgAY9YUATSuroHKDaSC7X\nzMyb8wkQ3yksjdPju0CMzGkM0QPj+c6OOmHTR6H5Hb12lEJF4aWBwHzZBzc7oOtc\na9H6Gu/oQN8REnKnDLUqtnlHwSBqd69Vh9QBsCb9r/1MSF+Qy92230N9tyxHhzWv\nKTI799s6QX5U6GguA1TMxuYs\n-----END PRIVATE KEY-----\n",
-  "client_email": "firebase-adminsdk-g50io@corona-mapp.iam.gserviceaccount.com",
-  "client_id": "113703272787125370201",
-  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-  "token_uri": "https://oauth2.googleapis.com/token",
-  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-g50io%40corona-mapp.iam.gserviceaccount.com"
+  "project_info": {
+    "project_number": "997427785224",
+    "firebase_url": "https://corona-mapp.firebaseio.com",
+    "project_id": "corona-mapp",
+    "storage_bucket": "corona-mapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:997427785224:android:6091b1ecf1d87ece6b6bbd",
+        "android_client_info": {
+          "package_name": "mu.cyberstorm.coronamapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "997427785224-t0bt31vcmlh7omp5t16fq9oikf90l4o5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyApFgmr_K6JO3Ga_S4enbKne_u1nBPi2MI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "997427785224-t0bt31vcmlh7omp5t16fq9oikf90l4o5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
 }
