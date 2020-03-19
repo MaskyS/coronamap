@@ -1,3 +1,4 @@
+import 'package:coronamapp/constants/routes.dart';
 import 'package:flutter/material.dart';
 
 class Splash extends StatelessWidget {
@@ -79,13 +80,13 @@ class Splash extends StatelessWidget {
                           textColor: Colors.white,
                           icon: Icon(Icons.arrow_forward),
                           label: Text("GO"),
-                          onPressed: () {},
+                          onPressed: () => Navigator.pushNamed(context, Routes.homePage),
                         ),
                       )
                     ],
                   ),
                 )
-                
+
               ],
             ),
           )
