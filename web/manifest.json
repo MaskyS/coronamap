@@ -1,6 +1,6 @@
 {
-    "name": "coronamap",
-    "short_name": "coronamap",
+    "name": "coronamapp",
+    "short_name": "coronamapp",
     "start_url": ".",
     "display": "minimal-ui",
     "background_color": "#0175C2",

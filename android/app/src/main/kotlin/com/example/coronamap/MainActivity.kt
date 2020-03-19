@@ -1,4 +1,4 @@
-package com.example.coronamap
+package mu.cyberstorm.coronamapp
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity
