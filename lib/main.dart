@@ -1,5 +1,4 @@
 import 'package:coronamapp/router.dart';
-import 'package:coronamapp/views/symptoms_form.dart';
 import 'package:flutter/material.dart';
 
 import 'constants/routes.dart';
