@@ -1,4 +1,4 @@
-import 'package:coronamapp/thank_you.dart';
+import 'package:coronamapp/constants/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chips_input/flutter_chips_input.dart';
 
@@ -18,9 +18,9 @@ class _SymptomsFormState extends State<SymptomsForm> {
         type: StepperType.horizontal,
         onStepContinue: () {
           if (_currentStep == 1) {
-            Navigator.pushReplacement(
+            Navigator.pushReplacementNamed(
               context,
-              MaterialPageRoute(builder: (_) => ThankYouForm()),
+              Routes.THANK_YOU_PAGE,
             );
           } else
             setState(() => _currentStep++);
