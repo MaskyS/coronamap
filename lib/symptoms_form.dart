@@ -1,3 +1,4 @@
+import 'package:coronamap/thank_you.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chips_input/flutter_chips_input.dart';
 
@@ -16,7 +17,13 @@ class _SymptomsFormState extends State<SymptomsForm> {
         physics: ClampingScrollPhysics(),
         type: StepperType.horizontal,
         onStepContinue: () {
-          setState(() => _currentStep++);
+          if (_currentStep == 1) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (_) => ThankYouForm()),
+            );
+          } else
+            setState(() => _currentStep++);
         },
         onStepCancel: () {
           setState(() => _currentStep--);
