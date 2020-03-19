@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_chips_input/flutter_chips_input.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -55,15 +56,53 @@ class SymptomsForm extends StatefulWidget {
 }
 
 class _SymptomsFormState extends State<SymptomsForm> {
-  final _formKey = GlobalKey<FormState>();
-
+  var _currentStep = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Covid-19 Depistage")),
-      body: Form(
-        child: ListView(
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+      body: Stepper(
+        physics: ClampingScrollPhysics(),
+        type: StepperType.horizontal,
+        onStepContinue: () {
+          setState(() => _currentStep++);
+        },
+        onStepCancel: () {
+          setState(() => _currentStep--);
+        },
+        currentStep: _currentStep,
+        onStepTapped: (int stepNo) {
+          setState(() => _currentStep = stepNo);
+        },
+        steps: [
+          Step(
+            content: Step1Form(),
+            title: Text("Personal Details"),
+          ),
+          Step(
+            content: Step2Form(),
+            title: Text("Symptoms"),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class Step1Form extends StatefulWidget {
+  @override
+  _Step1FormState createState() => _Step1FormState();
+}
+
+class _Step1FormState extends State<Step1Form> {
+  final _formKey = GlobalKey<FormState>();
+
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 20),
+        child: Column(
           children: <Widget>[
             SizedBox(height: 20),
             Column(
@@ -77,7 +116,7 @@ class _SymptomsFormState extends State<SymptomsForm> {
                       flex: 5,
                       child: TextFormField(
                         decoration: InputDecoration(
-                          labelText: "Nom",
+                          labelText: "Prenom",
                         ),
                       ),
                     ),
@@ -86,7 +125,7 @@ class _SymptomsFormState extends State<SymptomsForm> {
                       flex: 5,
                       child: TextFormField(
                         decoration: InputDecoration(
-                          labelText: "Nom",
+                          labelText: "Surnom",
                         ),
                       ),
                     ),
@@ -141,6 +180,78 @@ class _SymptomsFormState extends State<SymptomsForm> {
       ),
     );
   }
+}
+
+class Step2Form extends StatefulWidget {
+  @override
+  _Step2FormState createState() => _Step2FormState();
+}
+
+class _Step2FormState extends State<Step2Form> {
+  List<Symptom> _symptomsList = [Symptom("name")];
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        SizedBox(height: 10),
+        SectionHeaderText("REMPLI OU BAN SYMPTOMS"),
+        ChipsInput(
+          decoration: InputDecoration(
+            labelText: "Select Symptoms",
+          ),
+          maxChips: 3,
+          findSuggestions: (String query) {
+            if (query.length != 0) {
+              var lowercaseQuery = query.toLowerCase();
+              return _symptomsList.where((symptoms) {
+                return symptoms.name
+                    .toLowerCase()
+                    .contains(query.toLowerCase());
+              }).toList(growable: false)
+                ..sort((a, b) => a.name
+                    .toLowerCase()
+                    .indexOf(lowercaseQuery)
+                    .compareTo(b.name.toLowerCase().indexOf(lowercaseQuery)));
+            } else {
+              return const <Symptom>[];
+            }
+          },
+          onChanged: (data) {
+            print(data);
+          },
+          chipBuilder: (context, state, profile) {
+            return InputChip(
+              key: ObjectKey(profile),
+              label: Text(profile.name),
+              // avatar: CircleAvatar(
+              //   backgroundImage: NetworkImage(profile.imageUrl),
+              // ),
+              onDeleted: () => state.deleteChip(profile),
+              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            );
+          },
+          suggestionBuilder: (context, state, profile) {
+            return ListTile(
+              key: ObjectKey(profile),
+              // ! TODO Add images for symptoms
+              // leading: CircleAvatar(
+              //   backgroundImage: NetworkImage(profile.imageUrl),
+              // ),
+              title: Text(profile.name),
+              // subtitle: Text(profile.email),
+              onTap: () => state.selectSuggestion(profile),
+            );
+          },
+        )
+      ],
+    );
+  }
+}
+
+class Symptom {
+  String name;
+  Symptom(this.name);
 }
 
 class SectionHeaderText extends StatelessWidget {
