@@ -10,20 +10,22 @@ class SymptomRepository {
         .collection(dbName)
         .where('ref', isEqualTo: ref)
         .getDocuments().then((snapshot) {
-          return snapshot.documents.map((doc) => Symptom.fromJson(doc.data)).toList().first;
+          return snapshot.documents.map((doc) => Symptom.fromJson(doc.data['symptom'])).toList().first;
         });
   }
 
   Future<List<Symptom>> getAllWithLimit({int limit = 10}) {
+    
     return Firestore.instance
         .collection(dbName)
-        .orderBy('ref')
         .limit(limit)
         .getDocuments()
         .then(
       (snapshot) {
         return snapshot.documents
-            .map((doc) => Symptom.fromJson(doc.data))
+            .map((doc) {
+              return Symptom.fromJson(doc.data['symptom']);
+        })
             .toList();
       },
     );
