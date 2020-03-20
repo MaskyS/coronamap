@@ -14,6 +14,20 @@ mixin _$FormStore on _FormStore, Store {
   @override
   String get fullName =>
       (_$fullNameComputed ??= Computed<String>(() => super.fullName)).value;
+  Computed<int> _$ageComputed;
+
+  @override
+  int get age => (_$ageComputed ??= Computed<int>(() => super.age)).value;
+  Computed<int> _$phoneNoComputed;
+
+  @override
+  int get phoneNo =>
+      (_$phoneNoComputed ??= Computed<int>(() => super.phoneNo)).value;
+  Computed<int> _$homeNoComputed;
+
+  @override
+  int get homeNo =>
+      (_$homeNoComputed ??= Computed<int>(() => super.homeNo)).value;
   Computed<bool> _$canMoveToNextPageComputed;
 
   @override
@@ -55,38 +69,72 @@ mixin _$FormStore on _FormStore, Store {
     }, _$lastNameAtom, name: '${_$lastNameAtom.name}_set');
   }
 
-  final _$ageAtom = Atom(name: '_FormStore.age');
+  final _$ageTextAtom = Atom(name: '_FormStore.ageText');
 
   @override
-  int get age {
-    _$ageAtom.context.enforceReadPolicy(_$ageAtom);
-    _$ageAtom.reportObserved();
-    return super.age;
+  String get ageText {
+    _$ageTextAtom.context.enforceReadPolicy(_$ageTextAtom);
+    _$ageTextAtom.reportObserved();
+    return super.ageText;
   }
 
   @override
-  set age(int value) {
-    _$ageAtom.context.conditionallyRunInAction(() {
-      super.age = value;
-      _$ageAtom.reportChanged();
-    }, _$ageAtom, name: '${_$ageAtom.name}_set');
+  set ageText(String value) {
+    _$ageTextAtom.context.conditionallyRunInAction(() {
+      super.ageText = value;
+      _$ageTextAtom.reportChanged();
+    }, _$ageTextAtom, name: '${_$ageTextAtom.name}_set');
   }
 
   final _$genderAtom = Atom(name: '_FormStore.gender');
 
   @override
-  int get gender {
+  String get gender {
     _$genderAtom.context.enforceReadPolicy(_$genderAtom);
     _$genderAtom.reportObserved();
     return super.gender;
   }
 
   @override
-  set gender(int value) {
+  set gender(String value) {
     _$genderAtom.context.conditionallyRunInAction(() {
       super.gender = value;
       _$genderAtom.reportChanged();
     }, _$genderAtom, name: '${_$genderAtom.name}_set');
+  }
+
+  final _$phoneNoTextAtom = Atom(name: '_FormStore.phoneNoText');
+
+  @override
+  String get phoneNoText {
+    _$phoneNoTextAtom.context.enforceReadPolicy(_$phoneNoTextAtom);
+    _$phoneNoTextAtom.reportObserved();
+    return super.phoneNoText;
+  }
+
+  @override
+  set phoneNoText(String value) {
+    _$phoneNoTextAtom.context.conditionallyRunInAction(() {
+      super.phoneNoText = value;
+      _$phoneNoTextAtom.reportChanged();
+    }, _$phoneNoTextAtom, name: '${_$phoneNoTextAtom.name}_set');
+  }
+
+  final _$homeNoTextAtom = Atom(name: '_FormStore.homeNoText');
+
+  @override
+  String get homeNoText {
+    _$homeNoTextAtom.context.enforceReadPolicy(_$homeNoTextAtom);
+    _$homeNoTextAtom.reportObserved();
+    return super.homeNoText;
+  }
+
+  @override
+  set homeNoText(String value) {
+    _$homeNoTextAtom.context.conditionallyRunInAction(() {
+      super.homeNoText = value;
+      _$homeNoTextAtom.reportChanged();
+    }, _$homeNoTextAtom, name: '${_$homeNoTextAtom.name}_set');
   }
 
   final _$addressAtom = Atom(name: '_FormStore.address');
@@ -106,34 +154,18 @@ mixin _$FormStore on _FormStore, Store {
     }, _$addressAtom, name: '${_$addressAtom.name}_set');
   }
 
-  final _$usernameCheckAtom = Atom(name: '_FormStore.usernameCheck');
+  final _$validateFirstNameAsyncAction = AsyncAction('validateFirstName');
 
   @override
-  ObservableFuture<bool> get usernameCheck {
-    _$usernameCheckAtom.context.enforceReadPolicy(_$usernameCheckAtom);
-    _$usernameCheckAtom.reportObserved();
-    return super.usernameCheck;
-  }
-
-  @override
-  set usernameCheck(ObservableFuture<bool> value) {
-    _$usernameCheckAtom.context.conditionallyRunInAction(() {
-      super.usernameCheck = value;
-      _$usernameCheckAtom.reportChanged();
-    }, _$usernameCheckAtom, name: '${_$usernameCheckAtom.name}_set');
-  }
-
-  final _$validateNameAsyncAction = AsyncAction('validateName');
-
-  @override
-  Future<dynamic> validateName(List<String> names) {
-    return _$validateNameAsyncAction.run(() => super.validateName(names));
+  Future<dynamic> validateFirstName(String value) {
+    return _$validateFirstNameAsyncAction
+        .run(() => super.validateFirstName(value));
   }
 
   final _$_FormStoreActionController = ActionController(name: '_FormStore');
 
   @override
-  void validateAge(int value) {
+  void validateAge(String value) {
     final _$actionInfo = _$_FormStoreActionController.startAction();
     try {
       return super.validateAge(value);
@@ -143,10 +175,30 @@ mixin _$FormStore on _FormStore, Store {
   }
 
   @override
-  void validateGender(int value) {
+  void validateGender(String value) {
     final _$actionInfo = _$_FormStoreActionController.startAction();
     try {
       return super.validateGender(value);
+    } finally {
+      _$_FormStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void validatePhoneNo(String value) {
+    final _$actionInfo = _$_FormStoreActionController.startAction();
+    try {
+      return super.validatePhoneNo(value);
+    } finally {
+      _$_FormStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void validateHomeNo(String value) {
+    final _$actionInfo = _$_FormStoreActionController.startAction();
+    try {
+      return super.validateHomeNo(value);
     } finally {
       _$_FormStoreActionController.endAction(_$actionInfo);
     }
@@ -173,10 +225,10 @@ mixin _$FormStore on _FormStore, Store {
   }
 
   @override
-  void validateAddress(Address address) {
+  void validatePostalCode(String value) {
     final _$actionInfo = _$_FormStoreActionController.startAction();
     try {
-      return super.validateAddress(address);
+      return super.validatePostalCode(value);
     } finally {
       _$_FormStoreActionController.endAction(_$actionInfo);
     }
@@ -185,7 +237,7 @@ mixin _$FormStore on _FormStore, Store {
   @override
   String toString() {
     final string =
-        'firstName: ${firstName.toString()},lastName: ${lastName.toString()},age: ${age.toString()},gender: ${gender.toString()},address: ${address.toString()},usernameCheck: ${usernameCheck.toString()},fullName: ${fullName.toString()},canMoveToNextPage: ${canMoveToNextPage.toString()}';
+        'firstName: ${firstName.toString()},lastName: ${lastName.toString()},ageText: ${ageText.toString()},gender: ${gender.toString()},phoneNoText: ${phoneNoText.toString()},homeNoText: ${homeNoText.toString()},address: ${address.toString()},fullName: ${fullName.toString()},age: ${age.toString()},phoneNo: ${phoneNo.toString()},homeNo: ${homeNo.toString()},canMoveToNextPage: ${canMoveToNextPage.toString()}';
     return '{$string}';
   }
 }
@@ -231,38 +283,38 @@ mixin _$FormErrorState on _FormErrorState, Store {
     }, _$lastNameAtom, name: '${_$lastNameAtom.name}_set');
   }
 
-  final _$emailAtom = Atom(name: '_FormErrorState.email');
+  final _$phoneNoAtom = Atom(name: '_FormErrorState.phoneNo');
 
   @override
-  String get email {
-    _$emailAtom.context.enforceReadPolicy(_$emailAtom);
-    _$emailAtom.reportObserved();
-    return super.email;
+  String get phoneNo {
+    _$phoneNoAtom.context.enforceReadPolicy(_$phoneNoAtom);
+    _$phoneNoAtom.reportObserved();
+    return super.phoneNo;
   }
 
   @override
-  set email(String value) {
-    _$emailAtom.context.conditionallyRunInAction(() {
-      super.email = value;
-      _$emailAtom.reportChanged();
-    }, _$emailAtom, name: '${_$emailAtom.name}_set');
+  set phoneNo(String value) {
+    _$phoneNoAtom.context.conditionallyRunInAction(() {
+      super.phoneNo = value;
+      _$phoneNoAtom.reportChanged();
+    }, _$phoneNoAtom, name: '${_$phoneNoAtom.name}_set');
   }
 
-  final _$passwordAtom = Atom(name: '_FormErrorState.password');
+  final _$homeNoAtom = Atom(name: '_FormErrorState.homeNo');
 
   @override
-  String get password {
-    _$passwordAtom.context.enforceReadPolicy(_$passwordAtom);
-    _$passwordAtom.reportObserved();
-    return super.password;
+  String get homeNo {
+    _$homeNoAtom.context.enforceReadPolicy(_$homeNoAtom);
+    _$homeNoAtom.reportObserved();
+    return super.homeNo;
   }
 
   @override
-  set password(String value) {
-    _$passwordAtom.context.conditionallyRunInAction(() {
-      super.password = value;
-      _$passwordAtom.reportChanged();
-    }, _$passwordAtom, name: '${_$passwordAtom.name}_set');
+  set homeNo(String value) {
+    _$homeNoAtom.context.conditionallyRunInAction(() {
+      super.homeNo = value;
+      _$homeNoAtom.reportChanged();
+    }, _$homeNoAtom, name: '${_$homeNoAtom.name}_set');
   }
 
   final _$ageAtom = Atom(name: '_FormErrorState.age');
@@ -316,23 +368,6 @@ mixin _$FormErrorState on _FormErrorState, Store {
     }, _$line1Atom, name: '${_$line1Atom.name}_set');
   }
 
-  final _$line2Atom = Atom(name: '_FormErrorState.line2');
-
-  @override
-  String get line2 {
-    _$line2Atom.context.enforceReadPolicy(_$line2Atom);
-    _$line2Atom.reportObserved();
-    return super.line2;
-  }
-
-  @override
-  set line2(String value) {
-    _$line2Atom.context.conditionallyRunInAction(() {
-      super.line2 = value;
-      _$line2Atom.reportChanged();
-    }, _$line2Atom, name: '${_$line2Atom.name}_set');
-  }
-
   final _$districtAtom = Atom(name: '_FormErrorState.district');
 
   @override
@@ -370,12 +405,18 @@ mixin _$FormErrorState on _FormErrorState, Store {
   @override
   String toString() {
     final string =
-        'firstName: ${firstName.toString()},lastName: ${lastName.toString()},email: ${email.toString()},password: ${password.toString()},age: ${age.toString()},gender: ${gender.toString()},line1: ${line1.toString()},line2: ${line2.toString()},district: ${district.toString()},region: ${region.toString()},hasErrors: ${hasErrors.toString()}';
+        'firstName: ${firstName.toString()},lastName: ${lastName.toString()},phoneNo: ${phoneNo.toString()},homeNo: ${homeNo.toString()},age: ${age.toString()},gender: ${gender.toString()},line1: ${line1.toString()},district: ${district.toString()},region: ${region.toString()},hasErrors: ${hasErrors.toString()}';
     return '{$string}';
   }
 }
 
 mixin _$Address on _AddressBase, Store {
+  Computed<int> _$postalCodeComputed;
+
+  @override
+  int get postalCode =>
+      (_$postalCodeComputed ??= Computed<int>(() => super.postalCode)).value;
+
   final _$line1Atom = Atom(name: '_AddressBase.line1');
 
   @override
@@ -444,27 +485,27 @@ mixin _$Address on _AddressBase, Store {
     }, _$regionAtom, name: '${_$regionAtom.name}_set');
   }
 
-  final _$postalCodeAtom = Atom(name: '_AddressBase.postalCode');
+  final _$postalCodeTextAtom = Atom(name: '_AddressBase.postalCodeText');
 
   @override
-  int get postalCode {
-    _$postalCodeAtom.context.enforceReadPolicy(_$postalCodeAtom);
-    _$postalCodeAtom.reportObserved();
-    return super.postalCode;
+  String get postalCodeText {
+    _$postalCodeTextAtom.context.enforceReadPolicy(_$postalCodeTextAtom);
+    _$postalCodeTextAtom.reportObserved();
+    return super.postalCodeText;
   }
 
   @override
-  set postalCode(int value) {
-    _$postalCodeAtom.context.conditionallyRunInAction(() {
-      super.postalCode = value;
-      _$postalCodeAtom.reportChanged();
-    }, _$postalCodeAtom, name: '${_$postalCodeAtom.name}_set');
+  set postalCodeText(String value) {
+    _$postalCodeTextAtom.context.conditionallyRunInAction(() {
+      super.postalCodeText = value;
+      _$postalCodeTextAtom.reportChanged();
+    }, _$postalCodeTextAtom, name: '${_$postalCodeTextAtom.name}_set');
   }
 
   @override
   String toString() {
     final string =
-        'line1: ${line1.toString()},line2: ${line2.toString()},district: ${district.toString()},region: ${region.toString()},postalCode: ${postalCode.toString()}';
+        'line1: ${line1.toString()},line2: ${line2.toString()},district: ${district.toString()},region: ${region.toString()},postalCodeText: ${postalCodeText.toString()},postalCode: ${postalCode.toString()}';
     return '{$string}';
   }
 }
