@@ -15,10 +15,10 @@ class User {
   String phoneNumber;
   List<Symptom> symptoms;
   Address address;
-  String firstSymptomDate;
-  String dob;
-  String createdAt;
-  String updatedAt;
+  DateTime firstSymptomDate;
+  DateTime dob;
+  DateTime createdAt;
+  DateTime updatedAt;
 
   User({
     this.firstName,
@@ -34,6 +34,11 @@ class User {
     this.updatedAt,
   });
 
+
+  User.fromForm({this.firstName, this.lastName, this.gender,
+    this.phoneNumber, this.address, this.dob, this.createdAt, this.updatedAt});
+
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
   Map<String, dynamic> toJson() => _$UserToJson(this);
+
 }
