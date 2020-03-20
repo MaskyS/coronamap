@@ -9,24 +9,11 @@ part of 'symptoms_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$Form2Store on _Form2StoreBase, Store {
-  Computed<String> _$chosenSymptomsErrorTextComputed;
-
-  @override
-  String get chosenSymptomsErrorText => (_$chosenSymptomsErrorTextComputed ??=
-          Computed<String>(() => super.chosenSymptomsErrorText))
-      .value;
   Computed<StoreState> _$stateComputed;
 
   @override
   StoreState get state =>
       (_$stateComputed ??= Computed<StoreState>(() => super.state)).value;
-  Computed<List<Symptom>> _$symptomsListFromFireStoreComputed;
-
-  @override
-  List<Symptom> get symptomsListFromFireStore =>
-      (_$symptomsListFromFireStoreComputed ??=
-              Computed<List<Symptom>>(() => super.symptomsListFromFireStore))
-          .value;
 
   final _$chosenSymptomsAtom = Atom(name: '_Form2StoreBase.chosenSymptoms');
 
@@ -116,17 +103,81 @@ mixin _$Form2Store on _Form2StoreBase, Store {
     }, _$firstDateAtom, name: '${_$firstDateAtom.name}_set');
   }
 
-  final _$getFromFirestoreAsyncAction = AsyncAction('getFromFirestore');
+  final _$chosenSymptomsErrorTextAtom =
+      Atom(name: '_Form2StoreBase.chosenSymptomsErrorText');
 
   @override
-  Future<void> getFromFirestore() {
-    return _$getFromFirestoreAsyncAction.run(() => super.getFromFirestore());
+  String get chosenSymptomsErrorText {
+    _$chosenSymptomsErrorTextAtom.context
+        .enforceReadPolicy(_$chosenSymptomsErrorTextAtom);
+    _$chosenSymptomsErrorTextAtom.reportObserved();
+    return super.chosenSymptomsErrorText;
+  }
+
+  @override
+  set chosenSymptomsErrorText(String value) {
+    _$chosenSymptomsErrorTextAtom.context.conditionallyRunInAction(() {
+      super.chosenSymptomsErrorText = value;
+      _$chosenSymptomsErrorTextAtom.reportChanged();
+    }, _$chosenSymptomsErrorTextAtom,
+        name: '${_$chosenSymptomsErrorTextAtom.name}_set');
+  }
+
+  final _$firstDateErrorTextAtom =
+      Atom(name: '_Form2StoreBase.firstDateErrorText');
+
+  @override
+  String get firstDateErrorText {
+    _$firstDateErrorTextAtom.context
+        .enforceReadPolicy(_$firstDateErrorTextAtom);
+    _$firstDateErrorTextAtom.reportObserved();
+    return super.firstDateErrorText;
+  }
+
+  @override
+  set firstDateErrorText(String value) {
+    _$firstDateErrorTextAtom.context.conditionallyRunInAction(() {
+      super.firstDateErrorText = value;
+      _$firstDateErrorTextAtom.reportChanged();
+    }, _$firstDateErrorTextAtom, name: '${_$firstDateErrorTextAtom.name}_set');
+  }
+
+  final _$getSymptomsFromFirestoreAsyncAction =
+      AsyncAction('getSymptomsFromFirestore');
+
+  @override
+  Future<void> getSymptomsFromFirestore() {
+    return _$getSymptomsFromFirestoreAsyncAction
+        .run(() => super.getSymptomsFromFirestore());
+  }
+
+  final _$_Form2StoreBaseActionController =
+      ActionController(name: '_Form2StoreBase');
+
+  @override
+  void validateChosenSymptoms(List<Symptom> values) {
+    final _$actionInfo = _$_Form2StoreBaseActionController.startAction();
+    try {
+      return super.validateChosenSymptoms(values);
+    } finally {
+      _$_Form2StoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void validateFirstDate(DateTime dateTime) {
+    final _$actionInfo = _$_Form2StoreBaseActionController.startAction();
+    try {
+      return super.validateFirstDate(dateTime);
+    } finally {
+      _$_Form2StoreBaseActionController.endAction(_$actionInfo);
+    }
   }
 
   @override
   String toString() {
     final string =
-        'chosenSymptoms: ${chosenSymptoms.toString()},errorMessage: ${errorMessage.toString()},symptomsList: ${symptomsList.toString()},firstDate: ${firstDate.toString()},chosenSymptomsErrorText: ${chosenSymptomsErrorText.toString()},state: ${state.toString()},symptomsListFromFireStore: ${symptomsListFromFireStore.toString()}';
+        'chosenSymptoms: ${chosenSymptoms.toString()},errorMessage: ${errorMessage.toString()},symptomsList: ${symptomsList.toString()},firstDate: ${firstDate.toString()},chosenSymptomsErrorText: ${chosenSymptomsErrorText.toString()},firstDateErrorText: ${firstDateErrorText.toString()},state: ${state.toString()}';
     return '{$string}';
   }
 }
