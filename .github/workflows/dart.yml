@@ -23,7 +23,10 @@ jobs:
         KEY_JKS: ${{ secrets.KEY_JKS }}
         KEY_PASSWORD: ${{ secrets.ALIAS_PASSWORD }}
         ALIAS_PASSWORD: ${{ secrets.KEY_PASSWORD }}
-        run: echo $KEY_JKS > android/key.jks && flutter pub get && flutter test && flutter build apk --release --split-per-abi
+    - run: echo $KEY_JKS > android/key.jks
+    - run: flutter pub get
+    - run: flutter test
+    - run: flutter build apk --release --split-per-abi
     - uses: actions/upload-artifact@v2-preview
       with:
         path: "build/app/outputs/apk/release/*.apk"
