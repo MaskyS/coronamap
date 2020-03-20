@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:coronamapp/Entity/user.dart';
+import 'package:coronamapp/models/user.dart';
 
 class GenderRepository {
   final dbName = 'gender';

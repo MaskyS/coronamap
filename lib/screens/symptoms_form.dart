@@ -1,3 +1,4 @@
+import 'package:coronamapp/entity/symptom.dart';
 import 'package:coronamapp/constants/routes.dart';
 import 'package:coronamapp/district_enum.dart';
 import 'package:coronamapp/form_store.dart';
@@ -295,7 +296,7 @@ class Step2Form extends StatefulWidget {
 }
 
 class _Step2FormState extends State<Step2Form> {
-  List<Symptom> _symptomsList = [Symptom("name")];
+  List<Symptom> _symptomsList = [Symptom(label: "name")];
 
   @override
   Widget build(BuildContext context) {
@@ -312,14 +313,14 @@ class _Step2FormState extends State<Step2Form> {
             if (query.length != 0) {
               var lowercaseQuery = query.toLowerCase();
               return _symptomsList.where((symptoms) {
-                return symptoms.name
+                return symptoms.label
                     .toLowerCase()
                     .contains(query.toLowerCase());
               }).toList(growable: false)
-                ..sort((a, b) => a.name
+                ..sort((a, b) => a.label
                     .toLowerCase()
                     .indexOf(lowercaseQuery)
-                    .compareTo(b.name.toLowerCase().indexOf(lowercaseQuery)));
+                    .compareTo(b.label.toLowerCase().indexOf(lowercaseQuery)));
             } else {
               return const <Symptom>[];
             }
@@ -327,27 +328,27 @@ class _Step2FormState extends State<Step2Form> {
           onChanged: (data) {
             print(data);
           },
-          chipBuilder: (context, state, profile) {
+          chipBuilder: (context, state, symptom) {
             return InputChip(
-              key: ObjectKey(profile),
-              label: Text(profile.name),
+              key: ObjectKey(symptom),
+              label: Text(symptom.label),
               // avatar: CircleAvatar(
               //   backgroundImage: NetworkImage(profile.imageUrl),
               // ),
-              onDeleted: () => state.deleteChip(profile),
+              onDeleted: () => state.deleteChip(symptom),
               materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
             );
           },
-          suggestionBuilder: (context, state, profile) {
+          suggestionBuilder: (context, state, symptom) {
             return ListTile(
-              key: ObjectKey(profile),
+              key: ObjectKey(symptom),
               // ! TODO Add images for symptoms
               // leading: CircleAvatar(
               //   backgroundImage: NetworkImage(profile.imageUrl),
               // ),
-              title: Text(profile.name),
+              title: Text(symptom.label),
               // subtitle: Text(profile.email),
-              onTap: () => state.selectSuggestion(profile),
+              onTap: () => state.selectSuggestion(symptom),
             );
           },
         )
@@ -356,10 +357,6 @@ class _Step2FormState extends State<Step2Form> {
   }
 }
 
-class Symptom {
-  String name;
-  Symptom(this.name);
-}
 
 class SectionHeaderText extends StatelessWidget {
   final String text;
