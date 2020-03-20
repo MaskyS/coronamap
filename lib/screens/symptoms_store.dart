@@ -1,7 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:coronamapp/Repository/symptom_repository.dart';
 import 'package:coronamapp/models/symptom.dart';
-import 'package:flutter/services.dart';
 import 'package:mobx/mobx.dart';
 
 import '../store_state_enum.dart';
