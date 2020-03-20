@@ -31,6 +31,10 @@ abstract class _Form2StoreBase with Store {
   String firstDateErrorText;
 
   @computed
+  bool get canCompleteForm =>
+      chosenSymptoms == null && firstDateErrorText == null;
+
+  @computed
   StoreState get state {
     if (_symptomsListFuture == null ||
         _symptomsListFuture.status == FutureStatus.rejected) {
@@ -79,7 +83,7 @@ abstract class _Form2StoreBase with Store {
   Future<void> getSymptomsFromFirestore() async {
     try {
       _symptomsListFuture =
-          ObservableFuture((SymptomRepository()).getAllWithLimit(limit: 20));
+          ObservableFuture(SymptomRepository().getAllWithLimit(limit: 20));
       symptomsList = await _symptomsListFuture;
     } catch (e) {
       print(e);
