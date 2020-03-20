@@ -419,9 +419,15 @@ class _Step2FormState extends State<Step2Form> {
             }
 
             return Observer(builder: (_) {
-              return FormBuilderChipsInput(
+              return FormBuilderFilterChip(
                 attribute: 'symptoms',
+                options: _store.symptomsList
+                    .map((e) => FormBuilderFieldOption(value: e, child: Text(e.ref),))
+                    .toList(),
+                    spacing: 10,
+                    alignment: WrapAlignment.center,
                 initialValue: _store.chosenSymptoms,
+                selectedColor: Colors.green.shade300,
                 onChanged: (v) {
                   List<Symptom> temp = [];
                   v.forEach((element) {
@@ -430,49 +436,9 @@ class _Step2FormState extends State<Step2Form> {
                   _store.chosenSymptoms = temp;
                 },
                 decoration: _baseDeco.copyWith(
-                  labelText: "Ecrire ou ban symptomes",
+                  labelText: 'Choisir ou ban symptoms',
                   errorText: _store.chosenSymptomsErrorText,
                 ),
-                chipBuilder: (context, state, symptom) {
-                  return InputChip(
-                    key: ObjectKey(symptom),
-                    label: Text(symptom.label),
-                    // avatar: CircleAvatar(
-                    //   backgroundImage: NetworkImage(profile.imageUrl),
-                    // ),
-                    onDeleted: () => state.deleteChip(symptom),
-                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  );
-                },
-                suggestionBuilder: (context, state, symptom) {
-                  return ListTile(
-                    key: ObjectKey(symptom),
-                    // ! TODO Add images for symptoms
-                    // leading: CircleAvatar(
-                    //   backgroundImage: NetworkImage(profile.imageUrl),
-                    // ),
-                    title: Text(symptom.label),
-                    // subtitle: Text(profile.email),
-                    onTap: () => state.selectSuggestion(symptom),
-                  );
-                },
-                findSuggestions: (String query) {
-                  if (query.length != 0) {
-                    var lowercaseQuery = query.toLowerCase();
-                    return _store.symptomsList.where((symptoms) {
-                      return symptoms.label
-                          .toLowerCase()
-                          .contains(query.toLowerCase());
-                    }).toList(growable: false)
-                      ..sort((a, b) => a.label
-                          .toLowerCase()
-                          .indexOf(lowercaseQuery)
-                          .compareTo(
-                              b.label.toLowerCase().indexOf(lowercaseQuery)));
-                  } else {
-                    return const <Symptom>[];
-                  }
-                },
               );
             });
           }),

@@ -110,12 +110,12 @@ abstract class _FormStore with Store {
     error.phoneNo = null;
 
     if (!value.startsWith('5')) {
-      error.phoneNo = 'Ou numero bizin coummence ek 5';
+      error.phoneNo = 'Bizin mett 5 devant';
       return;
     }
 
     if (value.startsWith('0')) {
-      error.phoneNo = 'Ou numero pas cav coummence ek 0';
+      error.phoneNo = 'Pas cav ena 5 devant';
       return;
     }
 
