@@ -28,6 +28,9 @@ jobs:
            flutter pub get
            flutter test
            flutter build apk --release
+           ls -la
+           sudo apt-get install tree
+           tree -L 2
     - uses: actions/upload-artifact@v1
       with:
         name: release-apk
