@@ -48,6 +48,7 @@ class _SymptomsFormState extends State<SymptomsForm> {
         onStepTapped: (int stepNo) {
           setState(() => _currentStep = stepNo);
         },
+        controlsBuilder: _buildControlButtons,
         steps: [
           Step(
             content: Step1Form(),
@@ -56,6 +57,54 @@ class _SymptomsFormState extends State<SymptomsForm> {
           Step(
             content: Step2Form(),
             title: Text("Symptoms"),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildControlButtons(context, {onStepCancel, onStepContinue}) {
+    var buttonStyle = TextStyle(fontWeight: FontWeight.w800);
+    return Padding(
+      padding: const EdgeInsets.only(top: 25),
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            flex: 25,
+            child: FlatButton.icon(
+              onPressed: onStepCancel,
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              icon: Icon(Icons.keyboard_arrow_left),
+              label: Text("BACK", style: buttonStyle),
+              color: Colors.grey.shade200,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10)),
+            ),
+          ),
+          Spacer(flex: 1),
+          Expanded(
+            flex: 25,
+            child: FlatButton(
+              onPressed: onStepContinue,
+              child: Container(
+                margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      _currentStep == 1 ? "FINISH" : "NEXT",
+                      style: buttonStyle,
+                    ),
+                    Icon(Icons.keyboard_arrow_right)
+                  ],
+                ),
+              ),
+              textColor: Colors.white,
+              color: Colors.green,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
           ),
         ],
       ),
@@ -128,7 +177,8 @@ class _Step1FormState extends State<Step1Form> {
                       return FormBuilderDropdown(
                         attribute: "gender",
                         hint: Text('Sexe'),
-                        decoration: _baseDeco.copyWith(errorText: _store.error.gender),
+                        decoration:
+                            _baseDeco.copyWith(errorText: _store.error.gender),
                         onChanged: (v) => _store.gender = v,
                         initialValue: _store.gender,
                         items: ['Male', 'Female']
@@ -329,7 +379,8 @@ class _Step2FormState extends State<Step2Form> {
         children: <Widget>[
           SizedBox(height: 10),
           Observer(builder: (_) {
-            if (_store.state == StoreState.loading || _store.state == StoreState.initial) {
+            if (_store.state == StoreState.loading ||
+                _store.state == StoreState.initial) {
               return Center(child: CircularProgressIndicator());
             }
             print(_store.chosenSymptoms);
