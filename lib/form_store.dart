@@ -1,4 +1,6 @@
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:mobx/mobx.dart';
+import 'package:coronamapp/district_enum.dart';
 import 'package:validators/validators.dart';
 
 part 'form_store.g.dart';
@@ -15,19 +17,31 @@ abstract class _FormStore with Store {
   String lastName = '';
 
   @observable
-  int age;
+  String ageText;
 
   @observable
-  int gender;
+  String gender = 'Male';
 
   @observable
-  Address address;
+  String phoneNoText;
 
   @observable
-  ObservableFuture<bool> usernameCheck = ObservableFuture.value(true);
+  String homeNoText;
+
+  @observable
+  Address address = Address();
 
   @computed
   String get fullName => firstName + lastName;
+
+  @computed
+  int get age => int.tryParse(ageText);
+
+  @computed
+  int get phoneNo => int.tryParse(phoneNoText);
+
+  @computed
+  int get homeNo => int.tryParse(homeNoText);
 
   @computed
   bool get canMoveToNextPage => !error.hasErrors;
@@ -36,33 +50,36 @@ abstract class _FormStore with Store {
 
   void setupValidations() {
     _disposers = [
-      reaction((_) => [fullName, lastName], validateName),
-      reaction((_) => age, validateAge),
-      reaction((_) => gender, validateGender)
+      reaction((_) => firstName, validateFirstName),
+      reaction((_) => lastName, validateLastName),
+      reaction((_) => ageText, validateAge),
+      reaction((_) => gender, validateGender),
+      reaction((_) => phoneNoText, validatePhoneNo),
+      reaction((_) => homeNoText, validateHomeNo),
+      reaction((_) => address.line1, validateLine1),
+      reaction((_) => address.district, validateDistrict),
+      reaction((_) => address.region, validateRegion),
     ];
   }
 
   @action
-  Future validateName(List<String> names) async {
-    firstName = names[0];
-    lastName = names[1];
-
+  Future validateFirstName(String value) async {
     error.firstName = null;
-    error.lastName = null;
 
-    if (isNull(firstName) || firstName.isEmpty) {
-      error.firstName = 'Bizin remplit ou prenom';
-      return;
-    }
-
-    if (!isAlpha(firstName)) {
+    var requiredValidator =
+        FormBuilderValidators.required(errorText: 'Bizin remplit ou prenom');
+    error.firstName = requiredValidator(value);
+    if (!isAlpha(value)) {
       error.firstName = "Ou prenom bizin ena juste ban alphabets";
     }
+  }
 
-    if (isNull(lastName) || lastName.isEmpty) {
-      error.lastName = 'Bizin remplit ou surnom';
-      return;
-    }
+  Future validateLastName(String value) async {
+    error.lastName = null;
+
+    var requiredValidator =
+        FormBuilderValidators.required(errorText: 'Bizin remplit ou surnom');
+    error.lastName = requiredValidator(value);
 
     if (!isAlpha(lastName)) {
       error.lastName = "Ou surnom bizin ena juste ban alphabets";
@@ -70,16 +87,44 @@ abstract class _FormStore with Store {
   }
 
   @action
-  void validateAge(int value) {
-    error.age = value == null ? "Ou bizin mette ou l'age" : null;
+  void validateAge(String value) {
+    error.age = null;
+
+    error.age = FormBuilderValidators.required(
+            errorText: "Bizin mette ou l'age")(value) ??
+        FormBuilderValidators.numeric(
+            errorText: 'Ena ban characters invalides')(value) ??
+        FormBuilderValidators.max(100,
+            errorText: "Ou l'age bizin embas 100 ans")(value);
   }
 
   @action
-  void validateGender(int value) {
+  void validateGender(String value) {
     error.gender = value != null ? 'Ou bizin choisir ou sexe' : null;
   }
 
+  @action
+  void validatePhoneNo(String value) {
+    error.phoneNo = null;
 
+    error.phoneNo = FormBuilderValidators.required(
+            errorText: "Bizin mette ou numero")(value) ??
+        FormBuilderValidators.numeric(
+            errorText: 'Ena ban characters invalides')(value) ??
+        FormBuilderValidators.minLength(8,
+            errorText: "Ou numero bizin ena 8 numeros")(value) ??
+        FormBuilderValidators.maxLength(8,
+            errorText: "Ou numero bizin ena 8 numeros")(value);
+  }
+
+  @action
+  void validateHomeNo(String value) {
+    error.homeNo = null;
+    error.homeNo = FormBuilderValidators.numeric(
+            errorText: 'Ena ban characters invalides')(value) ??
+        FormBuilderValidators.maxLength(7,
+            errorText: "Ou numero bizin ena 7 numeros")(value.toString());
+  }
 
   @action
   void validateLine1(String value) {
@@ -87,6 +132,10 @@ abstract class _FormStore with Store {
     if (isNull(value) || value.isEmpty) {
       error.line1 = 'Ou bizin rempli ou address line';
     }
+  }
+
+  validateDistrict(District district) {
+    error.district = district == null ? 'Ou bizin choisir ene district' : null;
   }
 
   @action
@@ -103,19 +152,13 @@ abstract class _FormStore with Store {
   }
 
   @action
-  void validateAddress(Address address) {
-    error
-      ..line1 = null
-      ..line2 = null
-      ..region = null
-      ..postalCode = null
-      ..district = null;
-
-    if (isNull(address.line1) || address.line1.trim().isEmpty) {
-    }
-
+  void validatePostalCode(String value) {
+    error.postalCode = null;
+    error.postalCode = FormBuilderValidators.numeric(
+            errorText: 'Ena ban characters invalides')(value) ??
+        FormBuilderValidators.maxLength(5, errorText: "Bizin ena 5 numeros")(
+            value.toString());
   }
-
 
   void dispose() {
     for (final d in _disposers) {
@@ -124,10 +167,15 @@ abstract class _FormStore with Store {
   }
 
   void validateAll() {
-    validateName([firstName, lastName]);
-    validateAge(age);
+    validateFirstName(firstName);
+    validateLastName(lastName);
     validateGender(gender);
-    // validateLine1(address);
+    validateAge(ageText);
+    validatePhoneNo(phoneNoText);
+    validateLine1(address.line1);
+    validateRegion(address.region);
+    validateDistrict(address.district);
+    validatePostalCode(address.postalCodeText);
   }
 }
 
@@ -141,10 +189,10 @@ abstract class _FormErrorState with Store {
   String lastName;
 
   @observable
-  String email;
+  String phoneNo;
 
   @observable
-  String password;
+  String homeNo;
 
   @observable
   String age;
@@ -154,9 +202,6 @@ abstract class _FormErrorState with Store {
 
   @observable
   String line1;
-
-  @observable
-  String line2;
 
   @observable
   String district;
@@ -172,10 +217,9 @@ abstract class _FormErrorState with Store {
       lastName != null ||
       age != null ||
       gender != null ||
+      phoneNo != null ||
       line1 != null ||
-      line2 != null ||
       district != null ||
-      postalCode != null ||
       region != null;
 }
 
@@ -195,44 +239,8 @@ abstract class _AddressBase with Store {
   String region;
 
   @observable
-  int postalCode;
-}
+  String postalCodeText;
 
-enum District {
-  Flacq,
-  GrandPort,
-  Moka,
-  Pamplemousses,
-  PlainesWilhems,
-  PortLouis,
-  RiviereDuRempart,
-  RiviereNoire,
-  Savanne,
-}
-
-extension DistrictExtension on District {
-  String get value {
-    switch (this) {
-      case District.Flacq:
-        return 'Flacq';
-      case District.GrandPort:
-        return 'Grand Port';
-      case District.Moka:
-        return 'Moka';
-      case District.Pamplemousses:
-        return 'Pamplemousses';
-      case District.PlainesWilhems:
-        return 'Plaines Wilhems';
-      case District.PortLouis:
-        return 'Port Louis';
-      case District.RiviereDuRempart:
-        return 'Riviere du Rempart';
-      case District.RiviereNoire:
-        return 'Riviere Noire';
-      case District.Savanne:
-        return 'Savanne';
-      default:
-        return null;
-    }
-  }
+  @computed
+  int get postalCode => int.tryParse(postalCodeText);
 }
