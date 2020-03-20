@@ -14,10 +14,11 @@ mixin _$FormStore on _FormStore, Store {
   @override
   String get fullName =>
       (_$fullNameComputed ??= Computed<String>(() => super.fullName)).value;
-  Computed<int> _$ageComputed;
+  Computed<DateTime> _$ageComputed;
 
   @override
-  int get age => (_$ageComputed ??= Computed<int>(() => super.age)).value;
+  DateTime get age =>
+      (_$ageComputed ??= Computed<DateTime>(() => super.age)).value;
   Computed<int> _$phoneNoComputed;
 
   @override
@@ -69,21 +70,21 @@ mixin _$FormStore on _FormStore, Store {
     }, _$lastNameAtom, name: '${_$lastNameAtom.name}_set');
   }
 
-  final _$ageTextAtom = Atom(name: '_FormStore.ageText');
+  final _$dobAtom = Atom(name: '_FormStore.dob');
 
   @override
-  String get ageText {
-    _$ageTextAtom.context.enforceReadPolicy(_$ageTextAtom);
-    _$ageTextAtom.reportObserved();
-    return super.ageText;
+  DateTime get dob {
+    _$dobAtom.context.enforceReadPolicy(_$dobAtom);
+    _$dobAtom.reportObserved();
+    return super.dob;
   }
 
   @override
-  set ageText(String value) {
-    _$ageTextAtom.context.conditionallyRunInAction(() {
-      super.ageText = value;
-      _$ageTextAtom.reportChanged();
-    }, _$ageTextAtom, name: '${_$ageTextAtom.name}_set');
+  set dob(DateTime value) {
+    _$dobAtom.context.conditionallyRunInAction(() {
+      super.dob = value;
+      _$dobAtom.reportChanged();
+    }, _$dobAtom, name: '${_$dobAtom.name}_set');
   }
 
   final _$genderAtom = Atom(name: '_FormStore.gender');
@@ -165,7 +166,7 @@ mixin _$FormStore on _FormStore, Store {
   final _$_FormStoreActionController = ActionController(name: '_FormStore');
 
   @override
-  void validateAge(String value) {
+  void validateAge(DateTime value) {
     final _$actionInfo = _$_FormStoreActionController.startAction();
     try {
       return super.validateAge(value);
@@ -237,7 +238,7 @@ mixin _$FormStore on _FormStore, Store {
   @override
   String toString() {
     final string =
-        'firstName: ${firstName.toString()},lastName: ${lastName.toString()},ageText: ${ageText.toString()},gender: ${gender.toString()},phoneNoText: ${phoneNoText.toString()},homeNoText: ${homeNoText.toString()},address: ${address.toString()},fullName: ${fullName.toString()},age: ${age.toString()},phoneNo: ${phoneNo.toString()},homeNo: ${homeNo.toString()},canMoveToNextPage: ${canMoveToNextPage.toString()}';
+        'firstName: ${firstName.toString()},lastName: ${lastName.toString()},dob: ${dob.toString()},gender: ${gender.toString()},phoneNoText: ${phoneNoText.toString()},homeNoText: ${homeNoText.toString()},address: ${address.toString()},fullName: ${fullName.toString()},age: ${age.toString()},phoneNo: ${phoneNo.toString()},homeNo: ${homeNo.toString()},canMoveToNextPage: ${canMoveToNextPage.toString()}';
     return '{$string}';
   }
 }

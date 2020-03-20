@@ -24,10 +24,16 @@ User _$UserFromJson(Map<String, dynamic> json) {
     address: json['address'] == null
         ? null
         : Address.fromJson(json['address'] as Map<String, dynamic>),
-    firstSymptomDate: json['firstSymptomDate'] as String,
-    dob: json['dob'] as String,
-    createdAt: json['createdAt'] as String,
-    updatedAt: json['updatedAt'] as String,
+    firstSymptomDate: json['firstSymptomDate'] == null
+        ? null
+        : DateTime.parse(json['firstSymptomDate'] as String),
+    dob: json['dob'] == null ? null : DateTime.parse(json['dob'] as String),
+    createdAt: json['createdAt'] == null
+        ? null
+        : DateTime.parse(json['createdAt'] as String),
+    updatedAt: json['updatedAt'] == null
+        ? null
+        : DateTime.parse(json['updatedAt'] as String),
   );
 }
 
@@ -39,8 +45,8 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'phoneNumber': instance.phoneNumber,
       'symptoms': instance.symptoms,
       'address': instance.address,
-      'firstSymptomDate': instance.firstSymptomDate,
-      'dob': instance.dob,
-      'createdAt': instance.createdAt,
-      'updatedAt': instance.updatedAt,
+      'firstSymptomDate': instance.firstSymptomDate?.toIso8601String(),
+      'dob': instance.dob?.toIso8601String(),
+      'createdAt': instance.createdAt?.toIso8601String(),
+      'updatedAt': instance.updatedAt?.toIso8601String(),
     };
