@@ -1,7 +1,7 @@
-import 'package:coronamapp/Entity/gender.dart';
-import 'package:coronamapp/Entity/geolocation.dart';
-import 'package:coronamapp/Entity/symptom.dart';
-import 'package:coronamapp/Entity/address.dart';
+import 'package:coronamapp/models/gender.dart';
+import 'package:coronamapp/models/geolocation.dart';
+import 'package:coronamapp/models/symptom.dart';
+import 'package:coronamapp/models/address.dart';
 
 class User {
   String firstName;

@@ -1,9 +1,9 @@
 import 'package:coronamapp/constants/routes.dart';
 import 'package:coronamapp/form_store.dart';
-import 'package:coronamapp/views/home.dart';
-import 'package:coronamapp/views/splash.dart';
-import 'package:coronamapp/views/symptoms_form.dart';
-import 'package:coronamapp/views/thank_you.dart';
+import 'package:coronamapp/screens/home.dart';
+import 'package:coronamapp/screens/splash.dart';
+import 'package:coronamapp/screens/symptoms_form.dart';
+import 'package:coronamapp/screens/thank_you.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
