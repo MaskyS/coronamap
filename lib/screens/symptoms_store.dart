@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:coronamapp/Repository/symptom_repository.dart';
 import 'package:coronamapp/models/symptom.dart';
-import 'package:coronamapp/repository/gender_repository.dart';
-import 'package:coronamapp/repository/symptom_repository.dart';
 import 'package:flutter/services.dart';
 import 'package:mobx/mobx.dart';
 
@@ -50,7 +49,7 @@ abstract class _Form2StoreBase with Store {
   Future<void> getFromFirestore() async {
     try {
       _symptomsListFuture =
-          ObservableFuture(SymptomRepository().getAllWithLimit(limit: 20));
+          ObservableFuture((new SymptomRepository()).getAllWithLimit(limit: 20));
       symptomsList = await _symptomsListFuture;
     } catch (e) {
       print(e);
