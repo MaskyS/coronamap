@@ -9,6 +9,12 @@ part of 'symptoms_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$Form2Store on _Form2StoreBase, Store {
+  Computed<bool> _$canCompleteFormComputed;
+
+  @override
+  bool get canCompleteForm => (_$canCompleteFormComputed ??=
+          Computed<bool>(() => super.canCompleteForm))
+      .value;
   Computed<StoreState> _$stateComputed;
 
   @override
@@ -177,7 +183,7 @@ mixin _$Form2Store on _Form2StoreBase, Store {
   @override
   String toString() {
     final string =
-        'chosenSymptoms: ${chosenSymptoms.toString()},errorMessage: ${errorMessage.toString()},symptomsList: ${symptomsList.toString()},firstDate: ${firstDate.toString()},chosenSymptomsErrorText: ${chosenSymptomsErrorText.toString()},firstDateErrorText: ${firstDateErrorText.toString()},state: ${state.toString()}';
+        'chosenSymptoms: ${chosenSymptoms.toString()},errorMessage: ${errorMessage.toString()},symptomsList: ${symptomsList.toString()},firstDate: ${firstDate.toString()},chosenSymptomsErrorText: ${chosenSymptomsErrorText.toString()},firstDateErrorText: ${firstDateErrorText.toString()},canCompleteForm: ${canCompleteForm.toString()},state: ${state.toString()}';
     return '{$string}';
   }
 }

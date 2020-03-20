@@ -18,10 +18,12 @@ class SymptomsForm extends StatefulWidget {
 class _SymptomsFormState extends State<SymptomsForm> {
   var _currentStep = 0;
   FormStore _store;
+  Form2Store _store2;
 
   @override
   Widget build(BuildContext context) {
     _store = Provider.of<FormStore>(context, listen: false);
+    _store2 = Provider.of<Form2Store>(context, listen: false);
     return Scaffold(
       appBar: AppBar(title: Text("Covid-19 Depistage")),
       body: Stepper(
@@ -31,22 +33,35 @@ class _SymptomsFormState extends State<SymptomsForm> {
           if (_currentStep == 0) {
             _store.validateAll();
             if (_store.canMoveToNextPage) {
-              setState(() => _currentStep++);
-            } else {}
+              increaseStep();
+            }
           } else if (_currentStep == 1) {
-            // TODO Validate.
-            Navigator.pushReplacementNamed(
-              context,
-              Routes.thankYouPage,
-            );
+            _store2.validateAll();
+            if (_store2.canCompleteForm) {
+              Navigator.pushReplacementNamed(
+                context,
+                Routes.thankYouPage,
+              );
+            }
           }
         },
         onStepCancel: () {
-          setState(() => _currentStep--);
+          if (_currentStep > 0) {
+            setState(() => _currentStep--);
+          }
         },
         currentStep: _currentStep,
         onStepTapped: (int stepNo) {
-          setState(() => _currentStep = stepNo);
+          if (stepNo != _currentStep) {
+            if (stepNo == 1) {
+              _store.validateAll();
+              if (_store.canMoveToNextPage) {
+                increaseStep();
+              }
+            } else if (stepNo == 0) {
+              decreaseStep();
+            }
+          }
         },
         controlsBuilder: _buildControlButtons,
         steps: [
@@ -62,6 +77,9 @@ class _SymptomsFormState extends State<SymptomsForm> {
       ),
     );
   }
+
+  void decreaseStep() => setState(() => _currentStep--);
+  void increaseStep() => setState(() => _currentStep++);
 
   Widget _buildControlButtons(context, {onStepCancel, onStepContinue}) {
     var buttonStyle = TextStyle(fontWeight: FontWeight.w800);
@@ -367,8 +385,8 @@ class _Step2FormState extends State<Step2Form> {
   void initState() {
     super.initState();
     _store = Provider.of<Form2Store>(context, listen: false);
-    _store.setupValidations();
     _store.getSymptomsFromFirestore();
+    _store.setupValidations();
   }
 
   @override
@@ -390,7 +408,9 @@ class _Step2FormState extends State<Step2Form> {
                 initialValue: _store.chosenSymptoms,
                 onChanged: (v) {
                   List<Symptom> temp = [];
-                  v.forEach((element) {temp.add(element as Symptom);});
+                  v.forEach((element) {
+                    temp.add(element as Symptom);
+                  });
                   _store.chosenSymptoms = temp;
                 },
                 decoration: _baseDeco.copyWith(
