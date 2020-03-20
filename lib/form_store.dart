@@ -100,7 +100,7 @@ abstract class _FormStore with Store {
 
   @action
   void validateGender(String value) {
-    error.gender = value != null ? 'Ou bizin choisir ou sexe' : null;
+    error.gender = value == null ? 'Ou bizin choisir ou sexe' : null;
   }
 
   @action

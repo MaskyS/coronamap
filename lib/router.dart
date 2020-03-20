@@ -3,6 +3,7 @@ import 'package:coronamapp/form_store.dart';
 import 'package:coronamapp/screens/home.dart';
 import 'package:coronamapp/screens/splash.dart';
 import 'package:coronamapp/screens/symptoms_form.dart';
+import 'package:coronamapp/screens/symptoms_store.dart';
 import 'package:coronamapp/screens/thank_you.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -16,8 +17,11 @@ class Router {
         return MaterialPageRoute(builder: (_) => ThankYouForm());
       case Routes.formPage:
         return MaterialPageRoute(
-          builder: (_) => Provider(
-            create: (_) => FormStore(),
+          builder: (_) => MultiProvider(
+            providers: [
+              Provider<FormStore>(create: (_) => FormStore()),
+              Provider<Form2Store>(create: (_) => Form2Store()),
+            ],
             child: SymptomsForm(),
           ),
         );

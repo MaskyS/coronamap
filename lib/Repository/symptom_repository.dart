@@ -1,16 +1,31 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:coronamapp/models/symptom.dart';
 import 'package:coronamapp/models/user.dart';
 
 class SymptomRepository {
-  final dbName = 'symptom';
+  final dbName = 'symptoms';
 
-  Future<QuerySnapshot> findByRef(String ref)
-  {
-    return Firestore.instance.collection(dbName).where('ref', isEqualTo: ref).getDocuments();
+  Future<Symptom> findByRef(String ref) {
+    return Firestore.instance
+        .collection(dbName)
+        .where('ref', isEqualTo: ref)
+        .getDocuments().then((snapshot) {
+          return snapshot.documents.map((doc) => Symptom.fromJson(doc.data)).toList().first;
+        });
   }
 
-  Future<QuerySnapshot> getAllWithLimit({int limit = 10})
-  {
-    return Firestore.instance.collection(dbName).orderBy('ref').limit(limit).getDocuments();
+  Future<List<Symptom>> getAllWithLimit({int limit = 10}) {
+    return Firestore.instance
+        .collection(dbName)
+        .orderBy('ref')
+        .limit(limit)
+        .getDocuments()
+        .then(
+      (snapshot) {
+        return snapshot.documents
+            .map((doc) => Symptom.fromJson(doc.data))
+            .toList();
+      },
+    );
   }
 }
