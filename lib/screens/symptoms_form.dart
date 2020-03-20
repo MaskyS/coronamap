@@ -1,7 +1,11 @@
+import 'package:coronamapp/models/address.dart';
+import 'package:coronamapp/models/gender.dart';
 import 'package:coronamapp/models/symptom.dart';
 import 'package:coronamapp/constants/routes.dart';
 import 'package:coronamapp/district_enum.dart';
 import 'package:coronamapp/form_store.dart';
+import 'package:coronamapp/models/user.dart';
+import 'package:coronamapp/repository/user_repository.dart';
 import 'package:coronamapp/screens/symptoms_store.dart';
 import 'package:coronamapp/store_state_enum.dart';
 import 'package:flutter/material.dart';
@@ -38,6 +42,11 @@ class _SymptomsFormState extends State<SymptomsForm> {
           } else if (_currentStep == 1) {
             _store2.validateAll();
             if (_store2.canCompleteForm) {
+              // var user = User()
+              //   ..firstName = _store.firstName
+              //   ..lastName = _store.lastName..
+              //   address = _store.address..gender = Gender()..phoneNumber = _store.
+
               Navigator.pushReplacementNamed(
                 context,
                 Routes.thankYouPage,
