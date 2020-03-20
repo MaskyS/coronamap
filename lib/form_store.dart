@@ -173,10 +173,12 @@ abstract class _FormStore with Store {
   void validatePostalCode(String value) {
     error.postalCode = null;
 
-    error.postalCode = FormBuilderValidators.numeric(
+    if(value!=null){
+      error.postalCode = FormBuilderValidators.numeric(
             errorText: 'Ena ban characters invalides')(value) ??
         FormBuilderValidators.maxLength(5, errorText: "Bizin ena 5 numeros")(
             value);
+    }
   }
 
   void dispose() {
