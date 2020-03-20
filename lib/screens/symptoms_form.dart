@@ -352,7 +352,6 @@ class Step2Form extends StatefulWidget {
 }
 
 class _Step2FormState extends State<Step2Form> {
-
   final _baseDeco = InputDecoration(
     fillColor: Colors.grey.shade100,
     filled: true,
@@ -368,7 +367,8 @@ class _Step2FormState extends State<Step2Form> {
   void initState() {
     super.initState();
     _store = Provider.of<Form2Store>(context, listen: false);
-    _store.getFromFirestore();
+    _store.setupValidations();
+    _store.getSymptomsFromFirestore();
   }
 
   @override
@@ -383,72 +383,83 @@ class _Step2FormState extends State<Step2Form> {
                 _store.state == StoreState.initial) {
               return Center(child: CircularProgressIndicator());
             }
-            print(_store.chosenSymptoms);
 
-            print(_store.symptomsList);
-
-            print(_store.symptomsListFromFireStore);
-
-            return FormBuilderChipsInput(
-              attribute: 'symptoms',
-              initialValue: _store.chosenSymptoms,
-              decoration: _baseDeco.copyWith(
-                labelText: "Ecrire ou ban symptomes",
-                errorText: _store.chosenSymptomsErrorText,
-              ),
-              chipBuilder: (context, state, symptom) {
-                return InputChip(
-                  key: ObjectKey(symptom),
-                  label: Text(symptom.label),
-                  // avatar: CircleAvatar(
-                  //   backgroundImage: NetworkImage(profile.imageUrl),
-                  // ),
-                  onDeleted: () => state.deleteChip(symptom),
-                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                );
-              },
-              suggestionBuilder: (context, state, symptom) {
-                return ListTile(
-                  key: ObjectKey(symptom),
-                  // ! TODO Add images for symptoms
-                  // leading: CircleAvatar(
-                  //   backgroundImage: NetworkImage(profile.imageUrl),
-                  // ),
-                  title: Text(symptom.label),
-                  // subtitle: Text(profile.email),
-                  onTap: () => state.selectSuggestion(symptom),
-                );
-              },
-              findSuggestions: (String query) {
-                if (query.length != 0) {
-                  var lowercaseQuery = query.toLowerCase();
-                  return _store.symptomsList.where((symptoms) {
-                    return symptoms.label
-                        .toLowerCase()
-                        .contains(query.toLowerCase());
-                  }).toList(growable: false)
-                    ..sort((a, b) => a.label
-                        .toLowerCase()
-                        .indexOf(lowercaseQuery)
-                        .compareTo(
-                            b.label.toLowerCase().indexOf(lowercaseQuery)));
-                } else {
-                  return const <Symptom>[];
-                }
-              },
-            );
+            return Observer(builder: (_) {
+              return FormBuilderChipsInput(
+                attribute: 'symptoms',
+                initialValue: _store.chosenSymptoms,
+                onChanged: (v) {
+                  List<Symptom> temp = [];
+                  v.forEach((element) {temp.add(element as Symptom);});
+                  _store.chosenSymptoms = temp;
+                },
+                decoration: _baseDeco.copyWith(
+                  labelText: "Ecrire ou ban symptomes",
+                  errorText: _store.chosenSymptomsErrorText,
+                ),
+                chipBuilder: (context, state, symptom) {
+                  return InputChip(
+                    key: ObjectKey(symptom),
+                    label: Text(symptom.label),
+                    // avatar: CircleAvatar(
+                    //   backgroundImage: NetworkImage(profile.imageUrl),
+                    // ),
+                    onDeleted: () => state.deleteChip(symptom),
+                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  );
+                },
+                suggestionBuilder: (context, state, symptom) {
+                  return ListTile(
+                    key: ObjectKey(symptom),
+                    // ! TODO Add images for symptoms
+                    // leading: CircleAvatar(
+                    //   backgroundImage: NetworkImage(profile.imageUrl),
+                    // ),
+                    title: Text(symptom.label),
+                    // subtitle: Text(profile.email),
+                    onTap: () => state.selectSuggestion(symptom),
+                  );
+                },
+                findSuggestions: (String query) {
+                  if (query.length != 0) {
+                    var lowercaseQuery = query.toLowerCase();
+                    return _store.symptomsList.where((symptoms) {
+                      return symptoms.label
+                          .toLowerCase()
+                          .contains(query.toLowerCase());
+                    }).toList(growable: false)
+                      ..sort((a, b) => a.label
+                          .toLowerCase()
+                          .indexOf(lowercaseQuery)
+                          .compareTo(
+                              b.label.toLowerCase().indexOf(lowercaseQuery)));
+                  } else {
+                    return const <Symptom>[];
+                  }
+                },
+              );
+            });
           }),
           SizedBox(height: 30),
-          FormBuilderDateTimePicker(
-            attribute: 'first_date',
-            decoration: _baseDeco.copyWith(
-                labelText: _store.firstDate?.toIso8601String() ??
-                    'Date ou in coummence gagne symptoms'),
-            initialDate: _store.firstDate,
-            onChanged: (v) => _store.firstDate = v,
-          ),
+          Observer(builder: (_) {
+            return FormBuilderDateTimePicker(
+              attribute: 'first_date',
+              decoration: _baseDeco.copyWith(
+                labelText: 'Date ou in coummence gagne symptoms',
+                errorText: _store.firstDateErrorText,
+              ),
+              initialDate: _store.firstDate,
+              onChanged: (v) => _store.firstDate = v,
+            );
+          }),
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _store.dispose();
+    super.dispose();
   }
 }

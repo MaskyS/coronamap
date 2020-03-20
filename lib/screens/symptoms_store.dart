@@ -20,15 +20,17 @@ abstract class _Form2StoreBase with Store {
   String errorMessage;
 
   @observable
-  List<Symptom> symptomsList = List();
-
-  @computed
-  String get chosenSymptomsErrorText =>
-      chosenSymptoms.length >= 0 ? 'Choisir ou ban symptoms' : null;
+  List<Symptom> symptomsList = <Symptom>[];
 
   /// First date symptoms observed.
   @observable
   DateTime firstDate;
+
+  @observable
+  String chosenSymptomsErrorText;
+
+  @observable
+  String firstDateErrorText;
 
   @computed
   StoreState get state {
@@ -42,14 +44,44 @@ abstract class _Form2StoreBase with Store {
         : StoreState.loaded;
   }
 
-  @computed
-  List<Symptom> get symptomsListFromFireStore => _symptomsListFuture.value;
+  List<ReactionDisposer> _disposers;
+
+  void setupValidations() {
+    _disposers = [
+      reaction((_) => chosenSymptoms, validateChosenSymptoms),
+      reaction((_) => firstDate, validateFirstDate),
+    ];
+  }
 
   @action
-  Future<void> getFromFirestore() async {
+  void validateChosenSymptoms(List<Symptom> values) {
+    chosenSymptomsErrorText =
+        values.length < 1 ? 'Ou bizin remplit symptoms' : null;
+  }
+
+  @action
+  void validateFirstDate(DateTime dateTime) {
+    firstDateErrorText = dateTime == null
+        ? 'Faut choisir date ou in coummence gagne symptoms'
+        : null;
+  }
+
+  void validateAll() {
+    validateChosenSymptoms(chosenSymptoms);
+    validateFirstDate(firstDate);
+  }
+
+  void dispose() {
+    for (final d in _disposers) {
+      d();
+    }
+  }
+
+  @action
+  Future<void> getSymptomsFromFirestore() async {
     try {
       _symptomsListFuture =
-          ObservableFuture((new SymptomRepository()).getAllWithLimit(limit: 20));
+          ObservableFuture((SymptomRepository()).getAllWithLimit(limit: 20));
       symptomsList = await _symptomsListFuture;
     } catch (e) {
       print(e);
