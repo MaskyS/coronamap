@@ -30,11 +30,10 @@ class Splash extends StatelessWidget {
                           child: Text(
                             'CORONA-MAPP',
                             style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              letterSpacing: 3,
+                                fontWeight: FontWeight.bold,
+                                letterSpacing: 3,
                                 fontSize: 24,
-                                color: Colors.black
-                            ),
+                                color: Colors.black),
                           ),
                         ),
                       ),
@@ -50,10 +49,9 @@ class Splash extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
-                              'Language/Langaz/Langue:',
+                            'Language/Langaz/Langue:',
                             style: TextStyle(
-                              color: Color.fromRGBO(128, 122, 122, 1)
-                            ),
+                                color: Color.fromRGBO(128, 122, 122, 1)),
                           ),
                         ),
                       ),
@@ -61,17 +59,11 @@ class Splash extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
                           Image.asset('assets/uk_flag.png',
-                            height: 37,
-                            width: 37
-                          ),
+                              height: 37, width: 37),
                           Image.asset('assets/mauritius_flag.png',
-                              height: 37,
-                              width: 37
-                          ),
+                              height: 37, width: 37),
                           Image.asset('assets/france_flag.png',
-                              height: 37,
-                              width: 37
-                          ),
+                              height: 37, width: 37),
                         ],
                       ),
                       Center(
@@ -80,13 +72,14 @@ class Splash extends StatelessWidget {
                           textColor: Colors.white,
                           icon: Icon(Icons.arrow_forward),
                           label: Text("GO"),
-                          onPressed: () => Navigator.pushNamed(context, Routes.homePage),
+                          // TODO Make language matter.
+                          onPressed: () =>
+                              Navigator.pushNamed(context, Routes.homePage),
                         ),
                       )
                     ],
                   ),
-                )
-
+                ),
               ],
             ),
           )
