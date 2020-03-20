@@ -1,3 +1,4 @@
+import 'package:coronamapp/models/address.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:mobx/mobx.dart';
 import 'package:coronamapp/district_enum.dart';
@@ -221,26 +222,4 @@ abstract class _FormErrorState with Store {
       line1 != null ||
       district != null ||
       region != null;
-}
-
-class Address = _AddressBase with _$Address;
-
-abstract class _AddressBase with Store {
-  @observable
-  String line1;
-
-  @observable
-  String line2;
-
-  @observable
-  District district;
-
-  @observable
-  String region;
-
-  @observable
-  String postalCodeText;
-
-  @computed
-  int get postalCode => int.tryParse(postalCodeText);
 }

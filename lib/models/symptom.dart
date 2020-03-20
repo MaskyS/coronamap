@@ -1,3 +1,7 @@
+import 'package:json_annotation/json_annotation.dart';
+part 'symptom.g.dart';
+
+@JsonSerializable()
 class Symptom {
   String label;
   String ref;
@@ -9,15 +13,7 @@ class Symptom {
     this.description,
   });
 
-  factory Symptom.fromJson(Map<String, dynamic> json) => Symptom(
-    label: json["label"],
-    ref: json["ref"],
-    description: json["description"],
-  );
-
-  Map<String, dynamic> toJson() => {
-    "label": label,
-    "ref": ref,
-    "description": description,
-  };
+  factory Symptom.fromJson(Map<String, dynamic> json) =>
+      _$SymptomFromJson(json);
+  Map<String, dynamic> toJson() => _$SymptomToJson(this);
 }

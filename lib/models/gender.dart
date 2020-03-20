@@ -1,3 +1,7 @@
+import 'package:json_annotation/json_annotation.dart';
+part 'gender.g.dart';
+
+@JsonSerializable()
 class Gender {
   String label;
   String ref;
@@ -7,13 +11,7 @@ class Gender {
     this.ref,
   });
 
-  factory Gender.fromJson(Map<String, dynamic> json) => Gender(
-    label: json["label"],
-    ref: json["ref"],
-  );
-
-  Map<String, dynamic> toJson() => {
-    "label": label,
-    "ref": ref,
-  };
+  factory Gender.fromJson(Map<String, dynamic> json) =>
+      _$GenderFromJson(json);
+  Map<String, dynamic> toJson() => _$GenderToJson(this);
 }

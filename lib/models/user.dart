@@ -2,7 +2,11 @@ import 'package:coronamapp/models/gender.dart';
 import 'package:coronamapp/models/geolocation.dart';
 import 'package:coronamapp/models/symptom.dart';
 import 'package:coronamapp/models/address.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'user.g.dart';
+
+@JsonSerializable()
 class User {
   String firstName;
   String lastName;
@@ -30,31 +34,6 @@ class User {
     this.updatedAt,
   });
 
-  factory User.fromJson(Map<String, dynamic> json) => User(
-    firstName: json["firstName"],
-    lastName: json["lastName"],
-    gender: Gender.fromJson(json["gender"]),
-    location: Location.fromJson(json["location"]),
-    phoneNumber: json["phoneNumber"],
-    symptoms: List<Symptom>.from(json["symptoms"].map((x) => Symptom.fromJson(x))),
-    address: Address.fromJson(json["address"]),
-    firstSymptomDate: json["firstSymptomDate"],
-    dob: json["dob"],
-    createdAt: json["createdAt"],
-    updatedAt: json["updatedAt"],
-  );
-
-  Map<String, dynamic> toJson() => {
-    "firstName": firstName,
-    "lastName": lastName,
-    "gender": gender.toJson(),
-    "location": location.toJson(),
-    "phoneNumber": phoneNumber,
-    "symptoms": List<dynamic>.from(symptoms.map((x) => x.toJson())),
-    "address": address.toJson(),
-    "firstSymptomDate": firstSymptomDate,
-    "dob": dob,
-    "createdAt": createdAt,
-    "updatedAt": updatedAt,
-  };
+  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+  Map<String, dynamic> toJson() => _$UserToJson(this);
 }

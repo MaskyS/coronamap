@@ -1,3 +1,7 @@
+import 'package:json_annotation/json_annotation.dart';
+part 'geolocation.g.dart';
+
+@JsonSerializable()
 class Location {
   String latitude;
   String longitude;
@@ -6,14 +10,7 @@ class Location {
     this.latitude,
     this.longitude,
   });
-
-  factory Location.fromJson(Map<String, dynamic> json) => Location(
-    latitude: json["latitude"],
-    longitude: json["longitude"],
-  );
-
-  Map<String, dynamic> toJson() => {
-    "latitude": latitude,
-    "longitude": longitude,
-  };
+  factory Location.fromJson(Map<String, dynamic> json) =>
+      _$LocationFromJson(json);
+  Map<String, dynamic> toJson() => _$LocationToJson(this);
 }
