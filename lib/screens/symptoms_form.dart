@@ -352,7 +352,7 @@ class Step2Form extends StatefulWidget {
 }
 
 class _Step2FormState extends State<Step2Form> {
-  List<Symptom> _symptomsList = [Symptom(label: "name")];
+
   final _baseDeco = InputDecoration(
     fillColor: Colors.grey.shade100,
     filled: true,
@@ -422,7 +422,7 @@ class _Step2FormState extends State<Step2Form> {
               findSuggestions: (String query) {
                 if (query.length != 0) {
                   var lowercaseQuery = query.toLowerCase();
-                  return _symptomsList.where((symptoms) {
+                  return _store.symptomsList.where((symptoms) {
                     return symptoms.label
                         .toLowerCase()
                         .contains(query.toLowerCase());
