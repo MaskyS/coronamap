@@ -109,19 +109,16 @@ abstract class _FormStore with Store {
   void validatePhoneNo(String value) {
     error.phoneNo = null;
 
+    error.phoneNo = FormBuilderValidators.required(
+        errorText: "Bizin mette ou numero")(value);
+    if (error.phoneNo != null) return;
+
     if (!value.startsWith('5')) {
       error.phoneNo = 'Bizin mett 5 devant';
       return;
     }
 
-    if (value.startsWith('0')) {
-      error.phoneNo = 'Pas cav ena 5 devant';
-      return;
-    }
-
-    error.phoneNo = FormBuilderValidators.required(
-            errorText: "Bizin mette ou numero")(value) ??
-        FormBuilderValidators.numeric(
+    error.phoneNo = FormBuilderValidators.numeric(
             errorText: 'Ena ban characters invalides')(value) ??
         FormBuilderValidators.minLength(8,
             errorText: "Ou numero bizin ena 8 numeros")(value) ??
@@ -132,17 +129,19 @@ abstract class _FormStore with Store {
   @action
   void validateHomeNo(String value) {
     error.homeNo = null;
+    if (isNull(value)) return;
 
     if (value.startsWith('0')) {
-      error.phoneNo = 'Ou numero pas cav coummence ek 0';
+      error.phoneNo = 'Ou pas cav mette 0 devant';
       return;
     }
 
     error.homeNo = FormBuilderValidators.numeric(
             errorText: 'Ena ban characters invalides')(value) ??
-        FormBuilderValidators.minLength(7, errorText: 'Bizin ena 7 numeros')(value) ??
-        FormBuilderValidators.maxLength(7,
-            errorText: "Bizin ena 7 numeros")(value);
+        FormBuilderValidators.minLength(7, errorText: 'Bizin ena 7 numeros')(
+            value) ??
+        FormBuilderValidators.maxLength(7, errorText: "Bizin ena 7 numeros")(
+            value);
   }
 
   @action
