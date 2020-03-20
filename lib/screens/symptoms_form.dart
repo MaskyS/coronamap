@@ -1,10 +1,11 @@
-import 'package:coronamapp/entity/symptom.dart';
+import 'package:coronamapp/models/symptom.dart';
 import 'package:coronamapp/constants/routes.dart';
 import 'package:coronamapp/district_enum.dart';
 import 'package:coronamapp/form_store.dart';
+import 'package:coronamapp/screens/symptoms_store.dart';
+import 'package:coronamapp/store_state_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_chips_input/flutter_chips_input.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
@@ -31,8 +32,7 @@ class _SymptomsFormState extends State<SymptomsForm> {
             _store.validateAll();
             if (_store.canMoveToNextPage) {
               setState(() => _currentStep++);
-            } else {
-            }
+            } else {}
           } else if (_currentStep == 1) {
             // TODO Validate.
             Navigator.pushReplacementNamed(
@@ -76,8 +76,9 @@ class _Step1FormState extends State<Step1Form> {
     fillColor: Colors.grey.shade100,
     filled: true,
     border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10),
-        borderSide: BorderSide(width: 0.0, style: BorderStyle.none)),
+      borderRadius: BorderRadius.circular(10),
+      borderSide: BorderSide(width: 0.0, style: BorderStyle.none),
+    ),
   );
 
   @override
@@ -127,11 +128,16 @@ class _Step1FormState extends State<Step1Form> {
                       return FormBuilderDropdown(
                         attribute: "gender",
                         hint: Text('Sexe'),
-                        decoration: _baseDeco,
+                        decoration: _baseDeco.copyWith(errorText: _store.error.gender),
+                        onChanged: (v) => _store.gender = v,
                         initialValue: _store.gender,
                         items: ['Male', 'Female']
-                            .map((gender) => DropdownMenuItem(
-                                value: gender, child: Text("$gender")))
+                            .map(
+                              (gender) => DropdownMenuItem(
+                                value: gender,
+                                child: Text("$gender"),
+                              ),
+                            )
                             .toList(),
                       );
                     }),
@@ -224,7 +230,7 @@ class _Step1FormState extends State<Step1Form> {
                 return FormBuilderDropdown(
                   attribute: "district",
                   initialValue: _store.address.district,
-                  onChanged: (v) => _store.address.district,
+                  onChanged: (v) => _store.address.district = v,
                   decoration: _baseDeco.copyWith(
                     errorText: _store.error.district,
                   ),
@@ -297,77 +303,101 @@ class Step2Form extends StatefulWidget {
 
 class _Step2FormState extends State<Step2Form> {
   List<Symptom> _symptomsList = [Symptom(label: "name")];
+  final _baseDeco = InputDecoration(
+    fillColor: Colors.grey.shade100,
+    filled: true,
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(10),
+      borderSide: BorderSide(width: 0.0, style: BorderStyle.none),
+    ),
+  );
+
+  Form2Store _store;
 
   @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        SizedBox(height: 10),
-        SectionHeaderText("REMPLI OU BAN SYMPTOMS"),
-        ChipsInput(
-          decoration: InputDecoration(
-            labelText: "Select Symptoms",
-          ),
-          maxChips: 3,
-          findSuggestions: (String query) {
-            if (query.length != 0) {
-              var lowercaseQuery = query.toLowerCase();
-              return _symptomsList.where((symptoms) {
-                return symptoms.label
-                    .toLowerCase()
-                    .contains(query.toLowerCase());
-              }).toList(growable: false)
-                ..sort((a, b) => a.label
-                    .toLowerCase()
-                    .indexOf(lowercaseQuery)
-                    .compareTo(b.label.toLowerCase().indexOf(lowercaseQuery)));
-            } else {
-              return const <Symptom>[];
-            }
-          },
-          onChanged: (data) {
-            print(data);
-          },
-          chipBuilder: (context, state, symptom) {
-            return InputChip(
-              key: ObjectKey(symptom),
-              label: Text(symptom.label),
-              // avatar: CircleAvatar(
-              //   backgroundImage: NetworkImage(profile.imageUrl),
-              // ),
-              onDeleted: () => state.deleteChip(symptom),
-              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            );
-          },
-          suggestionBuilder: (context, state, symptom) {
-            return ListTile(
-              key: ObjectKey(symptom),
-              // ! TODO Add images for symptoms
-              // leading: CircleAvatar(
-              //   backgroundImage: NetworkImage(profile.imageUrl),
-              // ),
-              title: Text(symptom.label),
-              // subtitle: Text(profile.email),
-              onTap: () => state.selectSuggestion(symptom),
-            );
-          },
-        )
-      ],
-    );
+  void initState() {
+    super.initState();
+    _store = Provider.of<Form2Store>(context, listen: false);
+    _store.getFromFirestore();
   }
-}
-
-
-class SectionHeaderText extends StatelessWidget {
-  final String text;
-
-  SectionHeaderText(this.text);
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      text.toUpperCase(),
-      style: TextStyle(color: Colors.black87, fontSize: 15),
+    return FormBuilder(
+      autovalidate: true,
+      child: Column(
+        children: <Widget>[
+          SizedBox(height: 10),
+          Observer(builder: (_) {
+            if (_store.state == StoreState.loading || _store.state == StoreState.initial) {
+              return Center(child: CircularProgressIndicator());
+            }
+            print(_store.chosenSymptoms);
+
+            print(_store.symptomsList);
+
+            print(_store.symptomsListFromFireStore);
+
+            return FormBuilderChipsInput(
+              attribute: 'symptoms',
+              initialValue: _store.chosenSymptoms,
+              decoration: _baseDeco.copyWith(
+                labelText: "Ecrire ou ban symptomes",
+                errorText: _store.chosenSymptomsErrorText,
+              ),
+              chipBuilder: (context, state, symptom) {
+                return InputChip(
+                  key: ObjectKey(symptom),
+                  label: Text(symptom.label),
+                  // avatar: CircleAvatar(
+                  //   backgroundImage: NetworkImage(profile.imageUrl),
+                  // ),
+                  onDeleted: () => state.deleteChip(symptom),
+                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                );
+              },
+              suggestionBuilder: (context, state, symptom) {
+                return ListTile(
+                  key: ObjectKey(symptom),
+                  // ! TODO Add images for symptoms
+                  // leading: CircleAvatar(
+                  //   backgroundImage: NetworkImage(profile.imageUrl),
+                  // ),
+                  title: Text(symptom.label),
+                  // subtitle: Text(profile.email),
+                  onTap: () => state.selectSuggestion(symptom),
+                );
+              },
+              findSuggestions: (String query) {
+                if (query.length != 0) {
+                  var lowercaseQuery = query.toLowerCase();
+                  return _symptomsList.where((symptoms) {
+                    return symptoms.label
+                        .toLowerCase()
+                        .contains(query.toLowerCase());
+                  }).toList(growable: false)
+                    ..sort((a, b) => a.label
+                        .toLowerCase()
+                        .indexOf(lowercaseQuery)
+                        .compareTo(
+                            b.label.toLowerCase().indexOf(lowercaseQuery)));
+                } else {
+                  return const <Symptom>[];
+                }
+              },
+            );
+          }),
+          SizedBox(height: 30),
+          FormBuilderDateTimePicker(
+            attribute: 'first_date',
+            decoration: _baseDeco.copyWith(
+                labelText: _store.firstDate?.toIso8601String() ??
+                    'Date ou in coummence gagne symptoms'),
+            initialDate: _store.firstDate,
+            onChanged: (v) => _store.firstDate = v,
+          ),
+        ],
+      ),
     );
   }
 }
