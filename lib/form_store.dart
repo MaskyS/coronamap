@@ -95,6 +95,7 @@ abstract class _FormStore with Store {
             errorText: "Bizin mette ou l'age")(value) ??
         FormBuilderValidators.numeric(
             errorText: 'Ena ban characters invalides')(value) ??
+        FormBuilderValidators.min(1)(value) ??
         FormBuilderValidators.max(100,
             errorText: "Ou l'age bizin embas 100 ans")(value);
   }
@@ -107,6 +108,16 @@ abstract class _FormStore with Store {
   @action
   void validatePhoneNo(String value) {
     error.phoneNo = null;
+
+    if (!value.startsWith('5')) {
+      error.phoneNo = 'Ou numero bizin coummence ek 5';
+      return;
+    }
+
+    if (value.startsWith('0')) {
+      error.phoneNo = 'Ou numero pas cav coummence ek 0';
+      return;
+    }
 
     error.phoneNo = FormBuilderValidators.required(
             errorText: "Bizin mette ou numero")(value) ??
@@ -121,10 +132,17 @@ abstract class _FormStore with Store {
   @action
   void validateHomeNo(String value) {
     error.homeNo = null;
+
+    if (value.startsWith('0')) {
+      error.phoneNo = 'Ou numero pas cav coummence ek 0';
+      return;
+    }
+
     error.homeNo = FormBuilderValidators.numeric(
             errorText: 'Ena ban characters invalides')(value) ??
+        FormBuilderValidators.minLength(7, errorText: 'Bizin ena 7 numeros')(value) ??
         FormBuilderValidators.maxLength(7,
-            errorText: "Ou numero bizin ena 7 numeros")(value.toString());
+            errorText: "Bizin ena 7 numeros")(value);
   }
 
   @action
@@ -155,10 +173,11 @@ abstract class _FormStore with Store {
   @action
   void validatePostalCode(String value) {
     error.postalCode = null;
+
     error.postalCode = FormBuilderValidators.numeric(
             errorText: 'Ena ban characters invalides')(value) ??
         FormBuilderValidators.maxLength(5, errorText: "Bizin ena 5 numeros")(
-            value.toString());
+            value);
   }
 
   void dispose() {

@@ -32,7 +32,7 @@ abstract class _Form2StoreBase with Store {
 
   @computed
   bool get canCompleteForm =>
-      chosenSymptoms == null && firstDateErrorText == null;
+      chosenSymptomsErrorText == null && firstDateErrorText == null;
 
   @computed
   StoreState get state {
