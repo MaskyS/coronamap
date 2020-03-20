@@ -75,13 +75,20 @@ class _SymptomsFormState extends State<SymptomsForm> {
         controlsBuilder: _buildControlButtons,
         steps: [
           Step(
-            content: Step1Form(),
-            title: Text("Personal Details"),
-          ),
+              content: Step1Form(),
+              title: Text("Personal Details"),
+              isActive: (_currentStep == 0),
+              state: (_store.canMoveToNextPage && _currentStep == 1)
+                  ? StepState.complete
+                  : (_store.canMoveToNextPage && _currentStep == 0)
+                      ? StepState.editing
+                      : StepState.error),
           Step(
-            content: Step2Form(),
-            title: Text("Symptoms"),
-          ),
+              content: Step2Form(),
+              title: Text("Symptoms"),
+              isActive: (_currentStep == 1),
+              state:
+                  (_currentStep == 1) ? StepState.editing : StepState.indexed),
         ],
       ),
     );
@@ -478,6 +485,7 @@ class _Step2FormState extends State<Step2Form> {
                 errorText: _store.firstDateErrorText,
               ),
               initialDate: _store.firstDate,
+              initialValue: _store.firstDate,
               onChanged: (v) => _store.firstDate = v,
             );
           }),
