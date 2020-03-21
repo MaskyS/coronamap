@@ -76,7 +76,18 @@ class Splash extends StatelessWidget {
                           onPressed: () =>
                               Navigator.pushNamed(context, Routes.homePage),
                         ),
-                      )
+                      ),
+                      Center(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            'Avec Géolocalisation/Avek ou position/With geolocation',
+                            style: TextStyle(
+                                fontSize: 8.0,
+                                color: Color.fromRGBO(128, 122, 122, 0.8)),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
