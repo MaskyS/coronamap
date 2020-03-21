@@ -14,6 +14,10 @@ class SymptomsForm extends StatefulWidget {
 }
 
 class _SymptomsFormState extends State<SymptomsForm> {
+  final s1Index = 0;
+  final s2Index = 1;
+  final s3Index = 2;
+
   var _currentStep = 0;
   Step1Store _store;
   Step2Store _step2Store;
@@ -22,77 +26,90 @@ class _SymptomsFormState extends State<SymptomsForm> {
   @override
   Widget build(BuildContext context) {
     _store = Provider.of<Step1Store>(context, listen: false);
+    _step2Store = Provider.of<Step2Store>(context, listen: false);
     _step3Store = Provider.of<Step3Store>(context, listen: false);
+
     return Scaffold(
       appBar: AppBar(title: Text("Covid-19 Depistage")),
       body: Stepper(
         physics: ClampingScrollPhysics(),
         type: StepperType.horizontal,
-        onStepContinue: () {
-          if (_currentStep == 0) {
-            _store.validateAll();
-            if (_store.canMoveToNextPage) {
-              increaseStep();
-            }
-          } else if (_currentStep == 1) {
-            _step3Store.validateAll();
-            if (_step3Store.canCompleteForm) {
-              var user = _store.userPersonalFormData;
-              user.firstSymptomDate = _step3Store.firstDate;
-              user.symptoms = _step3Store.symptomsList;
-              Navigator.pushReplacementNamed(context, Routes.thankYouPage,
-                  arguments: user);
-            }
-          }
-        },
-        onStepCancel: () {
-          if (_currentStep > 0) {
-            setState(() => _currentStep--);
-          }
-        },
+        onStepContinue: _onStepContinue,
+        onStepCancel: _onStepCancel,
         currentStep: _currentStep,
-        onStepTapped: (int stepNo) {
-          if (stepNo != _currentStep) {
-            if (stepNo == 1) {
-              _store.validateAll();
-              if (_store.canMoveToNextPage) {
-                increaseStep();
-              }
-            } else if (stepNo == 0) {
-              decreaseStep();
-            }
-          }
-        },
+        onStepTapped: _onStepTapped,
         controlsBuilder: _buildControlButtons,
         steps: [
           Step(
-              content: Step1Form(),
-              title: Text("Personal Details"),
-              isActive: (_currentStep == 0),
-              state: (_store.canMoveToNextPage && _currentStep == 1)
-                  ? StepState.complete
-                  : (_store.canMoveToNextPage && _currentStep == 0)
-                      ? StepState.editing
-                      : StepState.error),
+            content: Step1Form(),
+            title: Text(_currentStep == s1Index ? "Personal Details" : ''),
+            isActive: (_currentStep == 0),
+            state: getStepState(s1Index),
+          ),
           Step(
-              content: Step2Form(),
-              title: Text("Prexisting Conditions"),
-              isActive: _currentStep == 1),
+            content: Step2Form(),
+            title: Text(_currentStep == s2Index ? "Prexisting Conditions" : ''),
+            isActive: _currentStep == s2Index,
+            state: getStepState(s2Index),
+          ),
           Step(
             content: Step3Form(),
-            title: Text("Symptoms"),
-            isActive: (_currentStep == 2),
-            state: getStepState(2),
+            title: Text(_currentStep == s3Index ? "Symptoms" : ''),
+            isActive: (_currentStep == s3Index),
+            state: getStepState(s3Index),
           ),
         ],
       ),
     );
   }
 
-  StepState getStepState(int stepNo) {
-    if (stepNo == _currentStep) return StepState.editing;
+  void _onStepContinue() {
+    if (_currentStep == s1Index) {
+      _store.validateAll();
+      if (_store.canMoveToNextPage) {
+        increaseStep();
+      }
+    }
 
-    switch (stepNo) {
+    if (_currentStep == s2Index) {
+      increaseStep();
+    }
+
+    if (_currentStep == s3Index) {
+      _step3Store.validateAll();
+      if (_step3Store.canCompleteForm) {
+        var user = _store.userPersonalFormData;
+        user.firstSymptomDate = _step3Store.firstDate;
+        user.symptoms = _step3Store.symptomsList;
+        Navigator.pushReplacementNamed(context, Routes.thankYouPage,
+            arguments: user);
+      }
+    }
+  }
+
+  void _onStepCancel() {
+    if (_currentStep > s1Index) {
+      setState(() => _currentStep--);
+    }
+  }
+
+  void _onStepTapped(int stepNo) {
+    if (stepNo != _currentStep) {
+      if (stepNo == s1Index) {
+        _currentStep = stepNo;
+      } else {
+        _store.validateAll();
+        if (_store.canMoveToNextPage) {
+          _currentStep = stepNo;
+        }
+      }
+    }
+  }
+
+  StepState getStepState(int stepIndex) {
+    if (stepIndex == _currentStep) return StepState.editing;
+
+    switch (stepIndex) {
       case 0:
         _store.validateAll();
         if (_store.canMoveToNextPage)
@@ -107,7 +124,8 @@ class _SymptomsFormState extends State<SymptomsForm> {
           return StepState.indexed;
         break;
       case 2:
-        if (_step3Store.canCompleteForm) return StepState.complete;
+        if (_step3Store.canCompleteForm && _step3Store.chosenSymptoms != null)
+          return StepState.complete;
         return StepState.indexed;
         break;
       default:
