@@ -6,20 +6,20 @@ class Step2Store = _Step2StoreBase with _$Step2Store;
 
 abstract class _Step2StoreBase with Store {
   final List<Condition> preExistingConditionList = [
-    Condition(label: 'Asthma', ref: 'Asthma'),
-    Condition(label: 'Diabetes', ref: 'Diabetes'),
+    Condition(label: 'Asthma', ref: 'asthma'),
+    Condition(label: 'Diabetes', ref: 'diabetes'),
     Condition(
         label: 'Insuffisance cardiaque chronique',
-        ref: 'Insuffisance cardiaque chronique'),
+        ref: 'chronic_heart_failure'),
     Condition(
       label: 'Maladie rénale chronique',
-      ref: 'Maladie rénale chronique',
+      ref: 'chronic_kidney_disease',
     ),
     Condition(
         label: 'Maladie hépatique chronique',
-        ref: 'Maladie hépatique chronique'),
-    Condition(label: 'Grossesse', ref: 'Grossesse'),
-    Condition(label: 'HIV', ref: 'HIV'),
+        ref: 'chronic_liver_disease'),
+    Condition(label: 'Grossesse', ref: 'pregnant'),
+    Condition(label: 'HIV', ref: 'hiv'),
   ];
 
   @observable
