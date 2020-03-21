@@ -166,7 +166,7 @@ abstract class _Step1Store with Store {
       error.region = 'Ou bizin rempli ou region';
     }
 
-    if (!isAlpha(value)) {
+    if (!isAlpha(value.replaceAll(' ', ''))) {
       error.region = 'Ou bizin servi juste ban alphabetes';
     }
   }
