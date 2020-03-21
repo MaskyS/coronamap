@@ -21,6 +21,9 @@ class Address extends _AddressBase with _$Address {
           postalCodeText: postalCodeText,
         );
 
+
+  Address.fromForm({line1, district, region, postalCodeText});
+
   factory Address.fromJson(Map<String, dynamic> json) =>
       _$AddressFromJson(json);
   Map<String, dynamic> toJson() => _$AddressToJson(this);
