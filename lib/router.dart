@@ -37,9 +37,10 @@ class Router {
         return MaterialPageRoute(builder: (_) => Splash());
       default:
         return MaterialPageRoute(
-            builder: (_) => Scaffold(
-                  body: Center(child: Text('404 Not Found !')),
-                ));
+          builder: (_) => Scaffold(
+            body: Center(child: Text('404 Not Found !')),
+          ),
+        );
     }
   }
 }
