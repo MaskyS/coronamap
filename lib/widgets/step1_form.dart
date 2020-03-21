@@ -1,8 +1,8 @@
-
 import 'package:coronamapp/district_enum.dart';
 import 'package:coronamapp/form_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
@@ -99,6 +99,23 @@ class _Step1FormState extends State<Step1Form> {
                         onChanged: (v) => _store.dob = v,
                         format: DateFormat("yyyy-MM-dd"),
                         initialDatePickerMode: DatePickerMode.year,
+                        datePicker: (context) async {
+                          const doneStyle = TextStyle(
+                            color: Colors.green,
+                            fontWeight: FontWeight.bold,
+                          );
+                          return DatePicker.showDatePicker(
+                            context,
+                            showTitleActions: true,
+                            minTime: DateTime(1900, 5, 5),
+                            maxTime: DateTime(2019, 12),
+                            currentTime: _store.dob ?? DateTime(2000),
+                            theme: DatePickerTheme(
+                              doneStyle: doneStyle,
+                              cancelStyle: TextStyle(color: Colors.redAccent),
+                            ),
+                          );
+                        },
                         decoration: _baseDeco.copyWith(
                           labelText: "DOB﹡",
                           errorText: _store.error.age,
@@ -157,8 +174,9 @@ class _Step1FormState extends State<Step1Form> {
                   initialValue: _store.address.line1,
                   onChanged: (v) => _store.address.line1 = v,
                   decoration: _baseDeco.copyWith(
-                      labelText: "Street Name﹡",
-                      errorText: _store.error.line1),
+                    labelText: "Street Name﹡",
+                    errorText: _store.error.line1,
+                  ),
                 );
               }),
               SizedBox(height: 10),

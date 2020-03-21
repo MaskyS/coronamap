@@ -49,11 +49,15 @@ abstract class _Step1Store with Store {
   @computed
   bool get canMoveToNextPage => !error.hasErrors;
   User get userPersonalFormData => User.fromForm(
-      firstName: firstName, lastName: lastName,
-      dob: dob, gender: Gender.create(label: gender, ref: gender.toLowerCase()),
-      phoneNumber: phoneNo.toString(),
-      address: address, createdAt: DateTime.now(), updatedAt: DateTime.now()
-  );
+        firstName: firstName,
+        lastName: lastName,
+        dob: dob,
+        gender: Gender.create(label: gender, ref: gender.toLowerCase()),
+        phoneNumber: phoneNo.toString(),
+        address: address,
+        createdAt: DateTime.now(),
+        updatedAt: DateTime.now(),
+      );
 
   List<ReactionDisposer> _disposers;
 
@@ -98,8 +102,8 @@ abstract class _Step1Store with Store {
   @action
   void validateAge(DateTime value) {
     error.age = null;
-    var ageRange = DateTime.now().year - value.year;
-    error.age = ageRange < 0 || ageRange > 100  ? 'Bizin mette enn l\'age valid' : null;
+    error.age = FormBuilderValidators.required(
+        errorText: 'Mette ou date de naissance')(value);
   }
 
   @action
@@ -175,11 +179,11 @@ abstract class _Step1Store with Store {
   void validatePostalCode(String value) {
     error.postalCode = null;
 
-    if(value!=null){
+    if (value != null) {
       error.postalCode = FormBuilderValidators.numeric(
-            errorText: 'Ena ban characters invalides')(value) ??
-        FormBuilderValidators.maxLength(5, errorText: "Bizin ena 5 numeros")(
-            value);
+              errorText: 'Ena ban characters invalides')(value) ??
+          FormBuilderValidators.maxLength(5, errorText: "Bizin ena 5 numeros")(
+              value);
     }
   }
 
