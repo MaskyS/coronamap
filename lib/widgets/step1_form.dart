@@ -47,7 +47,7 @@ class _Step1FormState extends State<Step1Form> {
                   initialValue: _store.firstName,
                   onChanged: (v) => _store.firstName = v,
                   decoration: _baseDeco.copyWith(
-                    labelText: "Prenom",
+                    labelText: "Prenom﹡",
                     errorText: _store.error.firstName,
                   ),
                 );
@@ -59,7 +59,7 @@ class _Step1FormState extends State<Step1Form> {
                   initialValue: _store.lastName,
                   onChanged: (v) => _store.lastName = v,
                   decoration: _baseDeco.copyWith(
-                    labelText: "Surnom",
+                    labelText: "Surnom﹡",
                     errorText: _store.error.lastName,
                   ),
                 );
@@ -72,7 +72,7 @@ class _Step1FormState extends State<Step1Form> {
                     child: Observer(builder: (_) {
                       return FormBuilderDropdown(
                         attribute: "gender",
-                        hint: Text('Sexe'),
+                        hint: Text('Sexe﹡'),
                         decoration:
                             _baseDeco.copyWith(errorText: _store.error.gender),
                         onChanged: (v) => _store.gender = v,
@@ -100,7 +100,7 @@ class _Step1FormState extends State<Step1Form> {
                         format: DateFormat("yyyy-MM-dd"),
                         initialDatePickerMode: DatePickerMode.year,
                         decoration: _baseDeco.copyWith(
-                          labelText: "DOB",
+                          labelText: "DOB﹡",
                           errorText: _store.error.age,
                         ),
                       );
@@ -123,7 +123,7 @@ class _Step1FormState extends State<Step1Form> {
                           WhitelistingTextInputFormatter.digitsOnly
                         ],
                         decoration: _baseDeco.copyWith(
-                          labelText: "Mobile No",
+                          labelText: "Mobile No﹡",
                           errorText: _store.error.phoneNo,
                         ),
                       );
@@ -157,7 +157,7 @@ class _Step1FormState extends State<Step1Form> {
                   initialValue: _store.address.line1,
                   onChanged: (v) => _store.address.line1 = v,
                   decoration: _baseDeco.copyWith(
-                      labelText: "Address Line 1",
+                      labelText: "Street Name﹡",
                       errorText: _store.error.line1),
                 );
               }),
@@ -167,7 +167,7 @@ class _Step1FormState extends State<Step1Form> {
                   attribute: "address_line_2",
                   initialValue: _store.address.line2,
                   onChanged: (v) => _store.address.line2 = v,
-                  decoration: _baseDeco.copyWith(labelText: "Address Line 2"),
+                  decoration: _baseDeco.copyWith(labelText: "Street Name 2"),
                 );
               }),
               SizedBox(height: 20),
@@ -179,7 +179,7 @@ class _Step1FormState extends State<Step1Form> {
                   decoration: _baseDeco.copyWith(
                     errorText: _store.error.district,
                   ),
-                  hint: Text('Choisir ou Districte'),
+                  hint: Text('Choisir ou Districte﹡'),
                   items: District.values
                       .map(
                         (distr) => DropdownMenuItem(
@@ -201,7 +201,7 @@ class _Step1FormState extends State<Step1Form> {
                         initialValue: _store.address.region,
                         onChanged: (v) => _store.address.region = v,
                         decoration: _baseDeco.copyWith(
-                            labelText: 'Region',
+                            labelText: 'Region﹡',
                             errorText: _store.error.region),
                       );
                     }),
