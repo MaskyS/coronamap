@@ -5,9 +5,9 @@ import 'package:mobx/mobx.dart';
 import '../store_state_enum.dart';
 part 'symptoms_store.g.dart';
 
-class Form2Store = _Form2StoreBase with _$Form2Store;
+class Step3Store = _Step3StoreBase with _$Step3Store;
 
-abstract class _Form2StoreBase with Store {
+abstract class _Step3StoreBase with Store {
   @observable
   List<Symptom> chosenSymptoms = [];
 

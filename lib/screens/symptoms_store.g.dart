@@ -8,7 +8,7 @@ part of 'symptoms_store.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
-mixin _$Form2Store on _Form2StoreBase, Store {
+mixin _$Step3Store on _Step3StoreBase, Store {
   Computed<bool> _$canCompleteFormComputed;
 
   @override
@@ -21,7 +21,7 @@ mixin _$Form2Store on _Form2StoreBase, Store {
   StoreState get state =>
       (_$stateComputed ??= Computed<StoreState>(() => super.state)).value;
 
-  final _$chosenSymptomsAtom = Atom(name: '_Form2StoreBase.chosenSymptoms');
+  final _$chosenSymptomsAtom = Atom(name: '_Step3StoreBase.chosenSymptoms');
 
   @override
   List<Symptom> get chosenSymptoms {
@@ -39,7 +39,7 @@ mixin _$Form2Store on _Form2StoreBase, Store {
   }
 
   final _$_symptomsListFutureAtom =
-      Atom(name: '_Form2StoreBase._symptomsListFuture');
+      Atom(name: '_Step3StoreBase._symptomsListFuture');
 
   @override
   ObservableFuture<List<Symptom>> get _symptomsListFuture {
@@ -58,7 +58,7 @@ mixin _$Form2Store on _Form2StoreBase, Store {
         name: '${_$_symptomsListFutureAtom.name}_set');
   }
 
-  final _$errorMessageAtom = Atom(name: '_Form2StoreBase.errorMessage');
+  final _$errorMessageAtom = Atom(name: '_Step3StoreBase.errorMessage');
 
   @override
   String get errorMessage {
@@ -75,7 +75,7 @@ mixin _$Form2Store on _Form2StoreBase, Store {
     }, _$errorMessageAtom, name: '${_$errorMessageAtom.name}_set');
   }
 
-  final _$symptomsListAtom = Atom(name: '_Form2StoreBase.symptomsList');
+  final _$symptomsListAtom = Atom(name: '_Step3StoreBase.symptomsList');
 
   @override
   List<Symptom> get symptomsList {
@@ -92,7 +92,7 @@ mixin _$Form2Store on _Form2StoreBase, Store {
     }, _$symptomsListAtom, name: '${_$symptomsListAtom.name}_set');
   }
 
-  final _$firstDateAtom = Atom(name: '_Form2StoreBase.firstDate');
+  final _$firstDateAtom = Atom(name: '_Step3StoreBase.firstDate');
 
   @override
   DateTime get firstDate {
@@ -110,7 +110,7 @@ mixin _$Form2Store on _Form2StoreBase, Store {
   }
 
   final _$chosenSymptomsErrorTextAtom =
-      Atom(name: '_Form2StoreBase.chosenSymptomsErrorText');
+      Atom(name: '_Step3StoreBase.chosenSymptomsErrorText');
 
   @override
   String get chosenSymptomsErrorText {
@@ -130,7 +130,7 @@ mixin _$Form2Store on _Form2StoreBase, Store {
   }
 
   final _$firstDateErrorTextAtom =
-      Atom(name: '_Form2StoreBase.firstDateErrorText');
+      Atom(name: '_Step3StoreBase.firstDateErrorText');
 
   @override
   String get firstDateErrorText {
@@ -157,26 +157,26 @@ mixin _$Form2Store on _Form2StoreBase, Store {
         .run(() => super.getSymptomsFromFirestore());
   }
 
-  final _$_Form2StoreBaseActionController =
-      ActionController(name: '_Form2StoreBase');
+  final _$_Step3StoreBaseActionController =
+      ActionController(name: '_Step3StoreBase');
 
   @override
   void validateChosenSymptoms(List<Symptom> values) {
-    final _$actionInfo = _$_Form2StoreBaseActionController.startAction();
+    final _$actionInfo = _$_Step3StoreBaseActionController.startAction();
     try {
       return super.validateChosenSymptoms(values);
     } finally {
-      _$_Form2StoreBaseActionController.endAction(_$actionInfo);
+      _$_Step3StoreBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void validateFirstDate(DateTime dateTime) {
-    final _$actionInfo = _$_Form2StoreBaseActionController.startAction();
+    final _$actionInfo = _$_Step3StoreBaseActionController.startAction();
     try {
       return super.validateFirstDate(dateTime);
     } finally {
-      _$_Form2StoreBaseActionController.endAction(_$actionInfo);
+      _$_Step3StoreBaseActionController.endAction(_$actionInfo);
     }
   }
 
