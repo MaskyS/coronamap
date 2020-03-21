@@ -1,23 +1,14 @@
-import 'package:coronamapp/Repository/user_repository.dart';
-import 'package:coronamapp/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 
 class ThankYouForm extends StatefulWidget {
-  final User user;
-  ThankYouForm({Key key, this.user}) : super(key: key);
+  ThankYouForm({Key key}) : super(key: key);
 
   @override
   _ThankYouFormState createState() => _ThankYouFormState();
 }
 
 class _ThankYouFormState extends State<ThankYouForm> {
-  @override
-  void initState() {
-    UserRepository().save(widget.user);
-    super.initState();
-  }
-
   final _buttonStyle = TextStyle(
     fontWeight: FontWeight.w800,
     fontSize: 18,

@@ -3,8 +3,8 @@ part 'geolocation.g.dart';
 
 @JsonSerializable()
 class Location {
-  double latitude;
-  double longitude;
+  String latitude;
+  String longitude;
   String positionBasedAddress;
 
   Location({

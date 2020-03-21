@@ -17,11 +17,7 @@ class Router {
       case Routes.homePage:
         return MaterialPageRoute(builder: (_) => HomePage());
       case Routes.thankYouPage:
-        var user = settings.arguments as User;
-        return MaterialPageRoute(
-            builder: (_) => ThankYouForm(
-                  user: user,
-                ));
+        return MaterialPageRoute(builder: (_) => ThankYouForm());
       case Routes.formPage:
         return MaterialPageRoute(
           builder: (_) => MultiProvider(

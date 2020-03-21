@@ -36,6 +36,19 @@ mixin _$Step2Store on _Step2StoreBase, Store {
         name: '${_$chosenConditionsListAtom.name}_set');
   }
 
+  final _$_Step2StoreBaseActionController =
+      ActionController(name: '_Step2StoreBase');
+
+  @override
+  dynamic setConditions(List<Condition> conditions) {
+    final _$actionInfo = _$_Step2StoreBaseActionController.startAction();
+    try {
+      return super.setConditions(conditions);
+    } finally {
+      _$_Step2StoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     final string =

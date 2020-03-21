@@ -28,6 +28,12 @@ abstract class _Step2StoreBase with Store {
   @computed
   bool get hasConditions => chosenConditionsList != null;
   // ! TODO Allow adding other conditions not in the list.
+
+  @action
+  setConditions(List<Condition> conditions) {
+    chosenConditionsList = conditions;
+  }
+
   // @observable
   // bool hasOtherConditions;
 
