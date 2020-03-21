@@ -422,10 +422,13 @@ class _Step2FormState extends State<Step2Form> {
               return FormBuilderFilterChip(
                 attribute: 'symptoms',
                 options: _store.symptomsList
-                    .map((e) => FormBuilderFieldOption(value: e, child: Text(e.ref),))
+                    .map((e) => FormBuilderFieldOption(
+                          value: e,
+                          child: Text(e.ref),
+                        ))
                     .toList(),
-                    spacing: 10,
-                    alignment: WrapAlignment.center,
+                spacing: 10,
+                alignment: WrapAlignment.center,
                 initialValue: _store.chosenSymptoms,
                 selectedColor: Colors.green.shade300,
                 onChanged: (v) {
@@ -465,4 +468,51 @@ class _Step2FormState extends State<Step2Form> {
     _store.dispose();
     super.dispose();
   }
+}
+
+class Step3Form extends StatefulWidget {
+  @override
+  _Step3FormState createState() => _Step3FormState();
+}
+
+class _Step3FormState extends State<Step3Form> {
+  var _preExistingConditionList = [
+    Condition(label: 'Asthma', ref: 'asthma'),
+    Condition(label: 'Diabetes', ref: 'Diabetes'),
+    Condition(
+        label: 'Insuffisance cardiaque chronique',
+        ref: 'Insuffisance cardiaque chronique'),
+    Condition(
+      label: 'Maladie rénale chronique',
+      ref: 'Maladie rénale chronique',
+    ),
+    Condition(
+        label: 'Maladie hépatique chronique',
+        ref: 'Maladie hépatique chronique'),
+    Condition(label: 'Grossesse', ref: 'Grossesse'),
+    Condition(label: 'HIV', ref: 'HIV'),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return FormBuilder(
+        child: Column(
+      children: <Widget>[
+        FormBuilderCheckboxList(
+          attribute: 'prexisting_symptoms',
+          options: _preExistingConditionList
+              .map((e) => FormBuilderFieldOption(value: null))
+              .toList(),
+          // onChanged: (v) => _store.,
+        ),
+      ],
+    ));
+  }
+}
+
+class Condition {
+  String ref;
+  String label;
+
+  Condition({this.ref, this.label});
 }
