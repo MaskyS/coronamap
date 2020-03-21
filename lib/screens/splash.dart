@@ -1,5 +1,6 @@
 import 'package:coronamapp/constants/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class Splash extends StatelessWidget {
   @override
@@ -68,14 +69,20 @@ class Splash extends StatelessWidget {
                       ),
                       Center(
                         child: RaisedButton.icon(
-                          color: Colors.red,
-                          textColor: Colors.white,
-                          icon: Icon(Icons.arrow_forward),
-                          label: Text("GO"),
-                          // TODO Make language matter.
-                          onPressed: () =>
-                              Navigator.pushNamed(context, Routes.homePage),
-                        ),
+                            color: Colors.red,
+                            textColor: Colors.white,
+                            icon: Icon(Icons.arrow_forward),
+                            label: Text("GO"),
+                            // TODO Make language matter.
+                            onPressed: () async {
+                              PermissionStatus permissionResult =
+                                  await requestPermission(
+                                      PermissionGroup.location);
+                              if (permissionResult ==
+                                  PermissionStatus.granted) {
+                                Navigator.pushNamed(context, Routes.homePage);
+                              }
+                            }),
                       )
                     ],
                   ),
@@ -86,5 +93,13 @@ class Splash extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Future<PermissionStatus> requestPermission(PermissionGroup permission) async {
+    final List<PermissionGroup> permissions = <PermissionGroup>[permission];
+    final Map<PermissionGroup, PermissionStatus> permissionRequestResult =
+        await PermissionHandler().requestPermissions(permissions);
+
+    return permissionRequestResult[permission];
   }
 }
