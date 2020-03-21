@@ -103,6 +103,7 @@ class _SymptomsFormState extends State<SymptomsForm> {
             return AlertDialog(
               content: Container(
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
                     CircularProgressIndicator(),
                     Text("Loading..."),
@@ -120,9 +121,7 @@ class _SymptomsFormState extends State<SymptomsForm> {
   }
 
   Future<void> _getCurrentLocation() {
-    return geolocator
-        .getCurrentPosition()
-        .then((Position position) async {
+    return geolocator.getCurrentPosition().then((Position position) async {
       setState(() {
         _currentPosition = position;
       });

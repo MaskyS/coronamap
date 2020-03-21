@@ -56,8 +56,9 @@ abstract class _Step3StoreBase with Store {
 
   @action
   void validateChosenSymptoms(List<Symptom> values) {
-    chosenSymptomsErrorText =
-        values.length < 1 ? 'Ou bizin remplit symptoms' : null;
+    chosenSymptomsErrorText = values != null && values.isNotEmpty
+        ? null
+        : 'Ou bizin remplit symptoms';
   }
 
   @action
