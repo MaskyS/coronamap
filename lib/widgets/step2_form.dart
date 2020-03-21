@@ -21,35 +21,39 @@ class _Step2FormState extends State<Step2Form> {
 
   @override
   Widget build(BuildContext context) {
-    return FormBuilder(
-      child: Column(
-        children: <Widget>[
-          Text(
-            "Choisir ban condition pre-existent ki ou ena:",
-            style: TextStyle(fontSize: 16, color: Colors.black54),
+    return Column(
+      children: <Widget>[
+        FormBuilder(
+          child: Column(
+            children: <Widget>[
+              Text(
+                "Choisir ban condition pre-existent ki ou ena:",
+                style: TextStyle(fontSize: 16, color: Colors.black54),
+              ),
+              SizedBox(height: 20),
+              FormBuilderCheckboxList(
+                attribute: 'prexisting_symptoms',
+                initialValue: _store.chosenConditionsList,
+                options: _store.preExistingConditionList
+                    .map(
+                      (e) => FormBuilderFieldOption(
+                        value: e,
+                        child: Text(e.ref),
+                      ),
+                    )
+                    .toList(),
+                onChanged: (v) {
+                  List<Condition> temp = [];
+                  v.forEach((element) {
+                    temp.add(element as Condition);
+                  });
+                  _store.chosenConditionsList = temp;
+                },
+              ),
+            ],
           ),
-          SizedBox(height: 20),
-          FormBuilderCheckboxList(
-            attribute: 'prexisting_symptoms',
-            initialValue: _store.chosenConditionsList,
-            options: _store.preExistingConditionList
-                .map(
-                  (e) => FormBuilderFieldOption(
-                    value: e,
-                    child: Text(e.ref),
-                  ),
-                )
-                .toList(),
-            onChanged: (v) {
-              List<Condition> temp = [];
-              v.forEach((element) {
-                temp.add(element as Condition);
-              });
-              _store.chosenConditionsList = temp;
-            },
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
