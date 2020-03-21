@@ -18,15 +18,16 @@ class _HomePageState extends State<HomePage> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[Text("Wassup")],
+          children: <Widget>[Text("Bonjour!")],
         ),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton.extended(
         icon: Icon(Icons.warning),
         onPressed: () => Navigator.pushNamed(
             context, Routes.formPage),
         tooltip: 'Report Symptômes',
-        label: Text("Mo Ena Symptômes"),
+        label: Text("MO ENA SYMPTOMES"),
         backgroundColor: Colors.orange,
       ),
     );

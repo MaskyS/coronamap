@@ -5,7 +5,7 @@ import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 
 class ThankYouForm extends StatefulWidget {
   final User user;
-  ThankYouForm({Key key, this.user}): super(key: key);
+  ThankYouForm({Key key, this.user}) : super(key: key);
 
   @override
   _ThankYouFormState createState() => _ThankYouFormState();
@@ -17,6 +17,12 @@ class _ThankYouFormState extends State<ThankYouForm> {
     UserRepository().save(widget.user);
     super.initState();
   }
+
+  final _buttonStyle = TextStyle(
+    fontWeight: FontWeight.w800,
+    fontSize: 18,
+  );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,16 +50,25 @@ class _ThankYouFormState extends State<ThankYouForm> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
                     FlatButton(
-                      child: Text("Retour"),
+                      child: Container(
+                        margin:
+                            EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                        child: Text("Retour", style: _buttonStyle),
+                      ),
                       onPressed: () => Navigator.pop(context),
                       color: Colors.green,
+                      textColor: Colors.white,
                     ),
                     // ! TODO Use location-specific hotlines instead
                     FlatButton.icon(
-                      onPressed: ()   => UrlLauncher.launch("tel://114"),
-                      icon: Icon(Icons.call),
-                      label: Text("Call SAMU"),
+                      onPressed: () => UrlLauncher.launch("tel://114"),
+                      icon: Container(
+                        margin: EdgeInsets.symmetric(vertical: 10),
+                        child: Icon(Icons.call),
+                      ),
+                      label: Text("Call SAMU", style: _buttonStyle),
                       color: Colors.blue,
+                      textColor: Colors.white,
                     ),
                   ],
                 ),
