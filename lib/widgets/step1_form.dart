@@ -100,7 +100,7 @@ class _Step1FormState extends State<Step1Form> {
                         format: DateFormat("yyyy-MM-dd"),
                         initialDatePickerMode: DatePickerMode.year,
                         decoration: _baseDeco.copyWith(
-                          labelText: "Age",
+                          labelText: "DOB",
                           errorText: _store.error.age,
                         ),
                       );
