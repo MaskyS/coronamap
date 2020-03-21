@@ -1,4 +1,6 @@
 import 'package:coronamapp/models/address.dart';
+import 'package:coronamapp/models/gender.dart';
+import 'package:coronamapp/models/user.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:mobx/mobx.dart';
 import 'package:coronamapp/district_enum.dart';
@@ -18,7 +20,7 @@ abstract class _FormStore with Store {
   String lastName = '';
 
   @observable
-  String ageText;
+  DateTime dob;
 
   @observable
   String gender = 'Male';
@@ -36,7 +38,7 @@ abstract class _FormStore with Store {
   String get fullName => firstName + lastName;
 
   @computed
-  int get age => int.tryParse(ageText);
+  DateTime get age => dob;
 
   @computed
   int get phoneNo => int.tryParse(phoneNoText);
@@ -46,6 +48,12 @@ abstract class _FormStore with Store {
 
   @computed
   bool get canMoveToNextPage => !error.hasErrors;
+  User get userPersonalFormData => User.fromForm(
+      firstName: firstName, lastName: lastName,
+      dob: dob, gender: Gender.create(label: gender, ref: gender.toLowerCase()),
+      phoneNumber: phoneNo.toString(),
+      address: address, createdAt: DateTime.now(), updatedAt: DateTime.now()
+  );
 
   List<ReactionDisposer> _disposers;
 
@@ -53,7 +61,7 @@ abstract class _FormStore with Store {
     _disposers = [
       reaction((_) => firstName, validateFirstName),
       reaction((_) => lastName, validateLastName),
-      reaction((_) => ageText, validateAge),
+      reaction((_) => dob, validateAge),
       reaction((_) => gender, validateGender),
       reaction((_) => phoneNoText, validatePhoneNo),
       reaction((_) => homeNoText, validateHomeNo),
@@ -88,16 +96,10 @@ abstract class _FormStore with Store {
   }
 
   @action
-  void validateAge(String value) {
+  void validateAge(DateTime value) {
     error.age = null;
-
-    error.age = FormBuilderValidators.required(
-            errorText: "Bizin mette ou l'age")(value) ??
-        FormBuilderValidators.numeric(
-            errorText: 'Ena ban characters invalides')(value) ??
-        FormBuilderValidators.min(1)(value) ??
-        FormBuilderValidators.max(100,
-            errorText: "Ou l'age bizin embas 100 ans")(value);
+    var ageRange = DateTime.now().year - value.year;
+    error.age = ageRange < 0 || ageRange > 100  ? 'Bizin mette enn l\'age valid' : null;
   }
 
   @action
@@ -191,7 +193,7 @@ abstract class _FormStore with Store {
     validateFirstName(firstName);
     validateLastName(lastName);
     validateGender(gender);
-    validateAge(ageText);
+    validateAge(dob);
     validatePhoneNo(phoneNoText);
     validateLine1(address.line1);
     validateRegion(address.region);
