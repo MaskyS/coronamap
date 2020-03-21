@@ -1,4 +1,3 @@
-import 'package:geolocator/geolocator.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'geolocation.g.dart';
 
