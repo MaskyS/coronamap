@@ -17,11 +17,7 @@ class Router {
       case Routes.homePage:
         return MaterialPageRoute(builder: (_) => HomePage());
       case Routes.thankYouPage:
-        var user = settings.arguments as User;
-        return MaterialPageRoute(
-            builder: (_) => ThankYouForm(
-                  user: user,
-                ));
+        return MaterialPageRoute(builder: (_) => ThankYouForm());
       case Routes.formPage:
         return MaterialPageRoute(
           builder: (_) => MultiProvider(
@@ -37,9 +33,10 @@ class Router {
         return MaterialPageRoute(builder: (_) => Splash());
       default:
         return MaterialPageRoute(
-            builder: (_) => Scaffold(
-                  body: Center(child: Text('404 Not Found !')),
-                ));
+          builder: (_) => Scaffold(
+            body: Center(child: Text('404 Not Found !')),
+          ),
+        );
     }
   }
 }

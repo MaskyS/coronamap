@@ -11,7 +11,8 @@ part 'form_store.g.dart';
 class Step1Store = _Step1Store with _$Step1Store;
 
 abstract class _Step1Store with Store {
-  final StepErrorState error = StepErrorState();
+  @observable
+  StepErrorState error = StepErrorState();
 
   @observable
   String firstName = '';
@@ -38,7 +39,7 @@ abstract class _Step1Store with Store {
   String get fullName => firstName + lastName;
 
   @computed
-  DateTime get age => dob;
+  int get age => DateTime.now().year - (dob?.year ?? 0);
 
   @computed
   int get phoneNo => int.tryParse(phoneNoText);
@@ -49,13 +50,27 @@ abstract class _Step1Store with Store {
   @computed
   bool get canMoveToNextPage => !error.hasErrors;
   User get userPersonalFormData => User.fromForm(
-      firstName: firstName, lastName: lastName,
-      dob: dob, gender: Gender.create(label: gender, ref: gender.toLowerCase()),
-      phoneNumber: phoneNo.toString(),
-      address: address, createdAt: DateTime.now(), updatedAt: DateTime.now()
-  );
+        firstName: firstName,
+        lastName: lastName,
+        dob: dob,
+        gender: Gender.create(label: gender, ref: gender),
+        phoneNumber: phoneNo.toString(),
+        address: address,
+        createdAt: DateTime.now(),
+        updatedAt: DateTime.now(),
+      );
 
   List<ReactionDisposer> _disposers;
+
+  @action
+  void setStore(User user) {
+    firstName = user.firstName;
+    lastName = user.lastName;
+    gender = user.gender?.ref;
+    dob = user.dob;
+    phoneNoText = user.phoneNumber;
+    address = user.address ?? Address();
+  }
 
   void setupValidations() {
     _disposers = [
@@ -76,56 +91,58 @@ abstract class _Step1Store with Store {
     error.firstName = null;
 
     var requiredValidator =
-        FormBuilderValidators.required(errorText: 'Bizin remplit ou prenom');
+        FormBuilderValidators.required(errorText: 'form_error_first_name');
     error.firstName = requiredValidator(value);
     if (!isAlpha(value)) {
-      error.firstName = "Ou prenom bizin ena juste ban alphabets";
+      error.firstName = "form_error_first_name_alpha";
     }
   }
 
+  @action
   Future validateLastName(String value) async {
     error.lastName = null;
 
     var requiredValidator =
-        FormBuilderValidators.required(errorText: 'Bizin remplit ou surnom');
+        FormBuilderValidators.required(errorText: 'form_error_last_name');
     error.lastName = requiredValidator(value);
 
     if (!isAlpha(lastName)) {
-      error.lastName = "Ou surnom bizin ena juste ban alphabets";
+      error.lastName = "form_error_last_name_alpha";
     }
   }
 
   @action
   void validateAge(DateTime value) {
     error.age = null;
-    var ageRange = DateTime.now().year - value.year;
-    error.age = ageRange < 0 || ageRange > 100  ? 'Bizin mette enn l\'age valid' : null;
+
+    error.age = FormBuilderValidators.required(
+        errorText: 'form_error_age_valid_range')(value);
   }
 
   @action
   void validateGender(String value) {
-    error.gender = value == null ? 'Ou bizin choisir ou sexe' : null;
+    error.gender = value == null ? 'form_error_gender' : null;
   }
 
   @action
   void validatePhoneNo(String value) {
     error.phoneNo = null;
 
-    error.phoneNo = FormBuilderValidators.required(
-        errorText: "Bizin mette ou numero")(value);
+    error.phoneNo =
+        FormBuilderValidators.required(errorText: "form_error_phone_no")(value);
     if (error.phoneNo != null) return;
 
     if (!value.startsWith('5')) {
-      error.phoneNo = 'Bizin mett 5 devant';
+      error.phoneNo = 'form_error_phone_no_start_five';
       return;
     }
 
     error.phoneNo = FormBuilderValidators.numeric(
-            errorText: 'Ena ban characters invalides')(value) ??
+            errorText: 'form_error_phone_no_invalid')(value) ??
         FormBuilderValidators.minLength(8,
-            errorText: "Ou numero bizin ena 8 numeros")(value) ??
+            errorText: "form_error_phone_no_fill_eight")(value) ??
         FormBuilderValidators.maxLength(8,
-            errorText: "Ou numero bizin ena 8 numeros")(value);
+            errorText: "form_error_phone_no_fill_eight")(value);
   }
 
   @action
@@ -134,28 +151,29 @@ abstract class _Step1Store with Store {
     if (isNull(value)) return;
 
     if (value.startsWith('0')) {
-      error.phoneNo = 'Ou pas cav mette 0 devant';
+      error.phoneNo = 'form_error_home_no_start_zero';
       return;
     }
 
     error.homeNo = FormBuilderValidators.numeric(
-            errorText: 'Ena ban characters invalides')(value) ??
-        FormBuilderValidators.minLength(7, errorText: 'Bizin ena 7 numeros')(
-            value) ??
-        FormBuilderValidators.maxLength(7, errorText: "Bizin ena 7 numeros")(
-            value);
+            errorText: 'form_error_home_no_start_zero')(value) ??
+        FormBuilderValidators.minLength(7,
+            errorText: 'form_error_home_no_fill_seven')(value) ??
+        FormBuilderValidators.maxLength(7,
+            errorText: "form_error_home_no_fill_seven")(value);
   }
 
   @action
   void validateLine1(String value) {
     error.line1 = null;
     if (isNull(value) || value.isEmpty) {
-      error.line1 = 'Ou bizin rempli ou address line';
+      error.line1 = 'form_error_address_line_1';
     }
   }
 
-  validateDistrict(District district) {
-    error.district = district == null ? 'Ou bizin choisir ene district' : null;
+  @action
+  void validateDistrict(District district) {
+    error.district = district == null ? 'form_error_district' : null;
   }
 
   @action
@@ -163,11 +181,12 @@ abstract class _Step1Store with Store {
     error.region = null;
 
     if (isNull(value) || value.isEmpty) {
-      error.region = 'Ou bizin rempli ou region';
+      error.region = 'form_error_city';
+      return;
     }
 
     if (!isAlpha(value.replaceAll(' ', ''))) {
-      error.region = 'Ou bizin servi juste ban alphabetes';
+      error.region = 'form_error_city_alpha';
     }
   }
 
@@ -175,11 +194,11 @@ abstract class _Step1Store with Store {
   void validatePostalCode(String value) {
     error.postalCode = null;
 
-    if(value!=null){
+    if (value != null) {
       error.postalCode = FormBuilderValidators.numeric(
-            errorText: 'Ena ban characters invalides')(value) ??
-        FormBuilderValidators.maxLength(5, errorText: "Bizin ena 5 numeros")(
-            value);
+              errorText: 'form_error_postal')(value) ??
+          FormBuilderValidators.maxLength(5,
+              errorText: "form_error_postal_fill_five")(value);
     }
   }
 

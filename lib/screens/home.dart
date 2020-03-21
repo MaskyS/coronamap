@@ -1,4 +1,4 @@
-
+import 'package:coronamapp/config/app_localizations.dart';
 import 'package:coronamapp/constants/routes.dart';
 import 'package:flutter/material.dart';
 
@@ -24,10 +24,11 @@ class _HomePageState extends State<HomePage> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton.extended(
         icon: Icon(Icons.warning),
-        onPressed: () => Navigator.pushNamed(
-            context, Routes.formPage),
-        tooltip: 'Report Symptômes',
-        label: Text("MO ENA SYMPTOMES"),
+        onPressed: () async {
+          Navigator.pushNamed(context, Routes.formPage);
+        },
+        tooltip: AppLocalizations.of(context).translate("tooltip_report_button"),
+        label: Text(AppLocalizations.of(context).translate("report_button")),
         backgroundColor: Colors.orange,
       ),
     );

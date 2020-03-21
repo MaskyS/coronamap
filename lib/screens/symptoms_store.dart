@@ -56,14 +56,18 @@ abstract class _Step3StoreBase with Store {
 
   @action
   void validateChosenSymptoms(List<Symptom> values) {
-    chosenSymptomsErrorText =
-        values.length < 1 ? 'Ou bizin remplit symptoms' : null;
+    if (values == null) {
+      chosenSymptomsErrorText = "must_fill_symptoms";
+    } else {
+      chosenSymptomsErrorText =
+      values.length < 1 ? 'must_fill_symptoms' : null;
+    }
   }
 
   @action
   void validateFirstDate(DateTime dateTime) {
     firstDateErrorText = dateTime == null
-        ? 'Faut choisir date ou in coummence gagne symptoms'
+        ? 'must_fill_date_infection'
         : null;
   }
 
