@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
 
 import '../store_state_enum.dart';
 
@@ -77,13 +78,16 @@ class _Step3FormState extends State<Step3Form> {
           Observer(builder: (_) {
             return FormBuilderDateTimePicker(
               attribute: 'first_date',
+              inputType: InputType.date,
+              initialDatePickerMode: DatePickerMode.day,
+              format: DateFormat("yyyy-MM-dd"),
+              initialDate: _store.firstDate,
+              initialValue: _store.firstDate,
+              onChanged: (v) => _store.firstDate = v,
               decoration: _baseDeco.copyWith(
                 labelText: AppLocalizations.of(context).translate("form_date_infection"),
                 errorText: _store.firstDateErrorText == null  ? null :  AppLocalizations.of(context).translate(_store.firstDateErrorText),
               ),
-              initialDate: _store.firstDate,
-              initialValue: _store.firstDate,
-              onChanged: (v) => _store.firstDate = v,
             );
           }),
         ],
