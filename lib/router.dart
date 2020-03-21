@@ -1,4 +1,5 @@
 import 'package:coronamapp/constants/routes.dart';
+import 'package:coronamapp/step2_store.dart';
 import 'package:coronamapp/form_store.dart';
 import 'package:coronamapp/screens/home.dart';
 import 'package:coronamapp/screens/splash.dart';
@@ -17,13 +18,17 @@ class Router {
         return MaterialPageRoute(builder: (_) => HomePage());
       case Routes.thankYouPage:
         var user = settings.arguments as User;
-        return MaterialPageRoute(builder: (_) => ThankYouForm(user: user,));
+        return MaterialPageRoute(
+            builder: (_) => ThankYouForm(
+                  user: user,
+                ));
       case Routes.formPage:
         return MaterialPageRoute(
           builder: (_) => MultiProvider(
             providers: [
-              Provider<FormStore>(create: (_) => FormStore()),
-              Provider<Form2Store>(create: (_) => Form2Store()),
+              Provider<Step1Store>(create: (_) => Step1Store()),
+              Provider<Step2Store>(create: (_) => Step2Store()),
+              Provider<Step3Store>(create: (_) => Step3Store()),
             ],
             child: SymptomsForm(),
           ),

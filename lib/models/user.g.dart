@@ -17,6 +17,10 @@ User _$UserFromJson(Map<String, dynamic> json) {
         ? null
         : Location.fromJson(json['location'] as Map<String, dynamic>),
     phoneNumber: json['phoneNumber'] as String,
+    preExistingConditions: (json['preExistingConditions'] as List)
+        ?.map((e) =>
+            e == null ? null : Condition.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
     symptoms: (json['symptoms'] as List)
         ?.map((e) =>
             e == null ? null : Symptom.fromJson(e as Map<String, dynamic>))
@@ -44,6 +48,7 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'location': instance.location,
       'phoneNumber': instance.phoneNumber,
       'symptoms': instance.symptoms,
+      'preExistingConditions': instance.preExistingConditions,
       'address': instance.address,
       'firstSymptomDate': instance.firstSymptomDate?.toIso8601String(),
       'dob': instance.dob?.toIso8601String(),

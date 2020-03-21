@@ -8,7 +8,7 @@ part of 'form_store.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
-mixin _$FormStore on _FormStore, Store {
+mixin _$Step1Store on _Step1Store, Store {
   Computed<String> _$fullNameComputed;
 
   @override
@@ -36,7 +36,7 @@ mixin _$FormStore on _FormStore, Store {
           Computed<bool>(() => super.canMoveToNextPage))
       .value;
 
-  final _$firstNameAtom = Atom(name: '_FormStore.firstName');
+  final _$firstNameAtom = Atom(name: '_Step1Store.firstName');
 
   @override
   String get firstName {
@@ -53,7 +53,7 @@ mixin _$FormStore on _FormStore, Store {
     }, _$firstNameAtom, name: '${_$firstNameAtom.name}_set');
   }
 
-  final _$lastNameAtom = Atom(name: '_FormStore.lastName');
+  final _$lastNameAtom = Atom(name: '_Step1Store.lastName');
 
   @override
   String get lastName {
@@ -70,7 +70,7 @@ mixin _$FormStore on _FormStore, Store {
     }, _$lastNameAtom, name: '${_$lastNameAtom.name}_set');
   }
 
-  final _$dobAtom = Atom(name: '_FormStore.dob');
+  final _$dobAtom = Atom(name: '_Step1Store.dob');
 
   @override
   DateTime get dob {
@@ -87,7 +87,7 @@ mixin _$FormStore on _FormStore, Store {
     }, _$dobAtom, name: '${_$dobAtom.name}_set');
   }
 
-  final _$genderAtom = Atom(name: '_FormStore.gender');
+  final _$genderAtom = Atom(name: '_Step1Store.gender');
 
   @override
   String get gender {
@@ -104,7 +104,7 @@ mixin _$FormStore on _FormStore, Store {
     }, _$genderAtom, name: '${_$genderAtom.name}_set');
   }
 
-  final _$phoneNoTextAtom = Atom(name: '_FormStore.phoneNoText');
+  final _$phoneNoTextAtom = Atom(name: '_Step1Store.phoneNoText');
 
   @override
   String get phoneNoText {
@@ -121,7 +121,7 @@ mixin _$FormStore on _FormStore, Store {
     }, _$phoneNoTextAtom, name: '${_$phoneNoTextAtom.name}_set');
   }
 
-  final _$homeNoTextAtom = Atom(name: '_FormStore.homeNoText');
+  final _$homeNoTextAtom = Atom(name: '_Step1Store.homeNoText');
 
   @override
   String get homeNoText {
@@ -138,7 +138,7 @@ mixin _$FormStore on _FormStore, Store {
     }, _$homeNoTextAtom, name: '${_$homeNoTextAtom.name}_set');
   }
 
-  final _$addressAtom = Atom(name: '_FormStore.address');
+  final _$addressAtom = Atom(name: '_Step1Store.address');
 
   @override
   Address get address {
@@ -163,75 +163,75 @@ mixin _$FormStore on _FormStore, Store {
         .run(() => super.validateFirstName(value));
   }
 
-  final _$_FormStoreActionController = ActionController(name: '_FormStore');
+  final _$_Step1StoreActionController = ActionController(name: '_Step1Store');
 
   @override
   void validateAge(DateTime value) {
-    final _$actionInfo = _$_FormStoreActionController.startAction();
+    final _$actionInfo = _$_Step1StoreActionController.startAction();
     try {
       return super.validateAge(value);
     } finally {
-      _$_FormStoreActionController.endAction(_$actionInfo);
+      _$_Step1StoreActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void validateGender(String value) {
-    final _$actionInfo = _$_FormStoreActionController.startAction();
+    final _$actionInfo = _$_Step1StoreActionController.startAction();
     try {
       return super.validateGender(value);
     } finally {
-      _$_FormStoreActionController.endAction(_$actionInfo);
+      _$_Step1StoreActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void validatePhoneNo(String value) {
-    final _$actionInfo = _$_FormStoreActionController.startAction();
+    final _$actionInfo = _$_Step1StoreActionController.startAction();
     try {
       return super.validatePhoneNo(value);
     } finally {
-      _$_FormStoreActionController.endAction(_$actionInfo);
+      _$_Step1StoreActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void validateHomeNo(String value) {
-    final _$actionInfo = _$_FormStoreActionController.startAction();
+    final _$actionInfo = _$_Step1StoreActionController.startAction();
     try {
       return super.validateHomeNo(value);
     } finally {
-      _$_FormStoreActionController.endAction(_$actionInfo);
+      _$_Step1StoreActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void validateLine1(String value) {
-    final _$actionInfo = _$_FormStoreActionController.startAction();
+    final _$actionInfo = _$_Step1StoreActionController.startAction();
     try {
       return super.validateLine1(value);
     } finally {
-      _$_FormStoreActionController.endAction(_$actionInfo);
+      _$_Step1StoreActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void validateRegion(String value) {
-    final _$actionInfo = _$_FormStoreActionController.startAction();
+    final _$actionInfo = _$_Step1StoreActionController.startAction();
     try {
       return super.validateRegion(value);
     } finally {
-      _$_FormStoreActionController.endAction(_$actionInfo);
+      _$_Step1StoreActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void validatePostalCode(String value) {
-    final _$actionInfo = _$_FormStoreActionController.startAction();
+    final _$actionInfo = _$_Step1StoreActionController.startAction();
     try {
       return super.validatePostalCode(value);
     } finally {
-      _$_FormStoreActionController.endAction(_$actionInfo);
+      _$_Step1StoreActionController.endAction(_$actionInfo);
     }
   }
 
@@ -243,14 +243,14 @@ mixin _$FormStore on _FormStore, Store {
   }
 }
 
-mixin _$FormErrorState on _FormErrorState, Store {
+mixin _$StepErrorState on _StepErrorState, Store {
   Computed<bool> _$hasErrorsComputed;
 
   @override
   bool get hasErrors =>
       (_$hasErrorsComputed ??= Computed<bool>(() => super.hasErrors)).value;
 
-  final _$firstNameAtom = Atom(name: '_FormErrorState.firstName');
+  final _$firstNameAtom = Atom(name: '_StepErrorState.firstName');
 
   @override
   String get firstName {
@@ -267,7 +267,7 @@ mixin _$FormErrorState on _FormErrorState, Store {
     }, _$firstNameAtom, name: '${_$firstNameAtom.name}_set');
   }
 
-  final _$lastNameAtom = Atom(name: '_FormErrorState.lastName');
+  final _$lastNameAtom = Atom(name: '_StepErrorState.lastName');
 
   @override
   String get lastName {
@@ -284,7 +284,7 @@ mixin _$FormErrorState on _FormErrorState, Store {
     }, _$lastNameAtom, name: '${_$lastNameAtom.name}_set');
   }
 
-  final _$phoneNoAtom = Atom(name: '_FormErrorState.phoneNo');
+  final _$phoneNoAtom = Atom(name: '_StepErrorState.phoneNo');
 
   @override
   String get phoneNo {
@@ -301,7 +301,7 @@ mixin _$FormErrorState on _FormErrorState, Store {
     }, _$phoneNoAtom, name: '${_$phoneNoAtom.name}_set');
   }
 
-  final _$homeNoAtom = Atom(name: '_FormErrorState.homeNo');
+  final _$homeNoAtom = Atom(name: '_StepErrorState.homeNo');
 
   @override
   String get homeNo {
@@ -318,7 +318,7 @@ mixin _$FormErrorState on _FormErrorState, Store {
     }, _$homeNoAtom, name: '${_$homeNoAtom.name}_set');
   }
 
-  final _$ageAtom = Atom(name: '_FormErrorState.age');
+  final _$ageAtom = Atom(name: '_StepErrorState.age');
 
   @override
   String get age {
@@ -335,7 +335,7 @@ mixin _$FormErrorState on _FormErrorState, Store {
     }, _$ageAtom, name: '${_$ageAtom.name}_set');
   }
 
-  final _$genderAtom = Atom(name: '_FormErrorState.gender');
+  final _$genderAtom = Atom(name: '_StepErrorState.gender');
 
   @override
   String get gender {
@@ -352,7 +352,7 @@ mixin _$FormErrorState on _FormErrorState, Store {
     }, _$genderAtom, name: '${_$genderAtom.name}_set');
   }
 
-  final _$line1Atom = Atom(name: '_FormErrorState.line1');
+  final _$line1Atom = Atom(name: '_StepErrorState.line1');
 
   @override
   String get line1 {
@@ -369,7 +369,7 @@ mixin _$FormErrorState on _FormErrorState, Store {
     }, _$line1Atom, name: '${_$line1Atom.name}_set');
   }
 
-  final _$districtAtom = Atom(name: '_FormErrorState.district');
+  final _$districtAtom = Atom(name: '_StepErrorState.district');
 
   @override
   String get district {
@@ -386,7 +386,7 @@ mixin _$FormErrorState on _FormErrorState, Store {
     }, _$districtAtom, name: '${_$districtAtom.name}_set');
   }
 
-  final _$regionAtom = Atom(name: '_FormErrorState.region');
+  final _$regionAtom = Atom(name: '_StepErrorState.region');
 
   @override
   String get region {

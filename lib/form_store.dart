@@ -8,10 +8,10 @@ import 'package:validators/validators.dart';
 
 part 'form_store.g.dart';
 
-class FormStore = _FormStore with _$FormStore;
+class Step1Store = _Step1Store with _$Step1Store;
 
-abstract class _FormStore with Store {
-  final FormErrorState error = FormErrorState();
+abstract class _Step1Store with Store {
+  final StepErrorState error = StepErrorState();
 
   @observable
   String firstName = '';
@@ -202,9 +202,9 @@ abstract class _FormStore with Store {
   }
 }
 
-class FormErrorState = _FormErrorState with _$FormErrorState;
+class StepErrorState = _StepErrorState with _$StepErrorState;
 
-abstract class _FormErrorState with Store {
+abstract class _StepErrorState with Store {
   @observable
   String firstName;
 
