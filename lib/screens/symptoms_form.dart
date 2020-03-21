@@ -1,3 +1,4 @@
+import 'package:coronamapp/models/geolocation.dart';
 import 'package:coronamapp/step2_store.dart';
 import 'package:coronamapp/constants/routes.dart';
 import 'package:coronamapp/form_store.dart';
@@ -6,6 +7,7 @@ import 'package:coronamapp/widgets/step1_form.dart';
 import 'package:coronamapp/widgets/step2_form.dart';
 import 'package:coronamapp/widgets/step3_form.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
 
 class SymptomsForm extends StatefulWidget {
@@ -23,6 +25,11 @@ class _SymptomsFormState extends State<SymptomsForm> {
   Step2Store _step2Store;
   Step3Store _step3Store;
 
+  final Geolocator geolocator = Geolocator()..forceAndroidLocationManager;
+  Position _currentPosition;
+  String _positionBasedAddress;
+
+  /// ! TODO Extract all Stepper/Geolocation logic into a store.
   @override
   Widget build(BuildContext context) {
     _store = Provider.of<Step1Store>(context, listen: false);
@@ -63,7 +70,7 @@ class _SymptomsFormState extends State<SymptomsForm> {
     );
   }
 
-  void _onStepContinue() {
+  void _onStepContinue() async {
     if (_currentStep == s1Index) {
       _store.validateAll();
       if (_store.canMoveToNextPage) {
@@ -74,13 +81,71 @@ class _SymptomsFormState extends State<SymptomsForm> {
     } else if (_currentStep == s3Index) {
       _step3Store.validateAll();
       if (_step3Store.canCompleteForm) {
-        var user = _store.userPersonalFormData;
-        user.firstSymptomDate = _step3Store.firstDate;
-        user.preExistingConditions = _step2Store.chosenConditionsList;
-        user.symptoms = _step3Store.symptomsList;
+        var user;
+        await showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (context) {
+            user = _store.userPersonalFormData;
+            user.firstSymptomDate = _step3Store.firstDate;
+            user.preExistingConditions = _step2Store.chosenConditionsList;
+            user.symptoms = _step3Store.symptomsList;
+            _getCurrentLocation().then((value) {
+              user.location = Location(
+                latitude: _currentPosition.latitude,
+                longitude: _currentPosition.longitude,
+                positionBasedAddress: _positionBasedAddress,
+              );
+
+              Navigator.pop(context);
+            });
+
+            return AlertDialog(
+              content: Container(
+                child: Row(
+                  children: <Widget>[
+                    CircularProgressIndicator(),
+                    Text("Loading..."),
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+
         Navigator.pushReplacementNamed(context, Routes.thankYouPage,
             arguments: user);
       }
+    }
+  }
+
+  Future<void> _getCurrentLocation() {
+    return geolocator
+        .getCurrentPosition(desiredAccuracy: LocationAccuracy.best)
+        .then((Position position) async {
+      setState(() {
+        _currentPosition = position;
+      });
+
+      await _getAddressFromLatLng();
+    }).catchError((e) {
+      print(e);
+    });
+  }
+
+  Future<void> _getAddressFromLatLng() async {
+    try {
+      List<Placemark> p = await geolocator.placemarkFromCoordinates(
+          _currentPosition.latitude, _currentPosition.longitude);
+
+      Placemark place = p[0];
+
+      setState(() {
+        _positionBasedAddress =
+            "${place.subThoroughfare}, ${place.thoroughfare}, ${place.subLocality}, ${place.locality}, ${place.postalCode}, ${place.country}";
+      });
+    } catch (e) {
+      print(e);
     }
   }
 
