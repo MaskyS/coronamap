@@ -69,13 +69,9 @@ class _SymptomsFormState extends State<SymptomsForm> {
       if (_store.canMoveToNextPage) {
         increaseStep();
       }
-    }
-
-    if (_currentStep == s2Index) {
+    } else if (_currentStep == s2Index) {
       increaseStep();
-    }
-
-    if (_currentStep == s3Index) {
+    } else if (_currentStep == s3Index) {
       _step3Store.validateAll();
       if (_step3Store.canCompleteForm) {
         var user = _store.userPersonalFormData;
@@ -96,11 +92,15 @@ class _SymptomsFormState extends State<SymptomsForm> {
   void _onStepTapped(int stepNo) {
     if (stepNo != _currentStep) {
       if (stepNo == s1Index) {
-        _currentStep = stepNo;
+        setState(() {
+          _currentStep = stepNo;
+        });
       } else {
         _store.validateAll();
         if (_store.canMoveToNextPage) {
-          _currentStep = stepNo;
+          setState(() {
+            _currentStep = stepNo;
+          });
         }
       }
     }
