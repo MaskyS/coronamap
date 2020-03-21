@@ -12,7 +12,6 @@ import 'package:coronamapp/widgets/step3_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 
 class SymptomsForm extends StatefulWidget {
@@ -286,11 +285,7 @@ class _SymptomsFormState extends State<SymptomsForm> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text(
-<<<<<<< HEAD
-                      _currentStep == 2 ? "FINISH" : "NEXT",
-=======
-                      _currentStep == 1 ?  AppLocalizations.of(context).translate("step_finish") : AppLocalizations.of(context).translate("step_next"),
->>>>>>> 5f51837ff17d8a10f0ced26ca0021ee5791247cb
+                      _currentStep == 2 ?  AppLocalizations.of(context).translate("step_finish") : AppLocalizations.of(context).translate("step_next"),
                       style: buttonStyle,
                     ),
                     Icon(Icons.keyboard_arrow_right)
