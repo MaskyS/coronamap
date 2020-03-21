@@ -76,6 +76,7 @@ class _SymptomsFormState extends State<SymptomsForm> {
       if (_step3Store.canCompleteForm) {
         var user = _store.userPersonalFormData;
         user.firstSymptomDate = _step3Store.firstDate;
+        user.preExistingConditions = _step2Store.chosenConditionsList;
         user.symptoms = _step3Store.symptomsList;
         Navigator.pushReplacementNamed(context, Routes.thankYouPage,
             arguments: user);
