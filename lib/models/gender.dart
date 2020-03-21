@@ -11,6 +11,9 @@ class Gender {
     this.ref,
   });
 
+
+  Gender.create({this.label, this.ref});
+
   factory Gender.fromJson(Map<String, dynamic> json) =>
       _$GenderFromJson(json);
   Map<String, dynamic> toJson() => _$GenderToJson(this);
