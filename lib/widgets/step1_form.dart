@@ -201,7 +201,7 @@ class _Step1FormState extends State<Step1Form> {
                         initialValue: _store.address.region,
                         onChanged: (v) => _store.address.region = v,
                         decoration: _baseDeco.copyWith(
-                            labelText: 'Region﹡',
+                            labelText: 'Ville/Village﹡',
                             errorText: _store.error.region),
                       );
                     }),
