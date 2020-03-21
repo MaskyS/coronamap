@@ -121,7 +121,7 @@ class _SymptomsFormState extends State<SymptomsForm> {
 
   Future<void> _getCurrentLocation() {
     return geolocator
-        .getCurrentPosition(desiredAccuracy: LocationAccuracy.best)
+        .getCurrentPosition()
         .then((Position position) async {
       setState(() {
         _currentPosition = position;
