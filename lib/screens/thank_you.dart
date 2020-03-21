@@ -1,4 +1,5 @@
 import 'package:coronamapp/Repository/user_repository.dart';
+import 'package:coronamapp/config/app_localizations.dart';
 import 'package:coronamapp/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
@@ -37,7 +38,7 @@ class _ThankYouFormState extends State<ThankYouForm> {
               size: 200,
             ),
           ),
-          Expanded(child: Text("Merci Pu Rapporter")),
+          Expanded(child: Text(AppLocalizations.of(context).translate("thank_report"))),
           Spacer(flex: 1),
           Expanded(
             flex: 2,
@@ -53,7 +54,7 @@ class _ThankYouFormState extends State<ThankYouForm> {
                       child: Container(
                         margin:
                             EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                        child: Text("Retour", style: _buttonStyle),
+                        child: Text(AppLocalizations.of(context).translate("step_back"), style: _buttonStyle),
                       ),
                       onPressed: () => Navigator.pop(context),
                       color: Colors.green,
@@ -66,7 +67,7 @@ class _ThankYouFormState extends State<ThankYouForm> {
                         margin: EdgeInsets.symmetric(vertical: 10),
                         child: Icon(Icons.call),
                       ),
-                      label: Text("Call SAMU", style: _buttonStyle),
+                      label: Text(AppLocalizations.of(context).translate("call_emergency"), style: _buttonStyle),
                       color: Colors.blue,
                       textColor: Colors.white,
                     ),

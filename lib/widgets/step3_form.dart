@@ -1,3 +1,4 @@
+import 'package:coronamapp/config/app_localizations.dart';
 import 'package:coronamapp/models/symptom.dart';
 import 'package:coronamapp/screens/symptoms_store.dart';
 import 'package:flutter/material.dart';
@@ -51,7 +52,7 @@ class _Step3FormState extends State<Step3Form> {
                 options: _store.symptomsList
                     .map((e) => FormBuilderFieldOption(
                           value: e,
-                          child: Text(e.ref),
+                          child: Text(AppLocalizations.of(context).translate(e.ref)),
                         ))
                     .toList(),
                 spacing: 10,
@@ -66,8 +67,8 @@ class _Step3FormState extends State<Step3Form> {
                   _store.chosenSymptoms = temp;
                 },
                 decoration: _baseDeco.copyWith(
-                  labelText: 'Choisir ou ban symptoms',
-                  errorText: _store.chosenSymptomsErrorText,
+                  labelText: AppLocalizations.of(context).translate("form_choose_symptom"),
+                  errorText: _store.chosenSymptomsErrorText == null  ? null :  AppLocalizations.of(context).translate(_store.chosenSymptomsErrorText),
                 ),
               );
             });
@@ -77,8 +78,8 @@ class _Step3FormState extends State<Step3Form> {
             return FormBuilderDateTimePicker(
               attribute: 'first_date',
               decoration: _baseDeco.copyWith(
-                labelText: 'Date ou in coummence gagne symptoms',
-                errorText: _store.firstDateErrorText,
+                labelText: AppLocalizations.of(context).translate("form_date_infection"),
+                errorText: _store.firstDateErrorText == null  ? null :  AppLocalizations.of(context).translate(_store.firstDateErrorText),
               ),
               initialDate: _store.firstDate,
               initialValue: _store.firstDate,

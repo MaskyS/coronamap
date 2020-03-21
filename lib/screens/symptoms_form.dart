@@ -1,3 +1,4 @@
+import 'package:coronamapp/config/app_localizations.dart';
 import 'package:coronamapp/models/geolocation.dart';
 import 'package:coronamapp/step2_store.dart';
 import 'package:coronamapp/constants/routes.dart';
@@ -37,7 +38,7 @@ class _SymptomsFormState extends State<SymptomsForm> {
     _step3Store = Provider.of<Step3Store>(context, listen: false);
 
     return Scaffold(
-      appBar: AppBar(title: Text("Covid-19 Depistage")),
+      appBar: AppBar(title: Text(AppLocalizations.of(context).translate("form_title"))),
       body: Stepper(
         physics: ClampingScrollPhysics(),
         type: StepperType.horizontal,
@@ -49,19 +50,20 @@ class _SymptomsFormState extends State<SymptomsForm> {
         steps: [
           Step(
             content: Step1Form(),
-            title: Text(_currentStep == s1Index ? "Personal Details" : ''),
+            title: Text(_currentStep == s1Index ?
+            AppLocalizations.of(context).translate('step1_personal_details') : ''),
             isActive: (_currentStep == 0),
             state: getStepState(s1Index),
           ),
           Step(
             content: Step2Form(),
-            title: Text(_currentStep == s2Index ? "Prexisting Conditions" : ''),
+            title: Text(_currentStep == s2Index ? AppLocalizations.of(context).translate("step2_pre_conditions") : ''),
             isActive: _currentStep == s2Index,
             state: getStepState(s2Index),
           ),
           Step(
             content: Step3Form(),
-            title: Text(_currentStep == s3Index ? "Symptoms" : ''),
+            title: Text(_currentStep == s3Index ? AppLocalizations.of(context).translate("step3_symptoms") : ''),
             isActive: (_currentStep == s3Index),
             state: getStepState(s3Index),
           ),
@@ -106,7 +108,7 @@ class _SymptomsFormState extends State<SymptomsForm> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
                     CircularProgressIndicator(),
-                    Text("Loading..."),
+                    Text(AppLocalizations.of(context).translate("loading")),
                   ],
                 ),
               ),
@@ -213,7 +215,7 @@ class _SymptomsFormState extends State<SymptomsForm> {
               onPressed: onStepCancel,
               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               icon: Icon(Icons.keyboard_arrow_left),
-              label: Text("BACK", style: buttonStyle),
+              label: Text(AppLocalizations.of(context).translate("step_back"), style: buttonStyle),
               color: Colors.grey.shade200,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10)),
@@ -230,7 +232,7 @@ class _SymptomsFormState extends State<SymptomsForm> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text(
-                      _currentStep == 1 ? "FINISH" : "NEXT",
+                      _currentStep == 1 ?  AppLocalizations.of(context).translate("step_finish") : AppLocalizations.of(context).translate("step_next"),
                       style: buttonStyle,
                     ),
                     Icon(Icons.keyboard_arrow_right)
