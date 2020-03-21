@@ -1,11 +1,8 @@
-import 'package:coronamapp/models/address.dart';
-import 'package:coronamapp/models/gender.dart';
+
 import 'package:coronamapp/models/symptom.dart';
 import 'package:coronamapp/constants/routes.dart';
 import 'package:coronamapp/district_enum.dart';
 import 'package:coronamapp/form_store.dart';
-import 'package:coronamapp/models/user.dart';
-import 'package:coronamapp/repository/user_repository.dart';
 import 'package:coronamapp/screens/symptoms_store.dart';
 import 'package:coronamapp/store_state_enum.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +10,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
 
 class SymptomsForm extends StatefulWidget {
   @override
@@ -46,10 +44,13 @@ class _SymptomsFormState extends State<SymptomsForm> {
               //   ..firstName = _store.firstName
               //   ..lastName = _store.lastName..
               //   address = _store.address..gender = Gender()..phoneNumber = _store.
-
+              var user = _store.userPersonalFormData;
+              user.firstSymptomDate = _store2.firstDate;
+              user.symptoms = _store2.symptomsList;
               Navigator.pushReplacementNamed(
                 context,
                 Routes.thankYouPage,
+                arguments: user
               );
             }
           }
@@ -230,14 +231,13 @@ class _Step1FormState extends State<Step1Form> {
                   Expanded(
                     flex: 5,
                     child: Observer(builder: (_) {
-                      return FormBuilderTextField(
-                        attribute: "age",
-                        initialValue: _store.ageText,
-                        onChanged: (v) => _store.ageText = v,
-                        keyboardType: TextInputType.number,
-                        inputFormatters: [
-                          WhitelistingTextInputFormatter.digitsOnly
-                        ],
+                      return FormBuilderDateTimePicker(
+                        attribute: "date",
+                        inputType: InputType.date,
+                        initialValue: _store.dob,
+                        onChanged: (v) => _store.dob = v,
+                        format: DateFormat("yyyy-MM-dd"),
+                        initialDatePickerMode: DatePickerMode.year,
                         decoration: _baseDeco.copyWith(
                           labelText: "Age",
                           errorText: _store.error.age,
