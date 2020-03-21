@@ -9,7 +9,7 @@ class Step3Store = _Step3StoreBase with _$Step3Store;
 
 abstract class _Step3StoreBase with Store {
   @observable
-  List<Symptom> chosenSymptoms = [];
+  List<Symptom> chosenSymptoms;
 
   @observable
   ObservableFuture<List<Symptom>> _symptomsListFuture;
