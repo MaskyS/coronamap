@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 
 class ThankYouForm extends StatefulWidget {
-  User user;
+  final User user;
   ThankYouForm({Key key, this.user}): super(key: key);
 
   @override
