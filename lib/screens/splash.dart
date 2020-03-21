@@ -113,11 +113,12 @@ class _SplashState extends State<Splash> {
                       ),
                       Center(
                         child: RaisedButton.icon(
-                            color: Colors.red,
-                            textColor: Colors.white,
-                            icon: Icon(Icons.arrow_forward),
-                            label: Text("GO"),
-                            onPressed: () async {
+                          color: Colors.red,
+                          textColor: Colors.white,
+                          icon: Icon(Icons.arrow_forward),
+                          label: Text("GO"),
+                          // TODO Make language matter.
+                           onPressed: () async {
                               PermissionStatus permissionResult =
                                   await requestPermission(
                                       PermissionGroup.location);
@@ -126,7 +127,20 @@ class _SplashState extends State<Splash> {
                                 Navigator.pushNamed(context, Routes.homePage);
                               }
                             }),
-                      )
+                        ),
+                      ),
+                      Center(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            'Avec Géolocalisation/Avek ou position/With geolocation',
+                            style: TextStyle(
+                                fontSize: 8.0,
+                                color: Color.fromRGBO(128, 122, 122, 0.8)),
+                          ),
+                        ),
+                      ),
+
                     ],
                   ),
                 ),
