@@ -1,4 +1,6 @@
 import 'package:coronamapp/models/geolocation.dart';
+import 'package:coronamapp/models/user.dart';
+import 'package:coronamapp/repository/user_repository.dart';
 import 'package:coronamapp/step2_store.dart';
 import 'package:coronamapp/constants/routes.dart';
 import 'package:coronamapp/form_store.dart';
@@ -7,7 +9,9 @@ import 'package:coronamapp/widgets/step1_form.dart';
 import 'package:coronamapp/widgets/step2_form.dart';
 import 'package:coronamapp/widgets/step3_form.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 
 class SymptomsForm extends StatefulWidget {
@@ -29,13 +33,60 @@ class _SymptomsFormState extends State<SymptomsForm> {
   Position _currentPosition;
   String _positionBasedAddress;
 
+  User user;
+  var userRepo = UserRepository();
+  bool _isLoaded = false;
+
+  @override
+  void initState() {
+    super.initState();
+    getFirebaseData();
+  }
+
+  Future<void> getFirebaseData() async {
+    final storage = FlutterSecureStorage();
+    var userKey = await storage.read(key: 'userKey');
+    if (userKey != null) {
+      user = await userRepo.getByHash(userKey);
+      if (user == null) {
+        setState(() => _isLoaded = true);
+        return;
+      }
+
+      setState(() {
+        _store.setStore(user);
+
+        if (user.preExistingConditions != null) {
+          _step2Store.chosenConditionsList = user.preExistingConditions;
+        }
+
+        if (user.symptoms != null) {
+          _step3Store
+            ..chosenSymptoms = user.symptoms
+            ..firstDate = user.firstSymptomDate;
+        }
+      });
+    }
+
+    setState(() {
+      _isLoaded = true;
+    });
+  }
+
   /// ! TODO Extract all Stepper/Geolocation logic into a store.
   @override
   Widget build(BuildContext context) {
-    _store = Provider.of<Step1Store>(context, listen: false);
-    _step2Store = Provider.of<Step2Store>(context, listen: false);
-    _step3Store = Provider.of<Step3Store>(context, listen: false);
+    _store = Provider.of<Step1Store>(context);
+    _step2Store = Provider.of<Step2Store>(context);
+    _step3Store = Provider.of<Step3Store>(context);
 
+    if (!_isLoaded)
+      return Container(
+        color: Colors.white,
+        child: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
     return Scaffold(
       appBar: AppBar(title: Text("Covid-19 Depistage")),
       body: Stepper(
@@ -70,33 +121,36 @@ class _SymptomsFormState extends State<SymptomsForm> {
     );
   }
 
+  void saveAndNext(User user) {
+    userRepo.save(user);
+    increaseStep();
+  }
+
   void _onStepContinue() async {
     if (_currentStep == s1Index) {
       _store.validateAll();
       if (_store.canMoveToNextPage) {
-        increaseStep();
+        user = _store.userPersonalFormData;
+        saveAndNext(user);
       }
     } else if (_currentStep == s2Index) {
-      increaseStep();
+      user.preExistingConditions = _step2Store.chosenConditionsList;
+      saveAndNext(user);
     } else if (_currentStep == s3Index) {
       _step3Store.validateAll();
       if (_step3Store.canCompleteForm) {
-        var user;
         await showDialog(
           context: context,
           barrierDismissible: false,
           builder: (context) {
-            user = _store.userPersonalFormData;
-            user.firstSymptomDate = _step3Store.firstDate;
-            user.preExistingConditions = _step2Store.chosenConditionsList;
             user.symptoms = _step3Store.symptomsList;
+            user.firstSymptomDate = _step3Store.firstDate;
             _getCurrentLocation().then((value) {
               user.location = Location(
-                latitude: _currentPosition.latitude,
-                longitude: _currentPosition.longitude,
+                latitude: _currentPosition.latitude.toString(),
+                longitude: _currentPosition.longitude.toString(),
                 positionBasedAddress: _positionBasedAddress,
               );
-
               Navigator.pop(context);
             });
 
@@ -114,8 +168,8 @@ class _SymptomsFormState extends State<SymptomsForm> {
           },
         );
 
-        Navigator.pushReplacementNamed(context, Routes.thankYouPage,
-            arguments: user);
+        userRepo.save(user);
+        Navigator.pushReplacementNamed(context, Routes.thankYouPage);
       }
     }
   }
@@ -225,12 +279,12 @@ class _SymptomsFormState extends State<SymptomsForm> {
             child: FlatButton(
               onPressed: onStepContinue,
               child: Container(
-                margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                margin: EdgeInsets.symmetric(vertical: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text(
-                      _currentStep == 1 ? "FINISH" : "NEXT",
+                      _currentStep == 2 ? "FINISH" : "NEXT",
                       style: buttonStyle,
                     ),
                     Icon(Icons.keyboard_arrow_right)

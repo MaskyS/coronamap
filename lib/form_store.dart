@@ -11,7 +11,8 @@ part 'form_store.g.dart';
 class Step1Store = _Step1Store with _$Step1Store;
 
 abstract class _Step1Store with Store {
-  final StepErrorState error = StepErrorState();
+  @observable
+  StepErrorState error = StepErrorState();
 
   @observable
   String firstName = '';
@@ -38,7 +39,7 @@ abstract class _Step1Store with Store {
   String get fullName => firstName + lastName;
 
   @computed
-  DateTime get age => dob;
+  int get age => DateTime.now().year - (dob?.year ?? 0);
 
   @computed
   int get phoneNo => int.tryParse(phoneNoText);
@@ -52,7 +53,7 @@ abstract class _Step1Store with Store {
         firstName: firstName,
         lastName: lastName,
         dob: dob,
-        gender: Gender.create(label: gender, ref: gender.toLowerCase()),
+        gender: Gender.create(label: gender, ref: gender),
         phoneNumber: phoneNo.toString(),
         address: address,
         createdAt: DateTime.now(),
@@ -60,6 +61,16 @@ abstract class _Step1Store with Store {
       );
 
   List<ReactionDisposer> _disposers;
+
+  @action
+  void setStore(User user) {
+    firstName = user.firstName;
+    lastName = user.lastName;
+    gender = user.gender?.ref;
+    dob = user.dob;
+    phoneNoText = user.phoneNumber;
+    address = user.address ?? Address();
+  }
 
   void setupValidations() {
     _disposers = [
@@ -87,6 +98,7 @@ abstract class _Step1Store with Store {
     }
   }
 
+  @action
   Future validateLastName(String value) async {
     error.lastName = null;
 
@@ -158,7 +170,8 @@ abstract class _Step1Store with Store {
     }
   }
 
-  validateDistrict(District district) {
+  @action
+  void validateDistrict(District district) {
     error.district = district == null ? 'Ou bizin choisir ene district' : null;
   }
 
@@ -168,6 +181,7 @@ abstract class _Step1Store with Store {
 
     if (isNull(value) || value.isEmpty) {
       error.region = 'Ou bizin rempli ou region';
+      return;
     }
 
     if (!isAlpha(value.replaceAll(' ', ''))) {

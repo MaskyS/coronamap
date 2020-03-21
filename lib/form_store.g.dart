@@ -14,11 +14,10 @@ mixin _$Step1Store on _Step1Store, Store {
   @override
   String get fullName =>
       (_$fullNameComputed ??= Computed<String>(() => super.fullName)).value;
-  Computed<DateTime> _$ageComputed;
+  Computed<int> _$ageComputed;
 
   @override
-  DateTime get age =>
-      (_$ageComputed ??= Computed<DateTime>(() => super.age)).value;
+  int get age => (_$ageComputed ??= Computed<int>(() => super.age)).value;
   Computed<int> _$phoneNoComputed;
 
   @override
@@ -35,6 +34,23 @@ mixin _$Step1Store on _Step1Store, Store {
   bool get canMoveToNextPage => (_$canMoveToNextPageComputed ??=
           Computed<bool>(() => super.canMoveToNextPage))
       .value;
+
+  final _$errorAtom = Atom(name: '_Step1Store.error');
+
+  @override
+  StepErrorState get error {
+    _$errorAtom.context.enforceReadPolicy(_$errorAtom);
+    _$errorAtom.reportObserved();
+    return super.error;
+  }
+
+  @override
+  set error(StepErrorState value) {
+    _$errorAtom.context.conditionallyRunInAction(() {
+      super.error = value;
+      _$errorAtom.reportChanged();
+    }, _$errorAtom, name: '${_$errorAtom.name}_set');
+  }
 
   final _$firstNameAtom = Atom(name: '_Step1Store.firstName');
 
@@ -163,7 +179,25 @@ mixin _$Step1Store on _Step1Store, Store {
         .run(() => super.validateFirstName(value));
   }
 
+  final _$validateLastNameAsyncAction = AsyncAction('validateLastName');
+
+  @override
+  Future<dynamic> validateLastName(String value) {
+    return _$validateLastNameAsyncAction
+        .run(() => super.validateLastName(value));
+  }
+
   final _$_Step1StoreActionController = ActionController(name: '_Step1Store');
+
+  @override
+  void setStore(User user) {
+    final _$actionInfo = _$_Step1StoreActionController.startAction();
+    try {
+      return super.setStore(user);
+    } finally {
+      _$_Step1StoreActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   void validateAge(DateTime value) {
@@ -216,6 +250,16 @@ mixin _$Step1Store on _Step1Store, Store {
   }
 
   @override
+  void validateDistrict(District district) {
+    final _$actionInfo = _$_Step1StoreActionController.startAction();
+    try {
+      return super.validateDistrict(district);
+    } finally {
+      _$_Step1StoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void validateRegion(String value) {
     final _$actionInfo = _$_Step1StoreActionController.startAction();
     try {
@@ -238,7 +282,7 @@ mixin _$Step1Store on _Step1Store, Store {
   @override
   String toString() {
     final string =
-        'firstName: ${firstName.toString()},lastName: ${lastName.toString()},dob: ${dob.toString()},gender: ${gender.toString()},phoneNoText: ${phoneNoText.toString()},homeNoText: ${homeNoText.toString()},address: ${address.toString()},fullName: ${fullName.toString()},age: ${age.toString()},phoneNo: ${phoneNo.toString()},homeNo: ${homeNo.toString()},canMoveToNextPage: ${canMoveToNextPage.toString()}';
+        'error: ${error.toString()},firstName: ${firstName.toString()},lastName: ${lastName.toString()},dob: ${dob.toString()},gender: ${gender.toString()},phoneNoText: ${phoneNoText.toString()},homeNoText: ${homeNoText.toString()},address: ${address.toString()},fullName: ${fullName.toString()},age: ${age.toString()},phoneNo: ${phoneNo.toString()},homeNo: ${homeNo.toString()},canMoveToNextPage: ${canMoveToNextPage.toString()}';
     return '{$string}';
   }
 }
