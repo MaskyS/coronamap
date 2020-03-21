@@ -1,3 +1,4 @@
+import 'package:coronamapp/config/app_localizations.dart';
 import 'package:coronamapp/models/condition.dart';
 import 'package:coronamapp/step2_store.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +29,8 @@ class _Step2FormState extends State<Step2Form> {
           child: Column(
             children: <Widget>[
               Text(
-                "Choisir ban condition pre-existent ki ou ena:",
+                AppLocalizations.of(context)
+                    .translate("form_choose_pre_condition"),
                 style: TextStyle(fontSize: 16, color: Colors.black54),
               ),
               SizedBox(height: 20),
@@ -40,7 +42,8 @@ class _Step2FormState extends State<Step2Form> {
                       .map(
                         (e) => FormBuilderFieldOption(
                           value: e,
-                          child: Text(e.ref),
+                          child: Text(
+                              AppLocalizations.of(context).translate(e.ref)),
                         ),
                       )
                       .toList(),
@@ -49,7 +52,7 @@ class _Step2FormState extends State<Step2Form> {
                     v.forEach((element) {
                       temp.add(element as Condition);
                     });
-                    _store.setConditions(temp);
+                    _store.chosenConditionsList = temp;
                   },
                 );
               }),
