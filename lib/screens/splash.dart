@@ -97,10 +97,10 @@ class _SplashState extends State<Splash> {
                                   boxShadow: [
                                     BoxShadow(
                                       color: _langIndex == idx
-                                          ? Colors.black54
+                                          ? Colors.orange.withOpacity(.90)
                                           : Colors.transparent,
                                       blurRadius: 15.0,
-                                      spreadRadius: 1.0,
+                                      spreadRadius: 2.0,
                                       offset: Offset(
                                         1.0,
                                         1.0,
@@ -134,10 +134,11 @@ class _SplashState extends State<Splash> {
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
-                            'Avec Géolocalisation/Avek ou position/With geolocation',
+                            'With geolocation/Avek ou position/Avec Géolocalisation',
                             style: TextStyle(
-                                fontSize: 8.0,
-                                color: Color.fromRGBO(128, 122, 122, 0.8)),
+                              fontSize: 8.0,
+                              color: Color.fromRGBO(128, 122, 122, 0.8),
+                            ),
                           ),
                         ),
                       ),
