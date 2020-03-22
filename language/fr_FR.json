@@ -54,7 +54,7 @@
   "chronic_liver_disease": "Maladie chronique du foie",
   "pregnant": "Grossesse",
   "hiv": "HIV",
-  "irritated_throat": "Gorge irritée",
+  "sore_throat": "Gorge irritée",
   "stuffy_nose": "Nez bouché",
   "diarrhea": "La diarrhée",
   "dry_cough": "Toux sèche",
@@ -63,9 +63,17 @@
   "exhaustion": "Épuisement",
   "sneezing": "Éternuements",
   "fever": "Fièvre",
-  "pain": "Courbatures",
-  "very_difficult_breathing": "Essoufflement",
+  "body_ache": "Courbatures",
+  "shortness_of_breath": "Essoufflement",
 
   "call_emergency": "Appeler les urgences",
-  "form_title": "Covid-19 Dépistage"
+  "form_title": "Covid-19 Dépistage",
+
+  "cooking_oil": "Huile de cuisson",
+  "water": "L'eau",
+  "flour": "La farine",
+  "rice": "Du riz",
+  "meat": "La viande",
+  "vegetables": "Des Légumes",
+  "first_aid_supplies": "Kit de premiers secours"
 }
