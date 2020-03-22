@@ -19,6 +19,7 @@ class User {
   Address address;
   DateTime firstSymptomDate;
   DateTime dob;
+  int age;
   DateTime createdAt;
   DateTime updatedAt;
   String risk;
@@ -34,6 +35,7 @@ class User {
     this.address,
     this.firstSymptomDate,
     this.dob,
+    this.age,
     this.createdAt,
     this.updatedAt,
     this.risk,
@@ -46,6 +48,7 @@ class User {
     this.phoneNumber,
     this.address,
     this.dob,
+    this.age,
     this.createdAt,
     this.updatedAt,
   });

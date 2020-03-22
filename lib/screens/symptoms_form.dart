@@ -14,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
+import 'package:location/location.dart' as Geo;
 
 class SymptomsForm extends StatefulWidget {
   @override
@@ -30,8 +31,7 @@ class _SymptomsFormState extends State<SymptomsForm> {
   Step2Store _step2Store;
   Step3Store _step3Store;
 
-  final Geolocator geolocator = Geolocator()..forceAndroidLocationManager;
-  Position _currentPosition;
+  Geo.LocationData _locationData;
   String _positionBasedAddress;
 
   User user;
@@ -159,8 +159,8 @@ class _SymptomsFormState extends State<SymptomsForm> {
             _getCurrentLocation().then(
               (value) {
                 user.location = Location(
-                  latitude: _currentPosition.latitude.toString(),
-                  longitude: _currentPosition.longitude.toString(),
+                  latitude: _locationData.latitude.toString(),
+                  longitude: _locationData.longitude.toString(),
                   positionBasedAddress: _positionBasedAddress,
                 );
                 Navigator.pop(context);
@@ -182,35 +182,44 @@ class _SymptomsFormState extends State<SymptomsForm> {
         );
 
         userRepo.save(user);
-        Navigator.pushReplacementNamed(context, Routes.thankYouPage,
-            arguments: _step3Store.risk);
+        Navigator.pushReplacementNamed(
+          context,
+          Routes.thankYouPage,
+          arguments: _step3Store.risk,
+        );
       }
     }
   }
 
-  Future<void> _getCurrentLocation() {
-    return geolocator.getCurrentPosition().then((Position position) async {
-      setState(() {
-        _currentPosition = position;
-      });
+  Future<void> _getCurrentLocation() async {
+    Geo.Location location = Geo.Location();
+    bool _serviceEnabled;
 
-      await _getAddressFromLatLng();
-    }).catchError((e) {
-      print(e);
-    });
+    _serviceEnabled = await location.serviceEnabled();
+    if (!_serviceEnabled) {
+      _serviceEnabled = await location.requestService();
+      if (!_serviceEnabled) {
+        return;
+      }
+    }
+
+    _locationData = await location.getLocation();
+    _positionBasedAddress = await _getAddressFromLatLng(
+        _locationData.latitude, _locationData.longitude);
   }
 
-  Future<void> _getAddressFromLatLng() async {
+  Future<String> _getAddressFromLatLng(
+      double latitude, double longitude) async {
     try {
-      List<Placemark> p = await geolocator.placemarkFromCoordinates(
-          _currentPosition.latitude, _currentPosition.longitude);
+      final geolocator = Geolocator()..forceAndroidLocationManager;
+
+      List<Placemark> p =
+          await geolocator.placemarkFromCoordinates(latitude, longitude);
 
       Placemark place = p[0];
 
-      setState(() {
-        _positionBasedAddress =
-            "${place.subThoroughfare}, ${place.thoroughfare}, ${place.subLocality}, ${place.locality}, ${place.postalCode}, ${place.country}";
-      });
+      return _positionBasedAddress =
+          "${place.subThoroughfare}, ${place.thoroughfare}, ${place.subLocality}, ${place.locality}, ${place.postalCode}, ${place.country}";
     } catch (e) {
       print(e);
     }
