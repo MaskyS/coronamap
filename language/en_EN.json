@@ -40,7 +40,7 @@
   "form_error_phone_no_invalid": "Invalid phone number",
   "form_error_phone_no_fill_eight": "Must be 8 digit",
   "form_error_home_no_start_zero": "Should not start with zero",
-  "form_error_home_no_fill_seven": "Must start with 7",
+  "form_error_home_no_fill_seven": "Must be 7 digit",
   "form_error_address_line_1": "Address line 1 needed",
   "form_error_district": "District needed ",
   "form_error_city": "City needed ",
