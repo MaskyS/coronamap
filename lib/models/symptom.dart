@@ -7,10 +7,13 @@ class Symptom {
   String ref;
   String description;
 
+  int riskFactor;
+
   Symptom({
     this.label,
     this.ref,
     this.description,
+    this.riskFactor,
   });
 
   factory Symptom.fromJson(Map<String, dynamic> json) =>
