@@ -195,7 +195,7 @@ class _Step1FormState extends State<Step1Form> {
                   initialValue: _store.address.district,
                   onChanged: (v) => _store.address.district = v,
                   decoration: _baseDeco.copyWith(
-                    errorText: _store.error.district,
+                    errorText: AppLocalizations.of(context).translate(_store.error.district),
                   ),
                   hint: Text(AppLocalizations.of(context).translate("form_choose_district")),
                   items: District.values
