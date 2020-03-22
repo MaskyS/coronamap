@@ -54,7 +54,7 @@
   "chronic_liver_disease": "Maladi lefoi",
   "pregnant": "Enceinte",
   "hiv": "HIV",
-  "irritated_throat": "lagorz grate",
+  "sore_throat": "lagorz grate",
   "stuffy_nose": "Nene bouce",
   "diarrhea": "Diarrhe",
   "dry_cough": "Touse sek",
@@ -63,8 +63,16 @@
   "exhaustion": "Epuiseman",
   "sneezing": "Terne",
   "fever": "La fiev",
-  "pain": "Courbatir",
-  "very_difficult_breathing": "Esoufle",
+  "body_ache": "Courbatir",
+  "shortness_of_breath": "Esoufle",
   "call_emergency": "Apel secour",
-  "form_title": "Depistaz Covid-19"
+  "form_title": "Depistaz Covid-19",
+
+  "cooking_oil": "De l'huile",
+  "water": "Delo",
+  "flour": "La farine",
+  "rice": "Diri",
+  "meat": "La viande",
+  "vegetables": "legumes",
+  "first_aid_supplies": "kit premier secour"
 }
