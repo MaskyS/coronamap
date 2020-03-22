@@ -22,8 +22,9 @@ jobs:
       env:
         KEY_JKS: ${{ secrets.KEY_JKS }}
         KEY_PASSWORD: ${{ secrets.ALIAS_PASSWORD }}
-        ALIAS_PASSWORD: ${{ secrets.PASSWORD }}
-    - run: flutter doctor && flutter channel beta && flutter version && echo $KEY_JKS  | base64 -d > ./android/key.jks && ls -la && flutter pub get && flutter build apk --release
+        ALIAS_PASSWORD: ${{ secrets.ALIAS_PASSWORD }}
+    # - run: flutter doctor && flutter channel beta && flutter version && echo $KEY_JKS  | base64 -d > ./android/key.jks && ls -la && flutter pub get && flutter build apk --release
+    - run: echo $KEY_JKS  | base64 -d > ./android/key.jks && cat ./android/key.jks 
     - uses: actions/upload-artifact@v2-preview
       with:
         name: release-apk
