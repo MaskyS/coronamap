@@ -54,7 +54,7 @@
   "chronic_liver_disease": "Chronic liver disease",
   "pregnant": "Pregnant",
   "hiv": "HIV",
-  "irritated_throat": "Sore Throat",
+  "sore_throat": "Sore Throat",
   "stuffy_nose": "Stuffy Nose",
   "diarrhea": "Diarrhea",
   "dry_cough": "Dry Cough",
@@ -63,9 +63,17 @@
   "exhaustion": "Exhaustion",
   "sneezing": "Sneezing",
   "fever": "Fever",
-  "pain": "Body ache",
-  "very_difficult_breathing": "Shortness of breath",
+  "body_ache": "Body ache",
+  "shortness_of_breath": "Shortness of breath",
 
   "call_emergency": "Call SAMU",
-  "form_title": "Covid-19 Detection"
+  "form_title": "Covid-19 Detection",
+
+  "cooking_oil": "Cooking oil",
+  "water": "Water",
+  "flour": "Flour",
+  "rice": "Rice",
+  "meat": "Meat",
+  "vegetables": "Vegetables",
+  "first_aid_supplies": "First aid box"
 }
