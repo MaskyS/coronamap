@@ -6,7 +6,6 @@ class Symptom {
   String label;
   String ref;
   String description;
-
   int riskFactor;
 
   Symptom({

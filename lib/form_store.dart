@@ -53,6 +53,7 @@ abstract class _Step1Store with Store {
         firstName: firstName,
         lastName: lastName,
         dob: dob,
+        age: age,
         gender: Gender.create(label: gender, ref: gender),
         phoneNumber: phoneNo.toString(),
         address: address,
@@ -76,7 +77,7 @@ abstract class _Step1Store with Store {
     _disposers = [
       reaction((_) => firstName, validateFirstName),
       reaction((_) => lastName, validateLastName),
-      reaction((_) => dob, validateAge),
+      reaction((_) => dob, validateDob),
       reaction((_) => gender, validateGender),
       reaction((_) => phoneNoText, validatePhoneNo),
       reaction((_) => homeNoText, validateHomeNo),
@@ -112,7 +113,7 @@ abstract class _Step1Store with Store {
   }
 
   @action
-  void validateAge(DateTime value) {
+  void validateDob(DateTime value) {
     error.age = null;
 
     error.age = FormBuilderValidators.required(
@@ -212,7 +213,7 @@ abstract class _Step1Store with Store {
     validateFirstName(firstName);
     validateLastName(lastName);
     validateGender(gender);
-    validateAge(dob);
+    validateDob(dob);
     validatePhoneNo(phoneNoText);
     validateLine1(address.line1);
     validateRegion(address.region);

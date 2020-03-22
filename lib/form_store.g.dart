@@ -200,10 +200,10 @@ mixin _$Step1Store on _Step1Store, Store {
   }
 
   @override
-  void validateAge(DateTime value) {
+  void validateDob(DateTime value) {
     final _$actionInfo = _$_Step1StoreActionController.startAction();
     try {
-      return super.validateAge(value);
+      return super.validateDob(value);
     } finally {
       _$_Step1StoreActionController.endAction(_$actionInfo);
     }
