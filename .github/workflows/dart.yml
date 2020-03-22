@@ -22,7 +22,7 @@ jobs:
       env:
         KEY_JKS: ${{ secrets.KEY_JKS }}
         KEY_PASSWORD: ${{ secrets.ALIAS_PASSWORD }}
-        ALIAS_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+        ALIAS_PASSWORD: ${{ secrets.PASSWORD }}
         run: echo $KEY_JKS > key.jks && flutter pub get && flutter test && flutter build apk --release
     - uses: actions/upload-artifact@v1
       with:
