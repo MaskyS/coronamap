@@ -11,6 +11,7 @@ Symptom _$SymptomFromJson(Map<String, dynamic> json) {
     label: json['label'] as String,
     ref: json['ref'] as String,
     description: json['description'] as String,
+    riskFactor: json['riskFactor'] as int,
   );
 }
 
@@ -18,4 +19,5 @@ Map<String, dynamic> _$SymptomToJson(Symptom instance) => <String, dynamic>{
       'label': instance.label,
       'ref': instance.ref,
       'description': instance.description,
+      'riskFactor': instance.riskFactor,
     };

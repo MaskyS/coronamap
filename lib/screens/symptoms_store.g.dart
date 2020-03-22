@@ -148,6 +148,23 @@ mixin _$Step3Store on _Step3StoreBase, Store {
     }, _$firstDateErrorTextAtom, name: '${_$firstDateErrorTextAtom.name}_set');
   }
 
+  final _$riskAtom = Atom(name: '_Step3StoreBase.risk');
+
+  @override
+  Risk get risk {
+    _$riskAtom.context.enforceReadPolicy(_$riskAtom);
+    _$riskAtom.reportObserved();
+    return super.risk;
+  }
+
+  @override
+  set risk(Risk value) {
+    _$riskAtom.context.conditionallyRunInAction(() {
+      super.risk = value;
+      _$riskAtom.reportChanged();
+    }, _$riskAtom, name: '${_$riskAtom.name}_set');
+  }
+
   final _$getSymptomsFromFirestoreAsyncAction =
       AsyncAction('getSymptomsFromFirestore');
 
@@ -159,6 +176,16 @@ mixin _$Step3Store on _Step3StoreBase, Store {
 
   final _$_Step3StoreBaseActionController =
       ActionController(name: '_Step3StoreBase');
+
+  @override
+  void calculateRisk(int age, bool hasPreExistingConditions) {
+    final _$actionInfo = _$_Step3StoreBaseActionController.startAction();
+    try {
+      return super.calculateRisk(age, hasPreExistingConditions);
+    } finally {
+      _$_Step3StoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   void validateChosenSymptoms(List<Symptom> values) {
@@ -183,7 +210,7 @@ mixin _$Step3Store on _Step3StoreBase, Store {
   @override
   String toString() {
     final string =
-        'chosenSymptoms: ${chosenSymptoms.toString()},errorMessage: ${errorMessage.toString()},symptomsList: ${symptomsList.toString()},firstDate: ${firstDate.toString()},chosenSymptomsErrorText: ${chosenSymptomsErrorText.toString()},firstDateErrorText: ${firstDateErrorText.toString()},canCompleteForm: ${canCompleteForm.toString()},state: ${state.toString()}';
+        'chosenSymptoms: ${chosenSymptoms.toString()},errorMessage: ${errorMessage.toString()},symptomsList: ${symptomsList.toString()},firstDate: ${firstDate.toString()},chosenSymptomsErrorText: ${chosenSymptomsErrorText.toString()},firstDateErrorText: ${firstDateErrorText.toString()},risk: ${risk.toString()},canCompleteForm: ${canCompleteForm.toString()},state: ${state.toString()}';
     return '{$string}';
   }
 }

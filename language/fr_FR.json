@@ -10,7 +10,9 @@
   "report_button": "JE SUIS MALADE",
   "must_fill_symptoms": "Vos symptômes requis",
   "must_fill_date_infection": "Date de première infection requis",
-  "thank_report": "Merci de vos informations.",
+  "thank_report": "Merci de vos informations. Vous semblez normale. Veuillez contacter l'hopitale au numero dessus si necessaire",
+  "at_risk_report": "Merci de vos informations. Il faudra contacter l'hopitale au numero dessus pour une meilleure prediction. Entre temps, prenez soin de vous.",
+  "severe_report": "Merci de vos informations. Vous semblez malade. Veuillez contacter l'hopitale au numero dessus pour une meilleure prediction. Entre temps, isolez vous et prenez toutes les precautions",
   "form_first_name": "Prénom﹡",
   "form_last_name": "Nom﹡",
   "form_gender": "Genre﹡",
@@ -45,7 +47,6 @@
   "form_error_city_alpha": "Doit être des lettre",
   "form_error_postal": "Invalide",
   "form_error_postal_fill_five": "Doit contenir 5 chiffres",
-
   "asthma": "Asthme",
   "chronic_heart_failure": "Insuffisance cardiaque chronique",
   "diabetes": "Diabètes",

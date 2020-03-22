@@ -1,10 +1,12 @@
 import 'package:coronamapp/config/app_localizations.dart';
+import 'package:coronamapp/risk_enum.dart';
+
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 
 class ThankYouForm extends StatefulWidget {
-  ThankYouForm({Key key}) : super(key: key);
-
+  ThankYouForm({Key key, @required this.risk}) : super(key: key);
+  final Risk risk;
   @override
   _ThankYouFormState createState() => _ThankYouFormState();
 }
@@ -23,13 +25,18 @@ class _ThankYouFormState extends State<ThankYouForm> {
           Spacer(flex: 3),
           Expanded(
             flex: 3,
-            child: Icon(
-              Icons.check_circle,
-              color: Colors.green,
-              size: 200,
+            child: getIcon(widget.risk),
+          ),
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              child: Text(
+                getText(widget.risk),
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 16),
+              ),
             ),
           ),
-          Expanded(child: Text(AppLocalizations.of(context).translate("thank_report"))),
           Spacer(flex: 1),
           Expanded(
             flex: 2,
@@ -45,7 +52,9 @@ class _ThankYouFormState extends State<ThankYouForm> {
                       child: Container(
                         margin:
                             EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                        child: Text(AppLocalizations.of(context).translate("step_back"), style: _buttonStyle),
+                        child: Text(
+                            AppLocalizations.of(context).translate("step_back"),
+                            style: _buttonStyle),
                       ),
                       onPressed: () => Navigator.pop(context),
                       color: Colors.green,
@@ -58,7 +67,10 @@ class _ThankYouFormState extends State<ThankYouForm> {
                         margin: EdgeInsets.symmetric(vertical: 10),
                         child: Icon(Icons.call),
                       ),
-                      label: Text(AppLocalizations.of(context).translate("call_emergency"), style: _buttonStyle),
+                      label: Text(
+                          AppLocalizations.of(context)
+                              .translate("call_emergency"),
+                          style: _buttonStyle),
                       color: Colors.blue,
                       textColor: Colors.white,
                     ),
@@ -70,5 +82,44 @@ class _ThankYouFormState extends State<ThankYouForm> {
         ],
       ),
     );
+  }
+
+  Icon getIcon(Risk risk) {
+    switch (risk) {
+      case Risk.mild:
+        return Icon(
+          Icons.check_circle,
+          color: Colors.green,
+          size: 200,
+        );
+      case Risk.atRisk:
+        return Icon(
+          Icons.warning,
+          color: Colors.orange,
+          size: 200,
+        );
+        break;
+      case Risk.severe:
+        return Icon(
+          Icons.add_call,
+          color: Colors.redAccent,
+          size: 200,
+        );
+        break;
+      default:
+    }
+  }
+
+  String getText(Risk risk) {
+    switch (risk) {
+      case Risk.mild:
+        return AppLocalizations.of(context).translate("thank_report");
+
+      case Risk.atRisk:
+        return AppLocalizations.of(context).translate("at_risk_report");
+
+      case Risk.severe:
+        return AppLocalizations.of(context).translate("sever_report");
+    }
   }
 }

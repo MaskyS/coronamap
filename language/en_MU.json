@@ -10,7 +10,9 @@
   "report_button": "MO MALAD",
   "must_fill_symptoms": "Ou sintom ki ou p gagne",
   "must_fill_date_infection": "Dat pou premie infection ou in gagne",
-  "thank_report": "Merci pou ou information.",
+  "thank_report": "Merci pou ou information. Ou pas parete a risk. \nOu capav contacter lhopital embas.",
+  "at_risk_report": "Merci pou ou information. Bizin contacter l'hopital lor numero embas la pu ene meilleur analyse. Entre temps, prends soin ou meme",
+  "severe_report": "Merci pou ou information. Pu assurer ki ou pas infecter, contacter l'hopitale lors nimero embas la pu ene meilleure analyse. Prends tout precautions entre temps.",
   "form_first_name": "Prenom﹡",
   "form_last_name": "Nom﹡",
   "form_gender": "Sex﹡",
@@ -45,7 +47,6 @@
   "form_error_city_alpha": "Bizin zis let",
   "form_error_postal": "Pa bon",
   "form_error_postal_fill_five": "Bizin ena 5 sif",
-
   "asthma": "Lasmatik",
   "chronic_heart_failure": "Maladi leker",
   "diabetes": "Diabet",
@@ -64,7 +65,6 @@
   "fever": "La fiev",
   "pain": "Courbatir",
   "very_difficult_breathing": "Esoufle",
-
   "call_emergency": "Apel secour",
   "form_title": "Depistaz Covid-19"
 }

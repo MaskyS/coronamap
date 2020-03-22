@@ -10,7 +10,9 @@
   "report_button": "I HAVE SYMPTOMS",
   "must_fill_symptoms": "Please add at least one symptom",
   "must_fill_date_infection": "Please insert date of first infection",
-  "thank_report": "Thank you for reporting",
+  "thank_report": "Thank you for reporting. You seem to be fine, but you can get more assistance by calling a hospital below.",
+  "at_risk_report": "You have mild symptoms. Please contact the hospital at the number below for a better analysis. Meanwhile, take care of yourself.",
+  "severe_report": "You seem unwell. Please contact the hospital as soon as possible to ensure that you will recover. Please take all precautions meanwhile.",
   "form_first_name": "First Name﹡",
   "form_last_name": "Last Name﹡",
   "form_gender": "Gender﹡",
@@ -45,7 +47,6 @@
   "form_error_city_alpha": "City must be letters only",
   "form_error_postal": "Invalid values",
   "form_error_postal_fill_five": "Must be five digits",
-
   "asthma": "Asthma",
   "chronic_heart_failure": "Chronic heart failure",
   "diabetes": "Diabetes",
