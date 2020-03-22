@@ -21,6 +21,7 @@ class User {
   DateTime dob;
   DateTime createdAt;
   DateTime updatedAt;
+  String risk;
 
   User({
     this.firstName,
@@ -35,13 +36,20 @@ class User {
     this.dob,
     this.createdAt,
     this.updatedAt,
+    this.risk,
   });
 
-
-  User.fromForm({this.firstName, this.lastName, this.gender,
-    this.phoneNumber, this.address, this.dob, this.createdAt, this.updatedAt});
+  User.fromForm({
+    this.firstName,
+    this.lastName,
+    this.gender,
+    this.phoneNumber,
+    this.address,
+    this.dob,
+    this.createdAt,
+    this.updatedAt,
+  });
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
   Map<String, dynamic> toJson() => _$UserToJson(this);
-
 }

@@ -3,13 +3,14 @@ import 'package:coronamapp/models/symptom.dart';
 import 'package:mobx/mobx.dart';
 
 import '../store_state_enum.dart';
+import '../risk_enum.dart';
 part 'symptoms_store.g.dart';
 
 class Step3Store = _Step3StoreBase with _$Step3Store;
 
 abstract class _Step3StoreBase with Store {
   @observable
-  List<Symptom> chosenSymptoms;
+  List<Symptom> chosenSymptoms = [];
 
   @observable
   ObservableFuture<List<Symptom>> _symptomsListFuture;
@@ -33,6 +34,41 @@ abstract class _Step3StoreBase with Store {
   @computed
   bool get canCompleteForm =>
       chosenSymptomsErrorText == null && firstDateErrorText == null;
+
+  @observable
+  Risk risk;
+
+  @action
+  void calculateRisk(int age, bool hasPreExistingConditions) {
+    if (chosenSymptoms.isEmpty) return;
+    int sum;
+    sum = chosenSymptoms?.fold<int>(
+        0, (previousValue, element) => previousValue + (element.riskFactor ?? 0));
+
+    if ((age > 60) && (hasPreExistingConditions)) {
+      risk = Risk.severe;
+    }
+
+    int severeSum = 20;
+    int atRiskSum = 15;
+
+    if (age > 60) {
+      severeSum = 10;
+      atRiskSum = 0;
+    } else if (hasPreExistingConditions) {
+      severeSum = 15;
+      atRiskSum = 9;
+    }
+
+    if (sum > severeSum) {
+      risk = Risk.severe;
+    } else if (sum > atRiskSum) {
+      risk = Risk.atRisk;
+    } else {
+      risk = Risk.mild;
+    }
+  }
+
   @computed
   StoreState get state {
     if (_symptomsListFuture == null ||
@@ -59,16 +95,13 @@ abstract class _Step3StoreBase with Store {
     if (values == null) {
       chosenSymptomsErrorText = "must_fill_symptoms";
     } else {
-      chosenSymptomsErrorText =
-      values.length < 1 ? 'must_fill_symptoms' : null;
+      chosenSymptomsErrorText = values.length < 1 ? 'must_fill_symptoms' : null;
     }
   }
 
   @action
   void validateFirstDate(DateTime dateTime) {
-    firstDateErrorText = dateTime == null
-        ? 'must_fill_date_infection'
-        : null;
+    firstDateErrorText = dateTime == null ? 'must_fill_date_infection' : null;
   }
 
   void validateAll() {

@@ -9,6 +9,7 @@ import 'package:coronamapp/screens/symptoms_store.dart';
 import 'package:coronamapp/widgets/step1_form.dart';
 import 'package:coronamapp/widgets/step2_form.dart';
 import 'package:coronamapp/widgets/step3_form.dart';
+import 'package:coronamapp/risk_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:geolocator/geolocator.dart';
@@ -153,14 +154,18 @@ class _SymptomsFormState extends State<SymptomsForm> {
           builder: (context) {
             user.symptoms = _step3Store.chosenSymptoms;
             user.firstSymptomDate = _step3Store.firstDate;
-            _getCurrentLocation().then((value) {
-              user.location = Location(
-                latitude: _currentPosition.latitude.toString(),
-                longitude: _currentPosition.longitude.toString(),
-                positionBasedAddress: _positionBasedAddress,
-              );
-              Navigator.pop(context);
-            });
+            _step3Store.calculateRisk(_store.age, _step2Store.hasConditions);
+            user.risk = _step3Store.risk.value;
+            _getCurrentLocation().then(
+              (value) {
+                user.location = Location(
+                  latitude: _currentPosition.latitude.toString(),
+                  longitude: _currentPosition.longitude.toString(),
+                  positionBasedAddress: _positionBasedAddress,
+                );
+                Navigator.pop(context);
+              },
+            );
 
             return AlertDialog(
               content: Container(
@@ -177,7 +182,8 @@ class _SymptomsFormState extends State<SymptomsForm> {
         );
 
         userRepo.save(user);
-        Navigator.pushReplacementNamed(context, Routes.thankYouPage);
+        Navigator.pushReplacementNamed(context, Routes.thankYouPage,
+            arguments: _step3Store.risk);
       }
     }
   }
