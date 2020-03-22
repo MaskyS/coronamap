@@ -119,7 +119,7 @@ class _ThankYouFormState extends State<ThankYouForm> {
         return AppLocalizations.of(context).translate("at_risk_report");
 
       case Risk.severe:
-        return AppLocalizations.of(context).translate("sever_report");
+        return AppLocalizations.of(context).translate("severe_report");
     }
   }
 }
