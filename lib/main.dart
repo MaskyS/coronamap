@@ -43,37 +43,29 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    return  MaterialApp(
+      title: 'Corona Mapp',
+      theme: ThemeData(
+        primarySwatch: Colors.green,
+      ),
+      locale: this.locale ?? Locale('en', 'EN'),
 
-    if (this.localeLoaded == false) {
-      return CircularProgressIndicator();
-    } else {
-      print("LOCALE/FLUTTER");
-      print(this.locale == null ? "No locale": this.locale.languageCode);
-      return MaterialApp(
-        title: 'Corona Mapp',
-        theme: ThemeData(
-          primarySwatch: Colors.green,
-        ),
-        locale: this.locale == null ? Locale('en', 'EN'): this.locale,
-
-        supportedLocales: [
-          Locale('en', 'EN'),
-          Locale('en', 'MU'),
-          Locale('fr', 'FR'),
-        ],
-        localizationsDelegates: [
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-        ],
-        localeResolutionCallback: (locale, supportedLocales) {
-          return this.locale == null ? Locale('en', 'EN'): this.locale;
-        },
-        onGenerateRoute: Router.generateRoute,
-        initialRoute: Routes.splashPage,
-      );
-    }
-
+      supportedLocales: [
+        Locale('en', 'EN'),
+        Locale('en', 'MU'),
+        Locale('fr', 'FR'),
+      ],
+      localizationsDelegates: [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      localeResolutionCallback: (locale, supportedLocales) {
+        return this.locale ?? Locale('en', 'EN');
+      },
+      onGenerateRoute: Router.generateRoute,
+      initialRoute: Routes.splashPage,
+    );
   }
 
   _fetchLocale() async {
