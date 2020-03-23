@@ -2,7 +2,7 @@ name: Dart CI
 
 on:
   push:
-    branches: [ release ]
+    branches: [ master ]
   pull_request:
     branches: [ release ]
 
