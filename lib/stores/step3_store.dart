@@ -1,4 +1,4 @@
-import 'package:coronamapp/Repository/symptom_repository.dart';
+import 'package:coronamapp/repository/symptom_repository.dart';
 import 'package:coronamapp/models/symptom.dart';
 import 'package:mobx/mobx.dart';
 
