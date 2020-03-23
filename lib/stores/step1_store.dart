@@ -3,7 +3,6 @@ import 'package:coronamapp/models/gender.dart';
 import 'package:coronamapp/models/user.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:mobx/mobx.dart';
-import 'package:coronamapp/district_enum.dart';
 import 'package:validators/validators.dart';
 
 part 'step1_store.g.dart';
@@ -82,7 +81,6 @@ abstract class _Step1Store with Store {
       reaction((_) => phoneNoText, validatePhoneNo),
       reaction((_) => homeNoText, validateHomeNo),
       reaction((_) => address.line1, validateLine1),
-      reaction((_) => address.district, validateDistrict),
       reaction((_) => address.region, validateRegion),
     ];
   }
@@ -133,17 +131,17 @@ abstract class _Step1Store with Store {
         FormBuilderValidators.required(errorText: "form_error_phone_no")(value);
     if (error.phoneNo != null) return;
 
-    if (!value.startsWith('5')) {
-      error.phoneNo = 'form_error_phone_no_start_five';
+    if (!value.startsWith('0')) {
+      error.phoneNo = 'form_error_phone_no_start_zero';
       return;
     }
 
     error.phoneNo = FormBuilderValidators.numeric(
             errorText: 'form_error_phone_no_invalid')(value) ??
-        FormBuilderValidators.minLength(8,
-            errorText: "form_error_phone_no_fill_eight")(value) ??
-        FormBuilderValidators.maxLength(8,
-            errorText: "form_error_phone_no_fill_eight")(value);
+        FormBuilderValidators.minLength(10,
+            errorText: "form_error_phone_no_fill_ten")(value) ??
+        FormBuilderValidators.maxLength(10,
+            errorText: "form_error_phone_no_fill_ten")(value);
   }
 
   @action
@@ -173,11 +171,6 @@ abstract class _Step1Store with Store {
   }
 
   @action
-  void validateDistrict(District district) {
-    error.district = district == null ? 'form_error_district' : null;
-  }
-
-  @action
   void validateRegion(String value) {
     error.region = null;
 
@@ -188,18 +181,6 @@ abstract class _Step1Store with Store {
 
     if (!isAlpha(value.replaceAll(' ', ''))) {
       error.region = 'form_error_city_alpha';
-    }
-  }
-
-  @action
-  void validatePostalCode(String value) {
-    error.postalCode = null;
-
-    if (value != null) {
-      error.postalCode = FormBuilderValidators.numeric(
-              errorText: 'form_error_postal')(value) ??
-          FormBuilderValidators.maxLength(5,
-              errorText: "form_error_postal_fill_five")(value);
     }
   }
 
@@ -217,8 +198,6 @@ abstract class _Step1Store with Store {
     validatePhoneNo(phoneNoText);
     validateLine1(address.line1);
     validateRegion(address.region);
-    validateDistrict(address.district);
-    validatePostalCode(address.postalCodeText);
   }
 }
 
@@ -247,12 +226,7 @@ abstract class _StepErrorState with Store {
   String line1;
 
   @observable
-  String district;
-
-  @observable
   String region;
-
-  String postalCode;
 
   @computed
   bool get hasErrors =>
@@ -262,6 +236,5 @@ abstract class _StepErrorState with Store {
       gender != null ||
       phoneNo != null ||
       line1 != null ||
-      district != null ||
       region != null;
 }

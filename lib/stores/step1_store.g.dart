@@ -250,30 +250,10 @@ mixin _$Step1Store on _Step1Store, Store {
   }
 
   @override
-  void validateDistrict(District district) {
-    final _$actionInfo = _$_Step1StoreActionController.startAction();
-    try {
-      return super.validateDistrict(district);
-    } finally {
-      _$_Step1StoreActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   void validateRegion(String value) {
     final _$actionInfo = _$_Step1StoreActionController.startAction();
     try {
       return super.validateRegion(value);
-    } finally {
-      _$_Step1StoreActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void validatePostalCode(String value) {
-    final _$actionInfo = _$_Step1StoreActionController.startAction();
-    try {
-      return super.validatePostalCode(value);
     } finally {
       _$_Step1StoreActionController.endAction(_$actionInfo);
     }
@@ -413,23 +393,6 @@ mixin _$StepErrorState on _StepErrorState, Store {
     }, _$line1Atom, name: '${_$line1Atom.name}_set');
   }
 
-  final _$districtAtom = Atom(name: '_StepErrorState.district');
-
-  @override
-  String get district {
-    _$districtAtom.context.enforceReadPolicy(_$districtAtom);
-    _$districtAtom.reportObserved();
-    return super.district;
-  }
-
-  @override
-  set district(String value) {
-    _$districtAtom.context.conditionallyRunInAction(() {
-      super.district = value;
-      _$districtAtom.reportChanged();
-    }, _$districtAtom, name: '${_$districtAtom.name}_set');
-  }
-
   final _$regionAtom = Atom(name: '_StepErrorState.region');
 
   @override
@@ -450,7 +413,7 @@ mixin _$StepErrorState on _StepErrorState, Store {
   @override
   String toString() {
     final string =
-        'firstName: ${firstName.toString()},lastName: ${lastName.toString()},phoneNo: ${phoneNo.toString()},homeNo: ${homeNo.toString()},age: ${age.toString()},gender: ${gender.toString()},line1: ${line1.toString()},district: ${district.toString()},region: ${region.toString()},hasErrors: ${hasErrors.toString()}';
+        'firstName: ${firstName.toString()},lastName: ${lastName.toString()},phoneNo: ${phoneNo.toString()},homeNo: ${homeNo.toString()},age: ${age.toString()},gender: ${gender.toString()},line1: ${line1.toString()},region: ${region.toString()},hasErrors: ${hasErrors.toString()}';
     return '{$string}';
   }
 }

@@ -1,5 +1,4 @@
 import 'package:coronamapp/config/app_localizations.dart';
-import 'package:coronamapp/district_enum.dart';
 import 'package:coronamapp/stores/step1_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -44,24 +43,34 @@ class _Step1FormState extends State<Step1Form> {
             children: <Widget>[
               Observer(builder: (_) {
                 return FormBuilderTextField(
-                  attribute: AppLocalizations.of(context).translate("first_name"),
+                  attribute:
+                      AppLocalizations.of(context).translate("first_name"),
                   initialValue: _store.firstName,
                   onChanged: (v) => _store.firstName = v,
                   decoration: _baseDeco.copyWith(
-                    labelText: AppLocalizations.of(context).translate("form_first_name"),
-                    errorText: _store.error.firstName == null  ? null :  AppLocalizations.of(context).translate(_store.error.firstName),
+                    labelText: AppLocalizations.of(context)
+                        .translate("form_first_name"),
+                    errorText: _store.error.firstName == null
+                        ? null
+                        : AppLocalizations.of(context)
+                            .translate(_store.error.firstName),
                   ),
                 );
               }),
               SizedBox(height: 10),
               Observer(builder: (_) {
                 return FormBuilderTextField(
-                  attribute: AppLocalizations.of(context).translate("first_name"),
+                  attribute:
+                      AppLocalizations.of(context).translate("first_name"),
                   initialValue: _store.lastName,
                   onChanged: (v) => _store.lastName = v,
                   decoration: _baseDeco.copyWith(
-                    labelText: AppLocalizations.of(context).translate("form_last_name"),
-                    errorText: _store.error.lastName == null  ? null :  AppLocalizations.of(context).translate(_store.error.lastName),
+                    labelText: AppLocalizations.of(context)
+                        .translate("form_last_name"),
+                    errorText: _store.error.lastName == null
+                        ? null
+                        : AppLocalizations.of(context)
+                            .translate(_store.error.lastName),
                   ),
                 );
               }),
@@ -82,7 +91,8 @@ class _Step1FormState extends State<Step1Form> {
                             .map(
                               (gender) => DropdownMenuItem(
                                 value: gender,
-                                child: Text(AppLocalizations.of(context).translate('form_'+gender.toLowerCase())),
+                                child: Text(AppLocalizations.of(context)
+                                    .translate('form_' + gender.toLowerCase())),
                               ),
                             )
                             .toList(),
@@ -118,8 +128,12 @@ class _Step1FormState extends State<Step1Form> {
                           );
                         },
                         decoration: _baseDeco.copyWith(
-                          labelText: AppLocalizations.of(context).translate("form_dob"),
-                          errorText: _store.error.age == null  ? null :  AppLocalizations.of(context).translate(_store.error.age),
+                          labelText: AppLocalizations.of(context)
+                              .translate("form_dob"),
+                          errorText: _store.error.age == null
+                              ? null
+                              : AppLocalizations.of(context)
+                                  .translate(_store.error.age),
                         ),
                       );
                     }),
@@ -141,8 +155,12 @@ class _Step1FormState extends State<Step1Form> {
                           WhitelistingTextInputFormatter.digitsOnly
                         ],
                         decoration: _baseDeco.copyWith(
-                          labelText: AppLocalizations.of(context).translate("form_mobile_no"),
-                          errorText: _store.error.phoneNo == null  ? null :  AppLocalizations.of(context).translate(_store.error.phoneNo),
+                          labelText: AppLocalizations.of(context)
+                              .translate("form_mobile_no"),
+                          errorText: _store.error.phoneNo == null
+                              ? null
+                              : AppLocalizations.of(context)
+                                  .translate(_store.error.phoneNo),
                         ),
                       );
                     }),
@@ -160,8 +178,12 @@ class _Step1FormState extends State<Step1Form> {
                           WhitelistingTextInputFormatter.digitsOnly
                         ],
                         decoration: _baseDeco.copyWith(
-                          labelText: AppLocalizations.of(context).translate("form_home_no"),
-                          errorText: _store.error.homeNo == null  ? null :  AppLocalizations.of(context).translate(_store.error.homeNo),
+                          labelText: AppLocalizations.of(context)
+                              .translate("form_home_no"),
+                          errorText: _store.error.homeNo == null
+                              ? null
+                              : AppLocalizations.of(context)
+                                  .translate(_store.error.homeNo),
                         ),
                       );
                     }),
@@ -175,8 +197,12 @@ class _Step1FormState extends State<Step1Form> {
                   initialValue: _store.address.line1,
                   onChanged: (v) => _store.address.line1 = v,
                   decoration: _baseDeco.copyWith(
-                      labelText: AppLocalizations.of(context).translate("form_address_line_1"),
-                      errorText: _store.error.line1 == null  ? null :  AppLocalizations.of(context).translate(_store.error.line1)),
+                      labelText: AppLocalizations.of(context)
+                          .translate("form_address_line_1"),
+                      errorText: _store.error.line1 == null
+                          ? null
+                          : AppLocalizations.of(context)
+                              .translate(_store.error.line1)),
                 );
               }),
               SizedBox(height: 10),
@@ -185,66 +211,26 @@ class _Step1FormState extends State<Step1Form> {
                   attribute: "address_line_2",
                   initialValue: _store.address.line2,
                   onChanged: (v) => _store.address.line2 = v,
-                  decoration: _baseDeco.copyWith(labelText: AppLocalizations.of(context).translate("form_address_line_2")),
+                  decoration: _baseDeco.copyWith(
+                      labelText: AppLocalizations.of(context)
+                          .translate("form_address_line_2")),
                 );
               }),
               SizedBox(height: 20),
               Observer(builder: (_) {
-                return FormBuilderDropdown(
-                  attribute: "district",
-                  initialValue: _store.address.district,
-                  onChanged: (v) => _store.address.district = v,
+                return FormBuilderTextField(
+                  attribute: 'region',
+                  initialValue: _store.address.region,
+                  onChanged: (v) => _store.address.region = v,
                   decoration: _baseDeco.copyWith(
-                    errorText: AppLocalizations.of(context).translate(_store.error.district),
-                  ),
-                  hint: Text(AppLocalizations.of(context).translate("form_choose_district")),
-                  items: District.values
-                      .map(
-                        (distr) => DropdownMenuItem(
-                          value: distr,
-                          child: Text("${distr.value}"),
-                        ),
-                      )
-                      .toList(),
+                      labelText:
+                          AppLocalizations.of(context).translate("form_city"),
+                      errorText: _store.error.region == null
+                          ? null
+                          : AppLocalizations.of(context)
+                              .translate(_store.error.region)),
                 );
               }),
-              SizedBox(height: 10),
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    flex: 5,
-                    child: Observer(builder: (_) {
-                      return FormBuilderTextField(
-                        attribute: 'region',
-                        initialValue: _store.address.region,
-                        onChanged: (v) => _store.address.region = v,
-                        decoration: _baseDeco.copyWith(
-                            labelText: AppLocalizations.of(context).translate("form_city"),
-                            errorText: _store.error.region == null  ? null :  AppLocalizations.of(context).translate(_store.error.region)),
-                      );
-                    }),
-                  ),
-                  Spacer(flex: 1),
-                  Expanded(
-                    flex: 5,
-                    child: Observer(builder: (_) {
-                      return FormBuilderTextField(
-                        attribute: "postal_code",
-                        initialValue: _store.address.postalCodeText,
-                        onChanged: (v) => _store.address.postalCodeText = v,
-                        keyboardType: TextInputType.number,
-                        inputFormatters: [
-                          WhitelistingTextInputFormatter.digitsOnly
-                        ],
-                        decoration: _baseDeco.copyWith(
-                          labelText: AppLocalizations.of(context).translate("form_postal_code"),
-                          errorText: _store.error.postalCode == null  ? null :  AppLocalizations.of(context).translate(_store.error.region),
-                        ),
-                      );
-                    }),
-                  ),
-                ],
-              ),
             ],
           ),
         ),

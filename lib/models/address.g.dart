@@ -10,63 +10,15 @@ Address _$AddressFromJson(Map<String, dynamic> json) {
   return Address(
     line1: json['line1'] as String,
     line2: json['line2'] as String,
-    district: _$enumDecodeNullable(_$DistrictEnumMap, json['district']),
     region: json['region'] as String,
-    postalCodeText: json['postalCodeText'] as String,
   );
 }
 
 Map<String, dynamic> _$AddressToJson(Address instance) => <String, dynamic>{
       'line1': instance.line1,
       'line2': instance.line2,
-      'district': _$DistrictEnumMap[instance.district],
       'region': instance.region,
-      'postalCodeText': instance.postalCodeText,
     };
-
-T _$enumDecode<T>(
-  Map<T, dynamic> enumValues,
-  dynamic source, {
-  T unknownValue,
-}) {
-  if (source == null) {
-    throw ArgumentError('A value must be provided. Supported values: '
-        '${enumValues.values.join(', ')}');
-  }
-
-  final value = enumValues.entries
-      .singleWhere((e) => e.value == source, orElse: () => null)
-      ?.key;
-
-  if (value == null && unknownValue == null) {
-    throw ArgumentError('`$source` is not one of the supported values: '
-        '${enumValues.values.join(', ')}');
-  }
-  return value ?? unknownValue;
-}
-
-T _$enumDecodeNullable<T>(
-  Map<T, dynamic> enumValues,
-  dynamic source, {
-  T unknownValue,
-}) {
-  if (source == null) {
-    return null;
-  }
-  return _$enumDecode<T>(enumValues, source, unknownValue: unknownValue);
-}
-
-const _$DistrictEnumMap = {
-  District.Flacq: 'Flacq',
-  District.GrandPort: 'GrandPort',
-  District.Moka: 'Moka',
-  District.Pamplemousses: 'Pamplemousses',
-  District.PlainesWilhems: 'PlainesWilhems',
-  District.PortLouis: 'PortLouis',
-  District.RiviereDuRempart: 'RiviereDuRempart',
-  District.RiviereNoire: 'RiviereNoire',
-  District.Savanne: 'Savanne',
-};
 
 // **************************************************************************
 // StoreGenerator
@@ -75,12 +27,6 @@ const _$DistrictEnumMap = {
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$Address on _AddressBase, Store {
-  Computed<int> _$postalCodeComputed;
-
-  @override
-  int get postalCode =>
-      (_$postalCodeComputed ??= Computed<int>(() => super.postalCode)).value;
-
   final _$line1Atom = Atom(name: '_AddressBase.line1');
 
   @override
@@ -115,23 +61,6 @@ mixin _$Address on _AddressBase, Store {
     }, _$line2Atom, name: '${_$line2Atom.name}_set');
   }
 
-  final _$districtAtom = Atom(name: '_AddressBase.district');
-
-  @override
-  District get district {
-    _$districtAtom.context.enforceReadPolicy(_$districtAtom);
-    _$districtAtom.reportObserved();
-    return super.district;
-  }
-
-  @override
-  set district(District value) {
-    _$districtAtom.context.conditionallyRunInAction(() {
-      super.district = value;
-      _$districtAtom.reportChanged();
-    }, _$districtAtom, name: '${_$districtAtom.name}_set');
-  }
-
   final _$regionAtom = Atom(name: '_AddressBase.region');
 
   @override
@@ -149,27 +78,10 @@ mixin _$Address on _AddressBase, Store {
     }, _$regionAtom, name: '${_$regionAtom.name}_set');
   }
 
-  final _$postalCodeTextAtom = Atom(name: '_AddressBase.postalCodeText');
-
-  @override
-  String get postalCodeText {
-    _$postalCodeTextAtom.context.enforceReadPolicy(_$postalCodeTextAtom);
-    _$postalCodeTextAtom.reportObserved();
-    return super.postalCodeText;
-  }
-
-  @override
-  set postalCodeText(String value) {
-    _$postalCodeTextAtom.context.conditionallyRunInAction(() {
-      super.postalCodeText = value;
-      _$postalCodeTextAtom.reportChanged();
-    }, _$postalCodeTextAtom, name: '${_$postalCodeTextAtom.name}_set');
-  }
-
   @override
   String toString() {
     final string =
-        'line1: ${line1.toString()},line2: ${line2.toString()},district: ${district.toString()},region: ${region.toString()},postalCodeText: ${postalCodeText.toString()},postalCode: ${postalCode.toString()}';
+        'line1: ${line1.toString()},line2: ${line2.toString()},region: ${region.toString()}';
     return '{$string}';
   }
 }
