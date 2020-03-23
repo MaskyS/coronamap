@@ -6,7 +6,7 @@ import 'package:coronamapp/utils/utils.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class UserRepository {
-  final dbName = 'users';
+  final dbName = 'users-re';
 
   Future<void> save(User user) async {
     String hash = generateMd5(user.phoneNumber +

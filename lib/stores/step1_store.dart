@@ -149,17 +149,17 @@ abstract class _Step1Store with Store {
     error.homeNo = null;
     if (isNull(value)) return;
 
-    if (value.startsWith('0')) {
-      error.phoneNo = 'form_error_home_no_start_zero';
+    if (!value.startsWith('0')) {
+      error.homeNo = 'form_error_home_no_start_zero';
       return;
     }
 
     error.homeNo = FormBuilderValidators.numeric(
-            errorText: 'form_error_home_no_start_zero')(value) ??
-        FormBuilderValidators.minLength(7,
-            errorText: 'form_error_home_no_fill_seven')(value) ??
-        FormBuilderValidators.maxLength(7,
-            errorText: "form_error_home_no_fill_seven")(value);
+            errorText: 'form_error_home_no_invalid')(value) ??
+        FormBuilderValidators.minLength(10,
+            errorText: 'form_error_home_no_fill_ten')(value) ??
+        FormBuilderValidators.maxLength(10,
+            errorText: "form_error_home_no_fill_ten")(value);
   }
 
   @action
