@@ -80,7 +80,7 @@ class _Step3FormState extends State<Step3Form> {
               attribute: 'first_date',
               inputType: InputType.date,
               initialDatePickerMode: DatePickerMode.day,
-              format: DateFormat("yyyy-MM-dd"),
+              format: DateFormat("dd-MM-yyyy"),
               initialDate: _store.firstDate,
               initialValue: _store.firstDate,
               onChanged: (v) => _store.firstDate = v,
