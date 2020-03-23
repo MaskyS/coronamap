@@ -69,7 +69,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
   @override
   void initState() {
     pointIndex = 0;
-    _controller = new AnimationController(
+    _controller = AnimationController(
       vsync: this,
     );
     _startAnimation();
@@ -121,7 +121,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                 color: Colors.black12,
                 borderStrokeWidth: 3),
             builder: (context, markers) {
-              return new CustomPaint(
+              return CustomPaint(
                 painter: SpritePainter(_controller),
                 child: Container(
                   width: 200,
