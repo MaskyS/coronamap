@@ -2,6 +2,8 @@ name: Dart CI
 
 on:
   push:
+    tags: 
+    - '*'
     branches: [ release ]
   pull_request:
     branches: [ release ]
@@ -24,7 +26,8 @@ jobs:
         KEY_PASSWORD: ${{ secrets.ALIAS_PASSWORD }}
         ALIAS_PASSWORD: ${{ secrets.ALIAS_PASSWORD }}
     - run: flutter doctor && flutter channel beta && flutter version && echo $KEY_JKS  | base64 -d > ./android/key.jks && ls -la && flutter pub get && flutter build apk --release
-    - uses: actions/upload-artifact@v2-preview
-      with:
-        name: release-apk
-        path: build/app/outputs/apk/release/app-release.apk 
+    - uses: siristechnology/action-create-release@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.TOKEN }}
+        RELEASE_FILE_PATH: build/outputs/apk/release/app-release.apk
+        RELEASE_TITLE: "New Build"
