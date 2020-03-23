@@ -108,7 +108,7 @@ class _Step1FormState extends State<Step1Form> {
                         inputType: InputType.date,
                         initialValue: _store.dob,
                         onChanged: (v) => _store.dob = v,
-                        format: DateFormat("yyyy-MM-dd"),
+                        format: DateFormat("dd-MM-yyyy"),
                         initialDatePickerMode: DatePickerMode.year,
                         datePicker: (context) async {
                           const doneStyle = TextStyle(
