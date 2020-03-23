@@ -58,13 +58,10 @@ class _Step3FormState extends State<Step3Form> {
                     .toList(),
                 spacing: 10,
                 alignment: WrapAlignment.center,
-                initialValue: _store.chosenSymptoms,
+                initialValue: <Symptom>[],
                 selectedColor: Colors.green.shade300,
                 onChanged: (v) {
-                  List<Symptom> temp = [];
-                  v.forEach((element) {
-                    temp.add(element as Symptom);
-                  });
+                  List<Symptom> temp = v as List<Symptom>;
                   _store.chosenSymptoms = temp;
                 },
                 decoration: _baseDeco.copyWith(
