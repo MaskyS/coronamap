@@ -223,12 +223,13 @@ class _Step1FormState extends State<Step1Form> {
                   initialValue: _store.address.region,
                   onChanged: (v) => _store.address.region = v,
                   decoration: _baseDeco.copyWith(
-                      labelText:
-                          AppLocalizations.of(context).translate("form_city"),
-                      errorText: _store.error.region == null
-                          ? null
-                          : AppLocalizations.of(context)
-                              .translate(_store.error.region)),
+                    labelText:
+                        AppLocalizations.of(context).translate("form_city"),
+                    errorText: _store.error.region == null
+                        ? null
+                        : AppLocalizations.of(context)
+                            .translate(_store.error.region),
+                  ),
                 );
               }),
             ],
