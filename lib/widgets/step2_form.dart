@@ -1,6 +1,6 @@
 import 'package:coronamapp/config/app_localizations.dart';
 import 'package:coronamapp/models/condition.dart';
-import 'package:coronamapp/step2_store.dart';
+import 'package:coronamapp/stores/step2_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';

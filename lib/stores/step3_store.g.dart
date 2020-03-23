@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'symptoms_store.dart';
+part of 'step3_store.dart';
 
 // **************************************************************************
 // StoreGenerator
