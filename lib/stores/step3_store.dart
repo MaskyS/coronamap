@@ -2,9 +2,9 @@ import 'package:coronamapp/Repository/symptom_repository.dart';
 import 'package:coronamapp/models/symptom.dart';
 import 'package:mobx/mobx.dart';
 
-import '../store_state_enum.dart';
-import '../risk_enum.dart';
-part 'symptoms_store.g.dart';
+import 'package:coronamapp/store_state_enum.dart';
+import 'package:coronamapp/risk_enum.dart';
+part 'step3_store.g.dart';
 
 class Step3Store = _Step3StoreBase with _$Step3Store;
 

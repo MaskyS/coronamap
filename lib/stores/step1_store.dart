@@ -6,7 +6,7 @@ import 'package:mobx/mobx.dart';
 import 'package:coronamapp/district_enum.dart';
 import 'package:validators/validators.dart';
 
-part 'form_store.g.dart';
+part 'step1_store.g.dart';
 
 class Step1Store = _Step1Store with _$Step1Store;
 

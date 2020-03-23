@@ -1,20 +1,21 @@
-import 'package:coronamapp/config/app_localizations.dart';
-import 'package:coronamapp/models/geolocation.dart';
-import 'package:coronamapp/models/user.dart';
-import 'package:coronamapp/repository/user_repository.dart';
-import 'package:coronamapp/step2_store.dart';
-import 'package:coronamapp/constants/routes.dart';
-import 'package:coronamapp/form_store.dart';
-import 'package:coronamapp/screens/symptoms_store.dart';
-import 'package:coronamapp/widgets/step1_form.dart';
-import 'package:coronamapp/widgets/step2_form.dart';
-import 'package:coronamapp/widgets/step3_form.dart';
-import 'package:coronamapp/risk_enum.dart';
 import 'package:flutter/material.dart';
+import 'package:coronamapp/risk_enum.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
 import 'package:location/location.dart' as Geo;
+
+import 'package:coronamapp/config/app_localizations.dart';
+import 'package:coronamapp/models/geolocation.dart';
+import 'package:coronamapp/models/user.dart';
+import 'package:coronamapp/repository/user_repository.dart';
+import 'package:coronamapp/constants/routes.dart';
+import 'package:coronamapp/stores/step1_store.dart';
+import 'package:coronamapp/stores/step2_store.dart';
+import 'package:coronamapp/stores/step3_store.dart';
+import 'package:coronamapp/widgets/step1_form.dart';
+import 'package:coronamapp/widgets/step2_form.dart';
+import 'package:coronamapp/widgets/step3_form.dart';
 
 class SymptomsForm extends StatefulWidget {
   @override

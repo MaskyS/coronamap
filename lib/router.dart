@@ -1,10 +1,10 @@
 import 'package:coronamapp/constants/routes.dart';
-import 'package:coronamapp/step2_store.dart';
-import 'package:coronamapp/form_store.dart';
+import 'package:coronamapp/stores/step2_store.dart';
+import 'package:coronamapp/stores/step1_store.dart';
 import 'package:coronamapp/screens/home.dart';
 import 'package:coronamapp/screens/splash.dart';
-import 'package:coronamapp/screens/symptoms_form.dart';
-import 'package:coronamapp/screens/symptoms_store.dart';
+import 'package:coronamapp/screens/detection_form.dart';
+import 'package:coronamapp/stores/step3_store.dart';
 import 'package:coronamapp/screens/thank_you.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
