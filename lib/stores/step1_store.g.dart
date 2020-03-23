@@ -18,16 +18,6 @@ mixin _$Step1Store on _Step1Store, Store {
 
   @override
   int get age => (_$ageComputed ??= Computed<int>(() => super.age)).value;
-  Computed<int> _$phoneNoComputed;
-
-  @override
-  int get phoneNo =>
-      (_$phoneNoComputed ??= Computed<int>(() => super.phoneNo)).value;
-  Computed<int> _$homeNoComputed;
-
-  @override
-  int get homeNo =>
-      (_$homeNoComputed ??= Computed<int>(() => super.homeNo)).value;
   Computed<bool> _$canMoveToNextPageComputed;
 
   @override
@@ -280,9 +270,19 @@ mixin _$Step1Store on _Step1Store, Store {
   }
 
   @override
+  void validateAll() {
+    final _$actionInfo = _$_Step1StoreActionController.startAction();
+    try {
+      return super.validateAll();
+    } finally {
+      _$_Step1StoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     final string =
-        'error: ${error.toString()},firstName: ${firstName.toString()},lastName: ${lastName.toString()},dob: ${dob.toString()},gender: ${gender.toString()},phoneNoText: ${phoneNoText.toString()},homeNoText: ${homeNoText.toString()},address: ${address.toString()},fullName: ${fullName.toString()},age: ${age.toString()},phoneNo: ${phoneNo.toString()},homeNo: ${homeNo.toString()},canMoveToNextPage: ${canMoveToNextPage.toString()}';
+        'error: ${error.toString()},firstName: ${firstName.toString()},lastName: ${lastName.toString()},dob: ${dob.toString()},gender: ${gender.toString()},phoneNoText: ${phoneNoText.toString()},homeNoText: ${homeNoText.toString()},address: ${address.toString()},fullName: ${fullName.toString()},age: ${age.toString()},canMoveToNextPage: ${canMoveToNextPage.toString()}';
     return '{$string}';
   }
 }

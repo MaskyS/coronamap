@@ -22,12 +22,14 @@ class _ThankYouFormState extends State<ThankYouForm> {
     return Scaffold(
       body: Column(
         children: <Widget>[
-          Spacer(flex: 3),
+          Spacer(flex: 2),
           Expanded(
             flex: 3,
             child: getIcon(widget.risk),
           ),
+          Spacer(flex: 1),
           Expanded(
+            flex:5,
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 10),
               child: Text(
@@ -43,7 +45,7 @@ class _ThankYouFormState extends State<ThankYouForm> {
             child: Align(
               alignment: Alignment.bottomCenter,
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.symmetric(horizontal:8.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.stretch,

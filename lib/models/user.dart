@@ -14,6 +14,7 @@ class User {
   Gender gender;
   Location location;
   String phoneNumber;
+  String homeNumber;
   List<Symptom> symptoms;
   List<Condition> preExistingConditions;
   Address address;
@@ -30,6 +31,7 @@ class User {
     this.gender,
     this.location,
     this.phoneNumber,
+    this.homeNumber,
     this.preExistingConditions,
     this.symptoms,
     this.address,
@@ -46,6 +48,7 @@ class User {
     this.lastName,
     this.gender,
     this.phoneNumber,
+    this.homeNumber,
     this.address,
     this.dob,
     this.age,

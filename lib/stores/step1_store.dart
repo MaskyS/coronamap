@@ -42,12 +42,6 @@ abstract class _Step1Store with Store {
   int get age => DateTime.now().year - (dob?.year ?? 0);
 
   @computed
-  int get phoneNo => int.tryParse(phoneNoText);
-
-  @computed
-  int get homeNo => int.tryParse(homeNoText);
-
-  @computed
   bool get canMoveToNextPage => !error.hasErrors;
   User get userPersonalFormData => User.fromForm(
         firstName: firstName,
@@ -55,7 +49,8 @@ abstract class _Step1Store with Store {
         dob: dob,
         age: age,
         gender: Gender.create(label: gender, ref: gender),
-        phoneNumber: phoneNo.toString(),
+        phoneNumber: phoneNoText,
+        homeNumber: homeNoText,
         address: address,
         createdAt: DateTime.now(),
         updatedAt: DateTime.now(),
@@ -70,6 +65,7 @@ abstract class _Step1Store with Store {
     gender = user.gender?.ref;
     dob = user.dob;
     phoneNoText = user.phoneNumber;
+    homeNoText = user.homeNumber;
     address = user.address ?? Address();
   }
 
@@ -209,12 +205,14 @@ abstract class _Step1Store with Store {
     }
   }
 
+  @action
   void validateAll() {
     validateFirstName(firstName);
     validateLastName(lastName);
     validateGender(gender);
     validateDob(dob);
     validatePhoneNo(phoneNoText);
+    validateHomeNo(homeNoText);
     validateLine1(address.line1);
     validateRegion(address.region);
     validateDistrict(address.district);
