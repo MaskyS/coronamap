@@ -269,17 +269,6 @@ mixin _$ContactDetailsStepStore on _ContactDetailsStepStore, Store {
   }
 
   @override
-  void validatePostalCode(String value) {
-    final _$actionInfo =
-        _$_ContactDetailsStepStoreActionController.startAction();
-    try {
-      return super.validatePostalCode(value);
-    } finally {
-      _$_ContactDetailsStepStoreActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   void validateAll() {
     final _$actionInfo =
         _$_ContactDetailsStepStoreActionController.startAction();

@@ -187,18 +187,6 @@ abstract class _ContactDetailsStepStore with Store {
     }
   }
 
-  @action
-  void validatePostalCode(String value) {
-    error.postalCode = null;
-
-    if (value != null) {
-      error.postalCode = FormBuilderValidators.numeric(
-              errorText: 'form_error_postal')(value) ??
-          FormBuilderValidators.maxLength(5,
-              errorText: "form_error_postal_fill_five")(value);
-    }
-  }
-
   void dispose() {
     for (final d in _disposers) {
       d();
@@ -216,7 +204,6 @@ abstract class _ContactDetailsStepStore with Store {
     validateLine1(address.line1);
     validateRegion(address.region);
     validateDistrict(address.district);
-    validatePostalCode(address.postalCodeText);
   }
 }
 
@@ -249,8 +236,6 @@ abstract class _StepErrorState with Store {
 
   @observable
   String region;
-
-  String postalCode;
 
   @computed
   bool get hasErrors =>
