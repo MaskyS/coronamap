@@ -241,15 +241,11 @@ class _SymptomsFormState extends State<SymptomsForm> {
   void _onStepTapped(int stepNo) {
     if (stepNo != _currentStep) {
       if (stepNo == s1Index) {
-        setState(() {
-          _currentStep = stepNo;
-        });
+        setStep(stepNo);
       } else {
         _store.validateAll();
         if (_store.canMoveToNextPage) {
-          setState(() {
-            _currentStep = stepNo;
-          });
+          setStep(stepNo);
         }
       }
     }
@@ -284,6 +280,7 @@ class _SymptomsFormState extends State<SymptomsForm> {
 
   void decreaseStep() => setState(() => _currentStep--);
   void increaseStep() => setState(() => _currentStep++);
+  void setStep(int stepNo) => setState(() => _currentStep = stepNo);
 
   Widget _buildControlButtons(context, {onStepCancel, onStepContinue}) {
     var buttonStyle = TextStyle(fontWeight: FontWeight.w800);

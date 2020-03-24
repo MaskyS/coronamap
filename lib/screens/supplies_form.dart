@@ -163,7 +163,7 @@ class _HelpFormState extends State<HelpForm> {
           return StepState.indexed;
         break;
       case 1:
-        if (_necessitiesStore.necessities != null)
+        if (_necessitiesStore.isValid)
           return StepState.complete;
         else
           return StepState.indexed;
