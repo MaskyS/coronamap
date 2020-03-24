@@ -1,11 +1,10 @@
+import 'package:depistazmu/screens/location_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:depistazmu/risk_enum.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'package:location/location.dart' as Geo;
-
+import 'package:provider/provider.dart';
 import 'package:depistazmu/config/app_localizations.dart';
 import 'package:depistazmu/models/geolocation.dart';
 import 'package:depistazmu/models/user.dart';
@@ -32,7 +31,6 @@ class _DetectionFormState extends State<DetectionForm> {
   ContactDetailsStepStore _store;
   ConditionsStepStore _step2Store;
   SymptomsStepStore _step3Store;
-
   Geo.LocationData _locationData;
   String _positionBasedAddress;
 
@@ -155,6 +153,7 @@ class _DetectionFormState extends State<DetectionForm> {
     } else if (_currentStep == s3Index) {
       _step3Store.validateAll();
       if (_step3Store.canCompleteForm) {
+        _locationData = await LocationHelper.getCurrentLocation();
         await showDialog(
           context: context,
           barrierDismissible: false,
@@ -163,16 +162,19 @@ class _DetectionFormState extends State<DetectionForm> {
             user.firstSymptomDate = _step3Store.firstDate;
             _step3Store.calculateRisk(_store.age, _step2Store.hasConditions);
             user.risk = _step3Store.risk.value;
-            _getCurrentLocation().then(
-              (value) {
-                user.location = Location(
-                  latitude: _locationData.latitude.toString(),
-                  longitude: _locationData.longitude.toString(),
-                  positionBasedAddress: _positionBasedAddress,
-                );
-                Navigator.pop(context);
-              },
-            );
+
+            LocationHelper.getAddressFromLatLng(
+              _locationData.latitude,
+              _locationData.longitude,
+            ).then((positionBasedAdress) {
+              user.location = Location(
+                latitude: _locationData.latitude.toString(),
+                longitude: _locationData.longitude.toString(),
+                positionBasedAddress: _positionBasedAddress,
+              );
+
+              Navigator.pop(context);
+            });
 
             return AlertDialog(
               content: Container(
@@ -195,40 +197,6 @@ class _DetectionFormState extends State<DetectionForm> {
           arguments: _step3Store.risk,
         );
       }
-    }
-  }
-
-  Future<void> _getCurrentLocation() async {
-    Geo.Location location = Geo.Location();
-    bool _serviceEnabled;
-
-    _serviceEnabled = await location.serviceEnabled();
-    if (!_serviceEnabled) {
-      _serviceEnabled = await location.requestService();
-      if (!_serviceEnabled) {
-        return;
-      }
-    }
-
-    _locationData = await location.getLocation();
-    _positionBasedAddress = await _getAddressFromLatLng(
-        _locationData.latitude, _locationData.longitude);
-  }
-
-  Future<String> _getAddressFromLatLng(
-      double latitude, double longitude) async {
-    try {
-      final geolocator = Geolocator()..forceAndroidLocationManager;
-
-      List<Placemark> p =
-          await geolocator.placemarkFromCoordinates(latitude, longitude);
-
-      Placemark place = p[0];
-
-      return _positionBasedAddress =
-          "${place.subThoroughfare}, ${place.thoroughfare}, ${place.subLocality}, ${place.locality}, ${place.postalCode}, ${place.country}";
-    } catch (e) {
-      print(e);
     }
   }
 

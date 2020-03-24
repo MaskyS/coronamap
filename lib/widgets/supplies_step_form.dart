@@ -90,6 +90,17 @@ class _SuppliesStepFormState extends State<SuppliesStepForm> {
                   ),
                 );
               }),
+              SizedBox(height: 10),
+              Observer(builder: (_) {
+                return FormBuilderCheckbox(
+                  attribute: 'is_emergency',
+                  initialValue: _store.isEmergency,
+                  onChanged: (v) => _store.otherNecessities = v,
+                  label: Text(
+                    AppLocalizations.of(context).translate('emergency_label'),
+                  ),
+                );
+              }),
             ],
           ),
         ),

@@ -1,6 +1,8 @@
 import 'package:depistazmu/constants/routes.dart';
+import 'package:depistazmu/models/geolocation.dart';
 import 'package:depistazmu/models/user.dart';
 import 'package:depistazmu/repository/user_repository.dart';
+import 'package:depistazmu/screens/location_helper.dart';
 import 'package:depistazmu/stores/supplies_step_store.dart';
 import 'package:depistazmu/stores/contact_details_step_store.dart';
 import 'package:depistazmu/widgets/contact_details_step_form.dart';
@@ -10,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:depistazmu/config/app_localizations.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:provider/provider.dart';
+import 'package:location/location.dart' as Geo;
 
 class HelpForm extends StatefulWidget {
   @override
@@ -23,6 +26,8 @@ class _HelpFormState extends State<HelpForm> {
 
   ContactDetailsStepStore _store;
   SuppliesStepStore _necessitiesStore;
+  Geo.LocationData _locationData;
+  String _positionBasedAddress;
 
   User user;
   var userRepo = UserRepository();
@@ -118,8 +123,41 @@ class _HelpFormState extends State<HelpForm> {
       }
     } else if (_currentStep == s2Index) {
       if (_necessitiesStore.isValid) {
-        user.necessities = _necessitiesStore.chosenNecessities;
-        userRepo.save(user);
+        _locationData = await LocationHelper.getCurrentLocation();
+        await showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (context) {
+            LocationHelper.getAddressFromLatLng(
+              _locationData.latitude,
+              _locationData.longitude,
+            ).then((positionBasedAdress) {
+              user.location = Location(
+                latitude: _locationData.latitude.toString(),
+                longitude: _locationData.longitude.toString(),
+                positionBasedAddress: _positionBasedAddress,
+              );
+
+              user.necessities = _necessitiesStore.chosenNecessities;
+              user.isEmergency = _necessitiesStore.isEmergency;
+              userRepo.save(user);
+              Navigator.pop(context);
+            });
+
+            return AlertDialog(
+              content: Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    CircularProgressIndicator(),
+                    Text(AppLocalizations.of(context).translate("loading")),
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+
         Navigator.pushReplacementNamed(
           context,
           Routes.suppliesResultPage,

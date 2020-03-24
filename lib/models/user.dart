@@ -19,6 +19,7 @@ class User {
   List<Symptom> symptoms;
   List<Condition> preExistingConditions;
   List<Necessity> necessities;
+  bool isEmergency;
   Address address;
   DateTime firstSymptomDate;
   DateTime dob;
@@ -36,6 +37,7 @@ class User {
     this.homeNumber,
     this.preExistingConditions,
     this.necessities,
+    this.isEmergency,
     this.symptoms,
     this.address,
     this.firstSymptomDate,

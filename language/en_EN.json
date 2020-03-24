@@ -72,6 +72,7 @@
   "test_form_title": "Infection Detection",
   "supplies_form_title": "Request Supplies",
   "other_label": "Other",
+  "emergency_label": "Is this an emergency?",
   "cooking_oil": "Cooking oil",
   "cooking_gas": "Cooking Gas",
   "water": "Water",

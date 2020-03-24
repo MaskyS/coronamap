@@ -25,6 +25,9 @@ abstract class _SuppliesStepStoreBase with Store {
   @observable
   ObservableFuture<List<Necessity>> _necessitiesFuture;
 
+  @observable
+  bool isEmergency = false;
+
   @computed
   bool get isValid => fbKey.currentState?.validate() ?? false;
 
