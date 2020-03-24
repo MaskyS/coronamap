@@ -52,7 +52,12 @@ dev_dependencies:
   build_runner: ^1.8.0
   mobx_codegen: ^1.0.2
   json_serializable: ^3.2.5
+  flutter_launcher_icons: "^0.7.3"
 
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icon/ic_launcher.png" # https://pub.dev/packages/flutter_launcher_icons
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
