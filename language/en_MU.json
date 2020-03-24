@@ -1,6 +1,6 @@
 {
   "loading": "Sarzman...",
-  "step1_personal_details": "Information Personel",
+  "step1_personal_details": "Information pu contacter ou",
   "step2_pre_conditions": "Kondition pre-existan",
   "step3_symptoms": "Ou Sintom",
   "step_finish": "FINI",
@@ -66,7 +66,7 @@
   "body_ache": "Courbatir",
   "shortness_of_breath": "Esoufle",
   "call_emergency": "Apel secour",
-  "form_title": "Depistaz Covid-19",
+  "form_title": "Depistaz d'infection",
 
   "cooking_oil": "De l'huile",
   "water": "Delo",

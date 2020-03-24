@@ -1,6 +1,6 @@
 {
   "loading": "Loading...",
-  "step1_personal_details": "Personal Details",
+  "step1_personal_details": "Contact Details",
   "step2_pre_conditions": "Pre-existing Conditions",
   "step3_symptoms": "Symptoms",
   "step_finish": "FINISH",
@@ -28,7 +28,7 @@
   "form_postal_code": "Postal Code",
   "form_choose_pre_condition": "Please choose your pre-existing conditions:",
   "form_choose_symptom": "Please choose your symptoms",
-  "form_date_infection": "When you start to feel sick:",
+  "form_date_infection": "Enter date symptoms first appeared :",
   "form_error_first_name": "First name needed",
   "form_error_last_name": "Last name needed",
   "form_error_last_name_alpha": "Last name must be letters only",
@@ -67,7 +67,7 @@
   "shortness_of_breath": "Shortness of breath",
 
   "call_emergency": "Call SAMU",
-  "form_title": "Covid-19 Detection",
+  "form_title": "Infection Detection",
 
   "cooking_oil": "Cooking oil",
   "water": "Water",
