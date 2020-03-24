@@ -1,6 +1,6 @@
 import 'package:coronamapp/config/app_localizations.dart';
 import 'package:coronamapp/models/condition.dart';
-import 'package:coronamapp/stores/step2_store.dart';
+import 'package:coronamapp/stores/conditions_step_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -12,7 +12,7 @@ class Step2Form extends StatefulWidget {
 }
 
 class _Step2FormState extends State<Step2Form> {
-  Step2Store _store;
+  ConditionsStepStore _store;
 
   @override
   void initState() {
@@ -21,7 +21,7 @@ class _Step2FormState extends State<Step2Form> {
 
   @override
   Widget build(BuildContext context) {
-    _store = Provider.of<Step2Store>(context);
+    _store = Provider.of<ConditionsStepStore>(context);
 
     return Column(
       children: <Widget>[

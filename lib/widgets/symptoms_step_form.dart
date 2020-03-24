@@ -1,6 +1,6 @@
 import 'package:coronamapp/config/app_localizations.dart';
 import 'package:coronamapp/models/symptom.dart';
-import 'package:coronamapp/stores/step3_store.dart';
+import 'package:coronamapp/stores/symptoms_step_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -24,12 +24,12 @@ class _Step3FormState extends State<Step3Form> {
     ),
   );
 
-  Step3Store _store;
+  SymptomsStepStore _store;
 
   @override
   void initState() {
     super.initState();
-    _store = Provider.of<Step3Store>(context, listen: false);
+    _store = Provider.of<SymptomsStepStore>(context, listen: false);
     _store.getSymptomsFromFirestore();
     _store.setupValidations();
   }

@@ -3,11 +3,11 @@ import 'package:coronamapp/store_state_enum.dart';
 import 'package:mobx/mobx.dart';
 import 'package:coronamapp/models/necessity.dart';
 
-part 'help_form_store.g.dart';
+part 'supplies_step_store.g.dart';
 
-class NecessitiesStore = _NecessitiesStoreBase with _$NecessitiesStore;
+class SuppliesStepStore = _SuppliesStepStoreBase with _$SuppliesStepStore;
 
-abstract class _NecessitiesStoreBase with Store {
+abstract class _SuppliesStepStoreBase with Store {
   @observable
   List<Necessity> necessities = [];
 

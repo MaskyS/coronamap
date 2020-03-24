@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'step1_store.dart';
+part of 'contact_details_step_store.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,7 +8,7 @@ part of 'step1_store.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
-mixin _$Step1Store on _Step1Store, Store {
+mixin _$ContactDetailsStepStore on _ContactDetailsStepStore, Store {
   Computed<String> _$fullNameComputed;
 
   @override
@@ -25,7 +25,7 @@ mixin _$Step1Store on _Step1Store, Store {
           Computed<bool>(() => super.canMoveToNextPage))
       .value;
 
-  final _$errorAtom = Atom(name: '_Step1Store.error');
+  final _$errorAtom = Atom(name: '_ContactDetailsStepStore.error');
 
   @override
   StepErrorState get error {
@@ -42,7 +42,7 @@ mixin _$Step1Store on _Step1Store, Store {
     }, _$errorAtom, name: '${_$errorAtom.name}_set');
   }
 
-  final _$firstNameAtom = Atom(name: '_Step1Store.firstName');
+  final _$firstNameAtom = Atom(name: '_ContactDetailsStepStore.firstName');
 
   @override
   String get firstName {
@@ -59,7 +59,7 @@ mixin _$Step1Store on _Step1Store, Store {
     }, _$firstNameAtom, name: '${_$firstNameAtom.name}_set');
   }
 
-  final _$lastNameAtom = Atom(name: '_Step1Store.lastName');
+  final _$lastNameAtom = Atom(name: '_ContactDetailsStepStore.lastName');
 
   @override
   String get lastName {
@@ -76,7 +76,7 @@ mixin _$Step1Store on _Step1Store, Store {
     }, _$lastNameAtom, name: '${_$lastNameAtom.name}_set');
   }
 
-  final _$dobAtom = Atom(name: '_Step1Store.dob');
+  final _$dobAtom = Atom(name: '_ContactDetailsStepStore.dob');
 
   @override
   DateTime get dob {
@@ -93,7 +93,7 @@ mixin _$Step1Store on _Step1Store, Store {
     }, _$dobAtom, name: '${_$dobAtom.name}_set');
   }
 
-  final _$genderAtom = Atom(name: '_Step1Store.gender');
+  final _$genderAtom = Atom(name: '_ContactDetailsStepStore.gender');
 
   @override
   String get gender {
@@ -110,7 +110,7 @@ mixin _$Step1Store on _Step1Store, Store {
     }, _$genderAtom, name: '${_$genderAtom.name}_set');
   }
 
-  final _$phoneNoTextAtom = Atom(name: '_Step1Store.phoneNoText');
+  final _$phoneNoTextAtom = Atom(name: '_ContactDetailsStepStore.phoneNoText');
 
   @override
   String get phoneNoText {
@@ -127,7 +127,7 @@ mixin _$Step1Store on _Step1Store, Store {
     }, _$phoneNoTextAtom, name: '${_$phoneNoTextAtom.name}_set');
   }
 
-  final _$homeNoTextAtom = Atom(name: '_Step1Store.homeNoText');
+  final _$homeNoTextAtom = Atom(name: '_ContactDetailsStepStore.homeNoText');
 
   @override
   String get homeNoText {
@@ -144,7 +144,7 @@ mixin _$Step1Store on _Step1Store, Store {
     }, _$homeNoTextAtom, name: '${_$homeNoTextAtom.name}_set');
   }
 
-  final _$addressAtom = Atom(name: '_Step1Store.address');
+  final _$addressAtom = Atom(name: '_ContactDetailsStepStore.address');
 
   @override
   Address get address {
@@ -177,105 +177,116 @@ mixin _$Step1Store on _Step1Store, Store {
         .run(() => super.validateLastName(value));
   }
 
-  final _$_Step1StoreActionController = ActionController(name: '_Step1Store');
+  final _$_ContactDetailsStepStoreActionController =
+      ActionController(name: '_ContactDetailsStepStore');
 
   @override
   void setStore(User user) {
-    final _$actionInfo = _$_Step1StoreActionController.startAction();
+    final _$actionInfo =
+        _$_ContactDetailsStepStoreActionController.startAction();
     try {
       return super.setStore(user);
     } finally {
-      _$_Step1StoreActionController.endAction(_$actionInfo);
+      _$_ContactDetailsStepStoreActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void validateDob(DateTime value) {
-    final _$actionInfo = _$_Step1StoreActionController.startAction();
+    final _$actionInfo =
+        _$_ContactDetailsStepStoreActionController.startAction();
     try {
       return super.validateDob(value);
     } finally {
-      _$_Step1StoreActionController.endAction(_$actionInfo);
+      _$_ContactDetailsStepStoreActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void validateGender(String value) {
-    final _$actionInfo = _$_Step1StoreActionController.startAction();
+    final _$actionInfo =
+        _$_ContactDetailsStepStoreActionController.startAction();
     try {
       return super.validateGender(value);
     } finally {
-      _$_Step1StoreActionController.endAction(_$actionInfo);
+      _$_ContactDetailsStepStoreActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void validatePhoneNo(String value) {
-    final _$actionInfo = _$_Step1StoreActionController.startAction();
+    final _$actionInfo =
+        _$_ContactDetailsStepStoreActionController.startAction();
     try {
       return super.validatePhoneNo(value);
     } finally {
-      _$_Step1StoreActionController.endAction(_$actionInfo);
+      _$_ContactDetailsStepStoreActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void validateHomeNo(String value) {
-    final _$actionInfo = _$_Step1StoreActionController.startAction();
+    final _$actionInfo =
+        _$_ContactDetailsStepStoreActionController.startAction();
     try {
       return super.validateHomeNo(value);
     } finally {
-      _$_Step1StoreActionController.endAction(_$actionInfo);
+      _$_ContactDetailsStepStoreActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void validateLine1(String value) {
-    final _$actionInfo = _$_Step1StoreActionController.startAction();
+    final _$actionInfo =
+        _$_ContactDetailsStepStoreActionController.startAction();
     try {
       return super.validateLine1(value);
     } finally {
-      _$_Step1StoreActionController.endAction(_$actionInfo);
+      _$_ContactDetailsStepStoreActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void validateDistrict(District district) {
-    final _$actionInfo = _$_Step1StoreActionController.startAction();
+    final _$actionInfo =
+        _$_ContactDetailsStepStoreActionController.startAction();
     try {
       return super.validateDistrict(district);
     } finally {
-      _$_Step1StoreActionController.endAction(_$actionInfo);
+      _$_ContactDetailsStepStoreActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void validateRegion(String value) {
-    final _$actionInfo = _$_Step1StoreActionController.startAction();
+    final _$actionInfo =
+        _$_ContactDetailsStepStoreActionController.startAction();
     try {
       return super.validateRegion(value);
     } finally {
-      _$_Step1StoreActionController.endAction(_$actionInfo);
+      _$_ContactDetailsStepStoreActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void validatePostalCode(String value) {
-    final _$actionInfo = _$_Step1StoreActionController.startAction();
+    final _$actionInfo =
+        _$_ContactDetailsStepStoreActionController.startAction();
     try {
       return super.validatePostalCode(value);
     } finally {
-      _$_Step1StoreActionController.endAction(_$actionInfo);
+      _$_ContactDetailsStepStoreActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void validateAll() {
-    final _$actionInfo = _$_Step1StoreActionController.startAction();
+    final _$actionInfo =
+        _$_ContactDetailsStepStoreActionController.startAction();
     try {
       return super.validateAll();
     } finally {
-      _$_Step1StoreActionController.endAction(_$actionInfo);
+      _$_ContactDetailsStepStoreActionController.endAction(_$actionInfo);
     }
   }
 

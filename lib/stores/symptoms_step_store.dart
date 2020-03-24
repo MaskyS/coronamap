@@ -4,11 +4,11 @@ import 'package:mobx/mobx.dart';
 
 import 'package:coronamapp/store_state_enum.dart';
 import 'package:coronamapp/risk_enum.dart';
-part 'step3_store.g.dart';
+part 'symptoms_step_store.g.dart';
 
-class Step3Store = _Step3StoreBase with _$Step3Store;
+class SymptomsStepStore = _SymptomsStepStoreBase with _$SymptomsStepStore;
 
-abstract class _Step3StoreBase with Store {
+abstract class _SymptomsStepStoreBase with Store {
   @observable
   List<Symptom> chosenSymptoms = [];
 
