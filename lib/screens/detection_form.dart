@@ -51,6 +51,7 @@ class _SymptomsFormState extends State<SymptomsForm> {
     var userKey = await storage.read(key: 'userKey');
     if (userKey != null) {
       user = await userRepo.getByHash(userKey);
+      if (!mounted) return;
       if (user == null) {
         setState(() => _isLoaded = true);
         return;
@@ -190,7 +191,7 @@ class _SymptomsFormState extends State<SymptomsForm> {
         userRepo.save(user);
         Navigator.pushReplacementNamed(
           context,
-          Routes.thankYouPage,
+          Routes.testResultPage,
           arguments: _step3Store.risk,
         );
       }
