@@ -60,7 +60,7 @@ class _MyAppState extends State<MyApp> {
   _fetchLocale() async {
     var prefs = await SharedPreferences.getInstance();
     if (prefs.getString('language_code') == null) {
-      return null;
+      return Locale('en', 'EN');
     }
     return Locale(
         prefs.getString('language_code'), prefs.getString('country_code'));
