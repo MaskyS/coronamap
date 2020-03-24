@@ -1,5 +1,5 @@
-import 'package:coronamapp/config/app_localizations.dart';
-import 'package:coronamapp/router.dart';
+import 'package:depistazmu/config/app_localizations.dart';
+import 'package:depistazmu/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -35,7 +35,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Depistaz-Mu',
+      title: 'DepistazMu',
       theme: ThemeData(
         primarySwatch: Colors.green,
         textTheme: GoogleFonts.rubikTextTheme(

@@ -1,4 +1,4 @@
-import 'package:coronamapp/models/condition.dart';
+import 'package:depistazmu/models/condition.dart';
 import 'package:mobx/mobx.dart';
 part 'conditions_step_store.g.dart';
 
@@ -33,10 +33,4 @@ abstract class _ConditionsStepStoreBase with Store {
   setConditions(List<Condition> conditions) {
     chosenConditionsList = conditions;
   }
-
-  // @observable
-  // bool hasOtherConditions;
-
-  // @observable
-  // String otherConditions;
 }

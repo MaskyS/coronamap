@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:coronamapp/risk_enum.dart';
+import 'package:depistazmu/risk_enum.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:location/location.dart' as Geo;
 
-import 'package:coronamapp/config/app_localizations.dart';
-import 'package:coronamapp/models/geolocation.dart';
-import 'package:coronamapp/models/user.dart';
-import 'package:coronamapp/repository/user_repository.dart';
-import 'package:coronamapp/constants/routes.dart';
-import 'package:coronamapp/stores/contact_details_step_store.dart';
-import 'package:coronamapp/stores/conditions_step_store.dart';
-import 'package:coronamapp/stores/symptoms_step_store.dart';
-import 'package:coronamapp/widgets/contact_details_step_form.dart';
-import 'package:coronamapp/widgets/conditions_step_form.dart';
-import 'package:coronamapp/widgets/symptoms_step_form.dart';
+import 'package:depistazmu/config/app_localizations.dart';
+import 'package:depistazmu/models/geolocation.dart';
+import 'package:depistazmu/models/user.dart';
+import 'package:depistazmu/repository/user_repository.dart';
+import 'package:depistazmu/constants/routes.dart';
+import 'package:depistazmu/stores/contact_details_step_store.dart';
+import 'package:depistazmu/stores/conditions_step_store.dart';
+import 'package:depistazmu/stores/symptoms_step_store.dart';
+import 'package:depistazmu/widgets/contact_details_step_form.dart';
+import 'package:depistazmu/widgets/conditions_step_form.dart';
+import 'package:depistazmu/widgets/symptoms_step_form.dart';
 
 class SymptomsForm extends StatefulWidget {
   @override
@@ -94,7 +94,7 @@ class _SymptomsFormState extends State<SymptomsForm> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          AppLocalizations.of(context).translate("form_title"),
+          AppLocalizations.of(context).translate("test_form_title"),
           style: GoogleFonts.rubik(),
         ),
       ),
@@ -241,15 +241,11 @@ class _SymptomsFormState extends State<SymptomsForm> {
   void _onStepTapped(int stepNo) {
     if (stepNo != _currentStep) {
       if (stepNo == s1Index) {
-        setState(() {
-          _currentStep = stepNo;
-        });
+        setStep(stepNo);
       } else {
         _store.validateAll();
         if (_store.canMoveToNextPage) {
-          setState(() {
-            _currentStep = stepNo;
-          });
+          setStep(stepNo);
         }
       }
     }
@@ -273,8 +269,10 @@ class _SymptomsFormState extends State<SymptomsForm> {
           return StepState.indexed;
         break;
       case 2:
-        if (_step3Store.canCompleteForm && _step3Store.chosenSymptoms != null)
+        if (_step3Store.canCompleteForm &&
+            _step3Store.chosenSymptoms.isNotEmpty) {
           return StepState.complete;
+        }
         return StepState.indexed;
         break;
       default:
@@ -284,6 +282,7 @@ class _SymptomsFormState extends State<SymptomsForm> {
 
   void decreaseStep() => setState(() => _currentStep--);
   void increaseStep() => setState(() => _currentStep++);
+  void setStep(int stepNo) => setState(() => _currentStep = stepNo);
 
   Widget _buildControlButtons(context, {onStepCancel, onStepContinue}) {
     var buttonStyle = TextStyle(fontWeight: FontWeight.w800);

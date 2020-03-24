@@ -1,4 +1,4 @@
-# coronamapp
+# depistazmu
 
 A new Flutter project.
 

@@ -12,17 +12,15 @@ class Address extends _AddressBase with _$Address {
     String line2,
     District district,
     String region,
-    String postalCodeText,
   }) : super(
           line1: line1,
           line2: line2,
           district: district,
           region: region,
-          postalCodeText: postalCodeText,
         );
 
 
-  Address.fromForm({line1, district, region, postalCodeText});
+  Address.fromForm({line1, district, region,});
 
   factory Address.fromJson(Map<String, dynamic> json) =>
       _$AddressFromJson(json);
@@ -35,7 +33,6 @@ abstract class _AddressBase with Store {
     this.line2,
     @required this.district,
     @required this.region,
-    this.postalCodeText,
   });
 
   @observable
@@ -49,10 +46,4 @@ abstract class _AddressBase with Store {
 
   @observable
   String region;
-
-  @observable
-  String postalCodeText;
-
-  @computed
-  int get postalCode => int.tryParse(postalCodeText);
 }

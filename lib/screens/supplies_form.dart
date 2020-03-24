@@ -1,13 +1,13 @@
-import 'package:coronamapp/constants/routes.dart';
-import 'package:coronamapp/models/user.dart';
-import 'package:coronamapp/repository/user_repository.dart';
-import 'package:coronamapp/stores/supplies_step_store.dart';
-import 'package:coronamapp/stores/contact_details_step_store.dart';
-import 'package:coronamapp/widgets/contact_details_step_form.dart';
-import 'package:coronamapp/widgets/supplies_step_form.dart';
+import 'package:depistazmu/constants/routes.dart';
+import 'package:depistazmu/models/user.dart';
+import 'package:depistazmu/repository/user_repository.dart';
+import 'package:depistazmu/stores/supplies_step_store.dart';
+import 'package:depistazmu/stores/contact_details_step_store.dart';
+import 'package:depistazmu/widgets/contact_details_step_form.dart';
+import 'package:depistazmu/widgets/supplies_step_form.dart';
 import 'package:flutter/material.dart';
 
-import 'package:coronamapp/config/app_localizations.dart';
+import 'package:depistazmu/config/app_localizations.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:provider/provider.dart';
 
@@ -48,7 +48,11 @@ class _HelpFormState extends State<HelpForm> {
         ),
       );
     return Scaffold(
-      appBar: AppBar(title: Text("Request Supplies")), // TODO translate
+      appBar: AppBar(
+        title: Text(
+          AppLocalizations.of(context).translate("supplies_form_title"),
+        ),
+      ),
       body: Stepper(
         physics: ClampingScrollPhysics(),
         type: StepperType.horizontal,
@@ -69,7 +73,9 @@ class _HelpFormState extends State<HelpForm> {
           ),
           Step(
             content: SuppliesStepForm(),
-            title: Text(_currentStep == s2Index ? 'Needed Supplies' : ''), // TODO Translate!
+            title: Text(_currentStep == s2Index
+                ? AppLocalizations.of(context).translate("step_supplies_title")
+                : ''),
             isActive: _currentStep == s2Index,
             state: getStepState(s2Index),
           ),
@@ -111,13 +117,14 @@ class _HelpFormState extends State<HelpForm> {
         saveAndNext(user);
       }
     } else if (_currentStep == s2Index) {
-      user.necessities = _necessitiesStore.chosenNecessities;
-      userRepo.save(user);
-      print("DONE!");
-      Navigator.pushReplacementNamed(
-        context,
-        Routes.suppliesResultPage,
-      );
+      if (_necessitiesStore.isValid) {
+        user.necessities = _necessitiesStore.chosenNecessities;
+        userRepo.save(user);
+        Navigator.pushReplacementNamed(
+          context,
+          Routes.suppliesResultPage,
+        );
+      }
     }
   }
 
@@ -156,7 +163,7 @@ class _HelpFormState extends State<HelpForm> {
           return StepState.indexed;
         break;
       case 1:
-        if (_necessitiesStore.necessities != null)
+        if (_necessitiesStore.isValid)
           return StepState.complete;
         else
           return StepState.indexed;
@@ -185,7 +192,8 @@ class _HelpFormState extends State<HelpForm> {
                   style: buttonStyle),
               color: Colors.grey.shade200,
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10)),
+                borderRadius: BorderRadius.circular(10),
+              ),
             ),
           ),
           Spacer(flex: 1),

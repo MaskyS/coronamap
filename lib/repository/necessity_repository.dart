@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:coronamapp/models/necessity.dart';
+import 'package:depistazmu/models/necessity.dart';
 
 class NecessityRepository {
   final dbName = 'necessities';

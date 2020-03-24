@@ -1,7 +1,7 @@
-import 'package:coronamapp/config/app_localizations.dart';
-import 'package:coronamapp/models/necessity.dart';
-import 'package:coronamapp/store_state_enum.dart';
-import 'package:coronamapp/stores/supplies_step_store.dart';
+import 'package:depistazmu/config/app_localizations.dart';
+import 'package:depistazmu/models/necessity.dart';
+import 'package:depistazmu/store_state_enum.dart';
+import 'package:depistazmu/stores/supplies_step_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -38,10 +38,13 @@ class _SuppliesStepFormState extends State<SuppliesStepForm> {
     return Column(
       children: <Widget>[
         FormBuilder(
+          key: _store.fbKey,
+          autovalidate: true,
           child: Column(
             children: <Widget>[
               Text(
-                "Choose your necessities", // Translate
+                AppLocalizations.of(context)
+                    .translate("form_choose_necessities"),
                 style: TextStyle(fontSize: 16, color: Colors.black54),
               ),
               SizedBox(height: 20),
@@ -67,6 +70,12 @@ class _SuppliesStepFormState extends State<SuppliesStepForm> {
                   onChanged: (v) {
                     _store.chosenNecessities = v as List<Necessity>;
                   },
+                  validators: [
+                    FormBuilderValidators.required(
+                      errorText: AppLocalizations.of(context)
+                          .translate("must_fill_necessities"),
+                    )
+                  ],
                 );
               }),
               SizedBox(height: 20),
@@ -75,10 +84,10 @@ class _SuppliesStepFormState extends State<SuppliesStepForm> {
                   attribute: 'other_necessities',
                   initialValue: _store.otherNecessities,
                   onChanged: (v) => _store.otherNecessities = v,
-                  decoration: _baseDeco.copyWith(labelText: 'Other'),
-                  validators: [
-                    FormBuilderValidators.required(errorText: 'required')
-                  ], // TODO!
+                  decoration: _baseDeco.copyWith(
+                    labelText:
+                        AppLocalizations.of(context).translate('other_label'),
+                  ),
                 );
               }),
             ],

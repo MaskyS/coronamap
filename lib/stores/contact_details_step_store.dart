@@ -1,9 +1,9 @@
-import 'package:coronamapp/models/address.dart';
-import 'package:coronamapp/models/gender.dart';
-import 'package:coronamapp/models/user.dart';
+import 'package:depistazmu/models/address.dart';
+import 'package:depistazmu/models/gender.dart';
+import 'package:depistazmu/models/user.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:mobx/mobx.dart';
-import 'package:coronamapp/district_enum.dart';
+import 'package:depistazmu/district_enum.dart';
 import 'package:validators/validators.dart';
 
 part 'contact_details_step_store.g.dart';
@@ -187,18 +187,6 @@ abstract class _ContactDetailsStepStore with Store {
     }
   }
 
-  @action
-  void validatePostalCode(String value) {
-    error.postalCode = null;
-
-    if (value != null) {
-      error.postalCode = FormBuilderValidators.numeric(
-              errorText: 'form_error_postal')(value) ??
-          FormBuilderValidators.maxLength(5,
-              errorText: "form_error_postal_fill_five")(value);
-    }
-  }
-
   void dispose() {
     for (final d in _disposers) {
       d();
@@ -216,7 +204,6 @@ abstract class _ContactDetailsStepStore with Store {
     validateLine1(address.line1);
     validateRegion(address.region);
     validateDistrict(address.district);
-    validatePostalCode(address.postalCodeText);
   }
 }
 
@@ -249,8 +236,6 @@ abstract class _StepErrorState with Store {
 
   @observable
   String region;
-
-  String postalCode;
 
   @computed
   bool get hasErrors =>

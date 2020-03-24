@@ -61,7 +61,7 @@ class _SplashState extends State<Splash> {
                         child: Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: Text(
-                            'Depistaz-Mu',
+                            'DepistazMu',
                             style: TextStyle(
                                 fontWeight: FontWeight.w900,
                                 letterSpacing: 3,

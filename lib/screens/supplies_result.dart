@@ -1,6 +1,6 @@
-import 'package:coronamapp/config/app_localizations.dart';
+import 'package:depistazmu/config/app_localizations.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
+// import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 
 class SuppliesResult extends StatefulWidget {
   @override
@@ -33,7 +33,7 @@ class _SuppliesResultState extends State<SuppliesResult> {
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 10),
               child: Text(
-                "Thanks for submitting your request. Someone will see to it soon",
+                AppLocalizations.of(context).translate('necessities_report'),
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 16),
               ),
@@ -62,20 +62,20 @@ class _SuppliesResultState extends State<SuppliesResult> {
                       color: Colors.green,
                       textColor: Colors.white,
                     ),
-                    // ! TODO Use location-specific hotlines instead
-                    FlatButton.icon(
-                      onPressed: () => UrlLauncher.launch("tel://114"),
-                      icon: Container(
-                        margin: EdgeInsets.symmetric(vertical: 10),
-                        child: Icon(Icons.call),
-                      ),
-                      label: Text(
-                          AppLocalizations.of(context)
-                              .translate("call_emergency"),
-                          style: _buttonStyle),
-                      color: Colors.blue,
-                      textColor: Colors.white,
-                    ),
+                    // ? Replace with another hotline if needed later
+                    // FlatButton.icon(
+                    //   onPressed: () => UrlLauncher.launch("tel://114"),
+                    //   icon: Container(
+                    //     margin: EdgeInsets.symmetric(vertical: 10),
+                    //     child: Icon(Icons.call),
+                    //   ),
+                    //   label: Text(
+                    //       AppLocalizations.of(context)
+                    //           .translate("call_emergency"),
+                    //       style: _buttonStyle),
+                    //   color: Colors.blue,
+                    //   textColor: Colors.white,
+                    // ),
                   ],
                 ),
               ),

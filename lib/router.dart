@@ -1,14 +1,14 @@
-import 'package:coronamapp/constants/routes.dart';
-import 'package:coronamapp/screens/supplies_form.dart';
-import 'package:coronamapp/screens/supplies_result.dart';
-import 'package:coronamapp/stores/supplies_step_store.dart';
-import 'package:coronamapp/stores/symptoms_step_store.dart';
-import 'package:coronamapp/stores/contact_details_step_store.dart';
-import 'package:coronamapp/screens/home.dart';
-import 'package:coronamapp/screens/splash.dart';
-import 'package:coronamapp/screens/detection_form.dart';
-import 'package:coronamapp/stores/conditions_step_store.dart';
-import 'package:coronamapp/screens/test_result.dart';
+import 'package:depistazmu/constants/routes.dart';
+import 'package:depistazmu/screens/supplies_form.dart';
+import 'package:depistazmu/screens/supplies_result.dart';
+import 'package:depistazmu/stores/supplies_step_store.dart';
+import 'package:depistazmu/stores/symptoms_step_store.dart';
+import 'package:depistazmu/stores/contact_details_step_store.dart';
+import 'package:depistazmu/screens/home.dart';
+import 'package:depistazmu/screens/splash.dart';
+import 'package:depistazmu/screens/detection_form.dart';
+import 'package:depistazmu/stores/conditions_step_store.dart';
+import 'package:depistazmu/screens/test_result.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
