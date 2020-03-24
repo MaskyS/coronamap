@@ -125,7 +125,7 @@ class _SplashState extends State<Splash> {
                                 await requestPermission(
                                     PermissionGroup.location);
                             if (permissionResult == PermissionStatus.granted) {
-                              Navigator.pushReplacementNamed(context, Routes.homePage);
+                              Navigator.pop(context);
                             }
                           },
                         ),
