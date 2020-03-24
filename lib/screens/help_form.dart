@@ -194,7 +194,6 @@ class _HelpFormState extends State<HelpForm> {
       }
     } else if (_currentStep == s2Index) {
       user.necessities = _necessitiesStore.chosenNecessities;
-      saveAndNext(user);
       userRepo.save(user);
       Navigator.pushReplacementNamed(
         context,
