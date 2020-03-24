@@ -9,11 +9,33 @@ part of 'supplies_step_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$SuppliesStepStore on _SuppliesStepStoreBase, Store {
+  Computed<bool> _$isValidComputed;
+
+  @override
+  bool get isValid =>
+      (_$isValidComputed ??= Computed<bool>(() => super.isValid)).value;
   Computed<StoreState> _$stateComputed;
 
   @override
   StoreState get state =>
       (_$stateComputed ??= Computed<StoreState>(() => super.state)).value;
+
+  final _$fbKeyAtom = Atom(name: '_SuppliesStepStoreBase.fbKey');
+
+  @override
+  GlobalKey<FormBuilderState> get fbKey {
+    _$fbKeyAtom.context.enforceReadPolicy(_$fbKeyAtom);
+    _$fbKeyAtom.reportObserved();
+    return super.fbKey;
+  }
+
+  @override
+  set fbKey(GlobalKey<FormBuilderState> value) {
+    _$fbKeyAtom.context.conditionallyRunInAction(() {
+      super.fbKey = value;
+      _$fbKeyAtom.reportChanged();
+    }, _$fbKeyAtom, name: '${_$fbKeyAtom.name}_set');
+  }
 
   final _$necessitiesAtom = Atom(name: '_SuppliesStepStoreBase.necessities');
 
@@ -99,7 +121,7 @@ mixin _$SuppliesStepStore on _SuppliesStepStoreBase, Store {
   @override
   String toString() {
     final string =
-        'necessities: ${necessities.toString()},chosenNecessities: ${chosenNecessities.toString()},otherNecessities: ${otherNecessities.toString()},state: ${state.toString()}';
+        'fbKey: ${fbKey.toString()},necessities: ${necessities.toString()},chosenNecessities: ${chosenNecessities.toString()},otherNecessities: ${otherNecessities.toString()},isValid: ${isValid.toString()},state: ${state.toString()}';
     return '{$string}';
   }
 }

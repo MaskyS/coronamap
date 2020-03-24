@@ -94,7 +94,7 @@ class _SymptomsFormState extends State<SymptomsForm> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          AppLocalizations.of(context).translate("form_title"),
+          AppLocalizations.of(context).translate("test_form_title"),
           style: GoogleFonts.rubik(),
         ),
       ),

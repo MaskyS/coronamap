@@ -33,10 +33,4 @@ abstract class _ConditionsStepStoreBase with Store {
   setConditions(List<Condition> conditions) {
     chosenConditionsList = conditions;
   }
-
-  // @observable
-  // bool hasOtherConditions;
-
-  // @observable
-  // String otherConditions;
 }
