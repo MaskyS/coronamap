@@ -1,6 +1,6 @@
 {
   "loading": "Loading...",
-  "step1_personal_details": "Personal Details",
+  "step1_personal_details": "Contact Details",
   "step2_pre_conditions": "Pre-existing Conditions",
   "step3_symptoms": "Symptoms",
   "step_finish": "FINISH",
@@ -8,6 +8,10 @@
   "step_back": "BACK",
   "tooltip_report_button": "Report Symptoms",
   "report_button": "TAKE THE TEST",
+  "test_button_label": "I'm feeling ill",
+  "request_supplies_button": "REQUEST SUPPLIES",
+  "request_supplies_label": "If there's any other necessities you need, request for any critical supplies you'll need",
+  "necessities_report": "Your message has been received by the Ministry of Social Integration, Social Security and National Solidarity. Everything is being done to expedite your request.  Please do not panic , stay calm - someone will call you soon. Thank you for your collaboration and support. Please stay at home!",
   "must_fill_symptoms": "Please add at least one symptom",
   "must_fill_date_infection": "Please insert date of first infection",
   "thank_report": "You have mild symptoms. Do not panic. kindly take care of your health. Isolate yourself within your home to protect your loved ones. If you feel any deterioration, or are showing more symptoms.  Please redo the test immediately.",
@@ -28,7 +32,7 @@
   "form_postal_code": "Postal Code",
   "form_choose_pre_condition": "Please choose your pre-existing conditions:",
   "form_choose_symptom": "Please choose your symptoms",
-  "form_date_infection": "When you start to feel sick:",
+  "form_date_infection": "Enter date symptoms first appeared :",
   "form_error_first_name": "First name needed",
   "form_error_last_name": "Last name needed",
   "form_error_last_name_alpha": "Last name must be letters only",
@@ -67,7 +71,7 @@
   "shortness_of_breath": "Shortness of breath",
 
   "call_emergency": "Call SAMU",
-  "form_title": "Covid-19 Detection",
+  "form_title": "Infection Detection",
 
   "cooking_oil": "Cooking oil",
   "water": "Water",
