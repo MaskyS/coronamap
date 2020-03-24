@@ -10,7 +10,7 @@
   "report_button": "TAKE THE TEST",
   "test_button_label": "I'm feeling ill",
   "request_supplies_button": "REQUEST SUPPLIES",
-  "request_supplies_label": "If there's any other necessities you need, please use this button",
+  "request_supplies_label": "If there's any other necessities you need, request for any critical supplies you'll need",
   "necessities_report": "Your message has been received by the Ministry of Social Integration, Social Security and National Solidarity. Everything is being done to expedite your request.  Please do not panic , stay calm - someone will call you soon. Thank you for your collaboration and support. Please stay at home!",
   "must_fill_symptoms": "Please add at least one symptom",
   "must_fill_date_infection": "Please insert date of first infection",
