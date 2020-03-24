@@ -4,14 +4,14 @@ import 'package:coronamapp/risk_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 
-class ThankYouForm extends StatefulWidget {
-  ThankYouForm({Key key, @required this.risk}) : super(key: key);
+class TestResult extends StatefulWidget {
+  TestResult({Key key, @required this.risk}) : super(key: key);
   final Risk risk;
   @override
-  _ThankYouFormState createState() => _ThankYouFormState();
+  _TestResultState createState() => _TestResultState();
 }
 
-class _ThankYouFormState extends State<ThankYouForm> {
+class _TestResultState extends State<TestResult> {
   final _buttonStyle = TextStyle(
     fontWeight: FontWeight.w800,
     fontSize: 18,

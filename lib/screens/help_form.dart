@@ -15,85 +15,6 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:provider/provider.dart';
 // import 'package:provider/provider.dart';
 
-class NecessitiesForm extends StatefulWidget {
-  @override
-  _NecessitiesFormState createState() => _NecessitiesFormState();
-}
-
-class _NecessitiesFormState extends State<NecessitiesForm> {
-  NecessitiesStore _store;
-
-  // TODO extract and make this common for every widget.
-  final _baseDeco = InputDecoration(
-    fillColor: Colors.grey.shade100,
-    filled: true,
-    border: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(10),
-      borderSide: BorderSide(width: 0.0, style: BorderStyle.none),
-    ),
-  );
-
-  @override
-  void initState() {
-    super.initState();
-    _store = Provider.of<NecessitiesStore>(context, listen: false);
-    _store.getNecessitiesFromFirestore();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        FormBuilder(
-          child: Column(
-            children: <Widget>[
-              Text(
-                "Choose your necessities", // Translate
-                style: TextStyle(fontSize: 16, color: Colors.black54),
-              ),
-              SizedBox(height: 20),
-              Observer(builder: (_) {
-                if (_store.state == StoreState.loading ||
-                    _store.state == StoreState.initial) {
-                  return Center(child: CircularProgressIndicator());
-                }
-                return FormBuilderCheckboxList(
-                  attribute: 'necessities',
-                  initialValue: <Necessity>[],
-                  options: _store.necessities
-                      .map(
-                        (e) => FormBuilderFieldOption(
-                          value: e,
-                          child: Text(
-                            e.ref, //TODO!
-                          ),
-                        ),
-                      )
-                      .toList(),
-                  onChanged: (v) {
-                    _store.chosenNecessities = v as List<Necessity>;
-                  },
-                );
-              }),
-              Observer(builder: (_) {
-                return FormBuilderTextField(
-                  attribute: 'other_necessities',
-                  initialValue: _store.otherNecessities,
-                  onChanged: (v) => _store.otherNecessities = v,
-                  decoration: _baseDeco.copyWith(labelText: 'Other'),
-                  validators: [
-                    FormBuilderValidators.required(errorText: 'required')
-                  ], // TODO!
-                );
-              }),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-}
-
 class HelpForm extends StatefulWidget {
   @override
   _HelpFormState createState() => _HelpFormState();
@@ -117,24 +38,6 @@ class _HelpFormState extends State<HelpForm> {
     getFirebaseData();
   }
 
-  Future<void> getFirebaseData() async {
-    final storage = FlutterSecureStorage();
-    var userKey = await storage.read(key: 'userKey');
-    if (userKey != null) {
-      user = await userRepo.getByHash(userKey);
-      if (user == null) {
-        setState(() => _isLoaded = true);
-        return;
-      }
-
-      setState(() {
-        _store.setStore(user);
-      });
-    }
-
-    _store.setStore(user);
-  }
-
   /// ! TODO Extract all Stepper/Geolocation logic into a store.
   @override
   Widget build(BuildContext context) {
@@ -149,7 +52,7 @@ class _HelpFormState extends State<HelpForm> {
         ),
       );
     return Scaffold(
-      appBar: AppBar(title: Text("Request Supplies")),
+      appBar: AppBar(title: Text("Request Supplies")), // TODO translate
       body: Stepper(
         physics: ClampingScrollPhysics(),
         type: StepperType.horizontal,
@@ -170,15 +73,33 @@ class _HelpFormState extends State<HelpForm> {
           ),
           Step(
             content: NecessitiesForm(),
-            title: Text(_currentStep == s2Index
-                ? AppLocalizations.of(context).translate("step2_pre_conditions")
-                : ''),
+            title: Text(_currentStep == s2Index ? 'Needed Supplies' : ''),
             isActive: _currentStep == s2Index,
             state: getStepState(s2Index),
           ),
         ],
       ),
     );
+  }
+
+  Future<void> getFirebaseData() async {
+    final storage = FlutterSecureStorage();
+    var userKey = await storage.read(key: 'userKey');
+    if (userKey != null) {
+      user = await userRepo.getByHash(userKey);
+      if (user == null) {
+        setState(() => _isLoaded = true);
+        return;
+      }
+
+      setState(() {
+        _store.setStore(user);
+      });
+    }
+
+    setState(() {
+      _isLoaded = true;
+    });
   }
 
   Future<void> saveAndNext(User user) async {
@@ -196,9 +117,10 @@ class _HelpFormState extends State<HelpForm> {
     } else if (_currentStep == s2Index) {
       user.necessities = _necessitiesStore.chosenNecessities;
       userRepo.save(user);
+      print("DONE!");
       Navigator.pushReplacementNamed(
         context,
-        Routes.thankYouPage,
+        Routes.suppliesResultPage,
       );
     }
   }
@@ -300,6 +222,88 @@ class _HelpFormState extends State<HelpForm> {
           ),
         ],
       ),
+    );
+  }
+}
+
+class NecessitiesForm extends StatefulWidget {
+  @override
+  _NecessitiesFormState createState() => _NecessitiesFormState();
+}
+
+class _NecessitiesFormState extends State<NecessitiesForm> {
+  NecessitiesStore _store;
+
+  // TODO extract and make this common for every widget.
+  final _baseDeco = InputDecoration(
+    fillColor: Colors.grey.shade100,
+    filled: true,
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(10),
+      borderSide: BorderSide(width: 0.0, style: BorderStyle.none),
+    ),
+    labelStyle: TextStyle(fontSize: 18),
+  );
+
+  @override
+  void initState() {
+    super.initState();
+    _store = Provider.of<NecessitiesStore>(context, listen: false);
+    _store.getNecessitiesFromFirestore();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        FormBuilder(
+          child: Column(
+            children: <Widget>[
+              Text(
+                "Choose your necessities", // Translate
+                style: TextStyle(fontSize: 16, color: Colors.black54),
+              ),
+              SizedBox(height: 20),
+              Observer(builder: (_) {
+                if (_store.state == StoreState.loading ||
+                    _store.state == StoreState.initial) {
+                  return Center(child: CircularProgressIndicator());
+                }
+                return FormBuilderCheckboxList(
+                  attribute: 'necessities',
+                  initialValue: <Necessity>[],
+                  options: _store.necessities
+                      .map(
+                        (e) => FormBuilderFieldOption(
+                          value: e,
+                          child: Text(
+                            AppLocalizations.of(context).translate(e.ref),
+                            style: TextStyle(fontSize: 16),
+                          ),
+                        ),
+                      )
+                      .toList(),
+                  onChanged: (v) {
+                    _store.chosenNecessities = v as List<Necessity>;
+                  },
+                );
+              }),
+              SizedBox(height: 20),
+              Observer(builder: (_) {
+                return FormBuilderTextField(
+                  attribute: 'other_necessities',
+                  initialValue: _store.otherNecessities,
+                  onChanged: (v) => _store.otherNecessities = v,
+                  decoration: _baseDeco.copyWith(labelText: 'Other'),
+                  validators: [
+                    FormBuilderValidators.required(errorText: 'required')
+                  ], // TODO!
+                );
+              }),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }
