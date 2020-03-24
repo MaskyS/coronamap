@@ -15,55 +15,43 @@ void main() {
 class MyApp extends StatefulWidget {
   @override
   _MyAppState createState() => _MyAppState();
-
-  static void setLocale(BuildContext context, Locale newLocale) {
-    _MyAppState state = context.findAncestorStateOfType<_MyAppState>();
-
-    state.setState(() {
-      state.locale = newLocale;
-    });
-  }
 }
 
 class _MyAppState extends State<MyApp> {
-  Locale locale;
-  bool localeLoaded = false;
+  var prefs;
 
   @override
   void initState() {
-    super.initState();
     this._fetchLocale().then((locale) {
-      setState(() {
-        this.localeLoaded = true;
-        this.locale = locale;
-      });
+      AppLocalizations.load(locale);
     });
+    super.initState();
   }
+
+  AppLocalizationsDelegate _localeOverrideDelegate =
+  AppLocalizationsDelegate(Locale('en', 'EN'));
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Corona Mapp',
+      debugShowCheckedModeBanner: false,
+      title: 'Depistaz-Mu',
       theme: ThemeData(
         primarySwatch: Colors.green,
         textTheme: GoogleFonts.rubikTextTheme(
           Theme.of(context).textTheme,
         ),
       ),
-      locale: this.locale ?? Locale('en', 'EN'),
       supportedLocales: [
         Locale('en', 'EN'),
         Locale('en', 'MU'),
         Locale('fr', 'FR'),
       ],
       localizationsDelegates: [
-        AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
+        _localeOverrideDelegate,
       ],
-      localeResolutionCallback: (locale, supportedLocales) {
-        return this.locale ?? Locale('en', 'EN');
-      },
       onGenerateRoute: Router.generateRoute,
       initialRoute: Routes.splashPage,
     );

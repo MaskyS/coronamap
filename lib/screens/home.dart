@@ -159,7 +159,6 @@ class _HomePageState extends State<HomePage>
       List<dynamic> points = json.decode(response.body);
 
       points.forEach((value) {
-        print(value);
         markers.add(Marker(
           anchorPos: AnchorPos.align(AnchorAlign.center),
           height: 30,
@@ -171,10 +170,12 @@ class _HomePageState extends State<HomePage>
           builder: (ctx) => marker,
         ));
       });
+      if (mounted) {
+        setState(() {
+          markers = List.from(markers);
+        });
+      }
 
-      setState(() {
-        if (mounted) markers = List.from(markers);
-      });
     } else {
       throw Exception('Failed to load markers');
     }
