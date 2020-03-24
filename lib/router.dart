@@ -36,7 +36,7 @@ class Router {
               Provider<ConditionsStepStore>(create: (_) => ConditionsStepStore()),
               Provider<SymptomsStepStore>(create: (_) => SymptomsStepStore()),
             ],
-            child: SymptomsForm(),
+            child: DetectionForm(),
           ),
         );
       case Routes.splashPage:
