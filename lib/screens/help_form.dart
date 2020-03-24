@@ -149,7 +149,7 @@ class _HelpFormState extends State<HelpForm> {
         ),
       );
     return Scaffold(
-      appBar: AppBar(title: Text("G")),
+      appBar: AppBar(title: Text("Request Supplies")),
       body: Stepper(
         physics: ClampingScrollPhysics(),
         type: StepperType.horizontal,
