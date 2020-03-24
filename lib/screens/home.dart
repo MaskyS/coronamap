@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_boom_menu/flutter_boom_menu.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:latlong/latlong.dart';
 import 'package:http/http.dart' as http;
 
@@ -37,35 +38,6 @@ class _HomePageState extends State<HomePage>
     LatLng(-20.303443, 57.567211),
   ];
 
-  Future fetchPoints() async {
-    final response = await http.get(
-        'https://us-central1-corona-mapp.cloudfunctions.net/getAllLocation');
-
-    if (response.statusCode == 200) {
-      List<dynamic> points = json.decode(response.body);
-
-      points.forEach((value) {
-        print(value);
-        markers.add(Marker(
-          anchorPos: AnchorPos.align(AnchorAlign.center),
-          height: 30,
-          width: 30,
-          point: LatLng(
-              value['position'][1],
-              value['position'][
-                  0]), // Mapbox read Long and lat last, here its lat then long... (shrug)
-          builder: (ctx) => marker,
-        ));
-      });
-
-      setState(() {
-        markers = List.from(markers);
-      });
-    } else {
-      throw Exception('Failed to load markers');
-    }
-  }
-
   @override
   void initState() {
     pointIndex = 0;
@@ -78,24 +50,15 @@ class _HomePageState extends State<HomePage>
   }
 
   @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  void _startAnimation() {
-    _controller.stop();
-    _controller.reset();
-    _controller.repeat(
-      period: Duration(seconds: 1),
-    );
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("CoronaMap"),
+        centerTitle: true,
+        leading: null,
+        title: Text(
+          "DepistazMu",
+          style: GoogleFonts.rubik(fontWeight: FontWeight.w500),
+        ),
       ),
       body: FlutterMap(
         options: MapOptions(
@@ -172,5 +135,48 @@ class _HomePageState extends State<HomePage>
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void _startAnimation() {
+    _controller.stop();
+    _controller.reset();
+    _controller.repeat(
+      period: Duration(seconds: 1),
+    );
+  }
+
+  Future fetchPoints() async {
+    final response = await http.get(
+        'https://us-central1-corona-mapp.cloudfunctions.net/getAllLocation');
+
+    if (response.statusCode == 200) {
+      List<dynamic> points = json.decode(response.body);
+
+      points.forEach((value) {
+        print(value);
+        markers.add(Marker(
+          anchorPos: AnchorPos.align(AnchorAlign.center),
+          height: 30,
+          width: 30,
+          point: LatLng(
+              value['position'][1],
+              value['position'][
+                  0]), // Mapbox read Long and lat last, here its lat then long... (shrug)
+          builder: (ctx) => marker,
+        ));
+      });
+
+      setState(() {
+        if (mounted) markers = List.from(markers);
+      });
+    } else {
+      throw Exception('Failed to load markers');
+    }
   }
 }

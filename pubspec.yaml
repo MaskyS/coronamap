@@ -46,6 +46,7 @@ dependencies:
   flutter_map_marker_cluster: any
   http: any
   flutter_boom_menu: ^1.0.2
+  google_fonts: ^0.3.10
 dev_dependencies:
   flutter_test:
     sdk: flutter

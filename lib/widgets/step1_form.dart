@@ -25,6 +25,7 @@ class _Step1FormState extends State<Step1Form> {
       borderRadius: BorderRadius.circular(10),
       borderSide: BorderSide(width: 0.0, style: BorderStyle.none),
     ),
+    labelStyle: TextStyle(fontSize: 16),
   );
 
   @override
