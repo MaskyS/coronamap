@@ -12,7 +12,6 @@ Address _$AddressFromJson(Map<String, dynamic> json) {
     line2: json['line2'] as String,
     district: _$enumDecodeNullable(_$DistrictEnumMap, json['district']),
     region: json['region'] as String,
-    postalCodeText: json['postalCodeText'] as String,
   );
 }
 
@@ -21,7 +20,6 @@ Map<String, dynamic> _$AddressToJson(Address instance) => <String, dynamic>{
       'line2': instance.line2,
       'district': _$DistrictEnumMap[instance.district],
       'region': instance.region,
-      'postalCodeText': instance.postalCodeText,
     };
 
 T _$enumDecode<T>(
@@ -75,12 +73,6 @@ const _$DistrictEnumMap = {
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$Address on _AddressBase, Store {
-  Computed<int> _$postalCodeComputed;
-
-  @override
-  int get postalCode =>
-      (_$postalCodeComputed ??= Computed<int>(() => super.postalCode)).value;
-
   final _$line1Atom = Atom(name: '_AddressBase.line1');
 
   @override
@@ -149,27 +141,10 @@ mixin _$Address on _AddressBase, Store {
     }, _$regionAtom, name: '${_$regionAtom.name}_set');
   }
 
-  final _$postalCodeTextAtom = Atom(name: '_AddressBase.postalCodeText');
-
-  @override
-  String get postalCodeText {
-    _$postalCodeTextAtom.context.enforceReadPolicy(_$postalCodeTextAtom);
-    _$postalCodeTextAtom.reportObserved();
-    return super.postalCodeText;
-  }
-
-  @override
-  set postalCodeText(String value) {
-    _$postalCodeTextAtom.context.conditionallyRunInAction(() {
-      super.postalCodeText = value;
-      _$postalCodeTextAtom.reportChanged();
-    }, _$postalCodeTextAtom, name: '${_$postalCodeTextAtom.name}_set');
-  }
-
   @override
   String toString() {
     final string =
-        'line1: ${line1.toString()},line2: ${line2.toString()},district: ${district.toString()},region: ${region.toString()},postalCodeText: ${postalCodeText.toString()},postalCode: ${postalCode.toString()}';
+        'line1: ${line1.toString()},line2: ${line2.toString()},district: ${district.toString()},region: ${region.toString()}';
     return '{$string}';
   }
 }
