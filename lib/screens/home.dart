@@ -115,19 +115,19 @@ class _HomePageState extends State<HomePage>
         children: [
           MenuItem(
             child: Icon(Icons.warning, color: Colors.white),
-            title: AppLocalizations.of(context).translate("report_button"),
+            title: AppLocalizations.of(context).translate("test_button_label"),
             titleColor: Colors.white,
-            subtitle: "Test if you have the virus",
+            subtitle: AppLocalizations.of(context).translate("test_button_subtitle"),
             subTitleColor: Colors.white,
             backgroundColor: Colors.deepOrange,
             onTap: () => Navigator.pushNamed(context, Routes.detectionPage),
           ),
           MenuItem(
             child: Icon(Icons.shopping_basket, color: Colors.white),
-            title: "REQUEST SUPPLIES",
+            title: AppLocalizations.of(context).translate("supplies_button_label"),
             titleColor: Colors.white,
             subtitle:
-                "If there's any other necessities you need, use this button",
+                AppLocalizations.of(context).translate("supplies_button_subtitle"),
             subTitleColor: Colors.white,
             backgroundColor: Colors.lightBlue,
             onTap: () => Navigator.pushNamed(context, Routes.suppliesPage),

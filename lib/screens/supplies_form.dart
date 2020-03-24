@@ -48,7 +48,11 @@ class _HelpFormState extends State<HelpForm> {
         ),
       );
     return Scaffold(
-      appBar: AppBar(title: Text("Request Supplies")), // TODO translate
+      appBar: AppBar(
+        title: Text(
+          AppLocalizations.of(context).translate("supplies_form_title"),
+        ),
+      ),
       body: Stepper(
         physics: ClampingScrollPhysics(),
         type: StepperType.horizontal,
@@ -69,7 +73,9 @@ class _HelpFormState extends State<HelpForm> {
           ),
           Step(
             content: SuppliesStepForm(),
-            title: Text(_currentStep == s2Index ? 'Needed Supplies' : ''), // TODO Translate!
+            title: Text(_currentStep == s2Index
+                ? AppLocalizations.of(context).translate("step_supplies_title")
+                : ''),
             isActive: _currentStep == s2Index,
             state: getStepState(s2Index),
           ),
@@ -111,13 +117,14 @@ class _HelpFormState extends State<HelpForm> {
         saveAndNext(user);
       }
     } else if (_currentStep == s2Index) {
-      user.necessities = _necessitiesStore.chosenNecessities;
-      userRepo.save(user);
-      print("DONE!");
-      Navigator.pushReplacementNamed(
-        context,
-        Routes.suppliesResultPage,
-      );
+      if (_necessitiesStore.isValid) {
+        user.necessities = _necessitiesStore.chosenNecessities;
+        userRepo.save(user);
+        Navigator.pushReplacementNamed(
+          context,
+          Routes.suppliesResultPage,
+        );
+      }
     }
   }
 
@@ -185,7 +192,8 @@ class _HelpFormState extends State<HelpForm> {
                   style: buttonStyle),
               color: Colors.grey.shade200,
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10)),
+                borderRadius: BorderRadius.circular(10),
+              ),
             ),
           ),
           Spacer(flex: 1),
