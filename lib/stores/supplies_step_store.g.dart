@@ -109,6 +109,23 @@ mixin _$SuppliesStepStore on _SuppliesStepStoreBase, Store {
     }, _$_necessitiesFutureAtom, name: '${_$_necessitiesFutureAtom.name}_set');
   }
 
+  final _$isEmergencyAtom = Atom(name: '_SuppliesStepStoreBase.isEmergency');
+
+  @override
+  bool get isEmergency {
+    _$isEmergencyAtom.context.enforceReadPolicy(_$isEmergencyAtom);
+    _$isEmergencyAtom.reportObserved();
+    return super.isEmergency;
+  }
+
+  @override
+  set isEmergency(bool value) {
+    _$isEmergencyAtom.context.conditionallyRunInAction(() {
+      super.isEmergency = value;
+      _$isEmergencyAtom.reportChanged();
+    }, _$isEmergencyAtom, name: '${_$isEmergencyAtom.name}_set');
+  }
+
   final _$getNecessitiesFromFirestoreAsyncAction =
       AsyncAction('getNecessitiesFromFirestore');
 
@@ -121,7 +138,7 @@ mixin _$SuppliesStepStore on _SuppliesStepStoreBase, Store {
   @override
   String toString() {
     final string =
-        'fbKey: ${fbKey.toString()},necessities: ${necessities.toString()},chosenNecessities: ${chosenNecessities.toString()},otherNecessities: ${otherNecessities.toString()},isValid: ${isValid.toString()},state: ${state.toString()}';
+        'fbKey: ${fbKey.toString()},necessities: ${necessities.toString()},chosenNecessities: ${chosenNecessities.toString()},otherNecessities: ${otherNecessities.toString()},isEmergency: ${isEmergency.toString()},isValid: ${isValid.toString()},state: ${state.toString()}';
     return '{$string}';
   }
 }

@@ -72,8 +72,8 @@
   "call_emergency": "Appeler les urgences",
   "test_form_title": "Détection d'infection",
   "supplies_form_title": "Soliciter des fournitures",
-
   "other_label": "Autre",
+  "emergency_label": "Est cela une urgence?",
   "cooking_oil": "Huile de cuisson",
   "cooking_gas": "Gaz de cuisson",
   "water": "L'eau",
