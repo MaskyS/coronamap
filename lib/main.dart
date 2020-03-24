@@ -35,7 +35,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Depistaz-Mu',
+      title: 'DepistazMu',
       theme: ThemeData(
         primarySwatch: Colors.green,
         textTheme: GoogleFonts.rubikTextTheme(
