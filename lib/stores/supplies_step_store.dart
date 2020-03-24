@@ -26,7 +26,7 @@ abstract class _SuppliesStepStoreBase with Store {
   ObservableFuture<List<Necessity>> _necessitiesFuture;
 
   @computed
-  bool get isValid => fbKey.currentState.validate();
+  bool get isValid => fbKey.currentState?.validate() ?? false;
 
   @action
   Future<void> getNecessitiesFromFirestore() async {
