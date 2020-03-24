@@ -18,12 +18,12 @@ import 'package:depistazmu/widgets/contact_details_step_form.dart';
 import 'package:depistazmu/widgets/conditions_step_form.dart';
 import 'package:depistazmu/widgets/symptoms_step_form.dart';
 
-class SymptomsForm extends StatefulWidget {
+class DetectionForm extends StatefulWidget {
   @override
-  _SymptomsFormState createState() => _SymptomsFormState();
+  _DetectionFormState createState() => _DetectionFormState();
 }
 
-class _SymptomsFormState extends State<SymptomsForm> {
+class _DetectionFormState extends State<DetectionForm> {
   final s1Index = 0;
   final s2Index = 1;
   final s3Index = 2;
