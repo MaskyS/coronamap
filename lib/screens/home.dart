@@ -166,7 +166,7 @@ class _HomePageState extends State<HomePage>
             subtitle:
                 "If there's any other necessities you need, use this button",
             subTitleColor: Colors.white,
-            backgroundColor: Colors.green,
+            backgroundColor: Colors.lightBlue,
             onTap: () => Navigator.pushNamed(context, Routes.suppliesPage),
           ),
         ],
