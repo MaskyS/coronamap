@@ -1,6 +1,6 @@
-import 'package:coronamapp/config/app_localizations.dart';
-import 'package:coronamapp/constants/routes.dart';
-import 'package:coronamapp/constants/utils.dart';
+import 'package:depistazmu/config/app_localizations.dart';
+import 'package:depistazmu/constants/routes.dart';
+import 'package:depistazmu/constants/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:permission_handler/permission_handler.dart';

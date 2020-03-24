@@ -1,9 +1,9 @@
-import 'package:coronamapp/repository/symptom_repository.dart';
-import 'package:coronamapp/models/symptom.dart';
+import 'package:depistazmu/repository/symptom_repository.dart';
+import 'package:depistazmu/models/symptom.dart';
 import 'package:mobx/mobx.dart';
 
-import 'package:coronamapp/store_state_enum.dart';
-import 'package:coronamapp/risk_enum.dart';
+import 'package:depistazmu/store_state_enum.dart';
+import 'package:depistazmu/risk_enum.dart';
 part 'symptoms_step_store.g.dart';
 
 class SymptomsStepStore = _SymptomsStepStoreBase with _$SymptomsStepStore;

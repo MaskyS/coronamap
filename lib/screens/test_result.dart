@@ -1,5 +1,5 @@
-import 'package:coronamapp/config/app_localizations.dart';
-import 'package:coronamapp/risk_enum.dart';
+import 'package:depistazmu/config/app_localizations.dart';
+import 'package:depistazmu/risk_enum.dart';
 
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart' as UrlLauncher;

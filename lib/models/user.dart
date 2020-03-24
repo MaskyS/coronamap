@@ -1,9 +1,9 @@
-import 'package:coronamapp/models/condition.dart';
-import 'package:coronamapp/models/gender.dart';
-import 'package:coronamapp/models/geolocation.dart';
-import 'package:coronamapp/models/necessity.dart';
-import 'package:coronamapp/models/symptom.dart';
-import 'package:coronamapp/models/address.dart';
+import 'package:depistazmu/models/condition.dart';
+import 'package:depistazmu/models/gender.dart';
+import 'package:depistazmu/models/geolocation.dart';
+import 'package:depistazmu/models/necessity.dart';
+import 'package:depistazmu/models/symptom.dart';
+import 'package:depistazmu/models/address.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'user.g.dart';

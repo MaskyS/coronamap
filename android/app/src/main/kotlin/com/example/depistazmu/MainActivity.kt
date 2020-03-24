@@ -1,4 +1,4 @@
-package mu.cyberstorm.coronamapp
+package mu.cyberstorm.depistazmu
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity

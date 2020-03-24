@@ -1,6 +1,6 @@
-import 'package:coronamapp/config/app_localizations.dart';
-import 'package:coronamapp/district_enum.dart';
-import 'package:coronamapp/stores/contact_details_step_store.dart';
+import 'package:depistazmu/config/app_localizations.dart';
+import 'package:depistazmu/district_enum.dart';
+import 'package:depistazmu/stores/contact_details_step_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
