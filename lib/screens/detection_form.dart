@@ -303,8 +303,10 @@ class _SymptomsFormState extends State<SymptomsForm> {
           return StepState.indexed;
         break;
       case 2:
-        if (_step3Store.canCompleteForm && _step3Store.chosenSymptoms != null)
+        if (_step3Store.canCompleteForm &&
+            _step3Store.chosenSymptoms.isNotEmpty) {
           return StepState.complete;
+        }
         return StepState.indexed;
         break;
       default:
