@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:coronamapp/risk_enum.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:location/location.dart' as Geo;
 
@@ -91,7 +92,11 @@ class _SymptomsFormState extends State<SymptomsForm> {
       );
     return Scaffold(
       appBar: AppBar(
-          title: Text(AppLocalizations.of(context).translate("form_title"))),
+        title: Text(
+          AppLocalizations.of(context).translate("form_title"),
+          style: GoogleFonts.rubik(),
+        ),
+      ),
       body: Stepper(
         physics: ClampingScrollPhysics(),
         type: StepperType.horizontal,

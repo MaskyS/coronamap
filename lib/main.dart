@@ -2,6 +2,7 @@ import 'package:coronamapp/config/app_localizations.dart';
 import 'package:coronamapp/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'constants/routes.dart';
@@ -16,8 +17,7 @@ class MyApp extends StatefulWidget {
   _MyAppState createState() => _MyAppState();
 
   static void setLocale(BuildContext context, Locale newLocale) {
-    _MyAppState state =
-    context.findAncestorStateOfType<_MyAppState>();
+    _MyAppState state = context.findAncestorStateOfType<_MyAppState>();
 
     state.setState(() {
       state.locale = newLocale;
@@ -26,7 +26,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   Locale locale;
   bool localeLoaded = false;
 
@@ -43,13 +42,15 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
+    return MaterialApp(
       title: 'Corona Mapp',
       theme: ThemeData(
         primarySwatch: Colors.green,
+        textTheme: GoogleFonts.rubikTextTheme(
+          Theme.of(context).textTheme,
+        ),
       ),
       locale: this.locale ?? Locale('en', 'EN'),
-
       supportedLocales: [
         Locale('en', 'EN'),
         Locale('en', 'MU'),
@@ -73,8 +74,7 @@ class _MyAppState extends State<MyApp> {
     if (prefs.getString('language_code') == null) {
       return null;
     }
-    return Locale(prefs.getString('language_code'),
-        prefs.getString('country_code'));
+    return Locale(
+        prefs.getString('language_code'), prefs.getString('country_code'));
   }
 }
-
