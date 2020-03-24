@@ -11,8 +11,8 @@ class UserRepository {
   Future<void> save(User user) async {
     String hash = generateMd5(user.phoneNumber +
         user.dob.year.toString() +
-        user.firstName +
-        user.lastName);
+        user.firstName.toLowerCase() +
+        user.lastName.toLowerCase());
 
     var jsonString = json.encode(user);
     Firestore.instance
