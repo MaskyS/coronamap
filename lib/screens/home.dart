@@ -170,15 +170,6 @@ class _HomePageState extends State<HomePage>
             backgroundColor: Colors.green,
             onTap: () => Navigator.pushNamed(context, Routes.suppliesPage),
           ),
-          MenuItem(
-            child: Icon(Icons.code, color: Colors.white),
-            title: "CREATED BY CYBERSTORM",
-            titleColor: Colors.white,
-            subtitle: "In collaboration with MoH",
-            subTitleColor: Colors.white,
-            backgroundColor: Colors.black,
-            onTap: () => print('THIRD CHILD'),
-          ),
         ],
       ),
     );
