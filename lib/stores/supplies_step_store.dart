@@ -1,9 +1,9 @@
-import 'package:coronamapp/repository/necessity_repository.dart';
-import 'package:coronamapp/store_state_enum.dart';
+import 'package:depistazmu/repository/necessity_repository.dart';
+import 'package:depistazmu/store_state_enum.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:mobx/mobx.dart';
-import 'package:coronamapp/models/necessity.dart';
+import 'package:depistazmu/models/necessity.dart';
 
 part 'supplies_step_store.g.dart';
 

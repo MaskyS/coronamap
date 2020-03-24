@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:coronamapp/config/app_localizations.dart';
-import 'package:coronamapp/constants/routes.dart';
-import 'package:coronamapp/utils/marker.dart';
+import 'package:depistazmu/config/app_localizations.dart';
+import 'package:depistazmu/constants/routes.dart';
+import 'package:depistazmu/utils/marker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boom_menu/flutter_boom_menu.dart';
 import 'package:flutter_map/flutter_map.dart';

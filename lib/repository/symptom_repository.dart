@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:coronamapp/models/symptom.dart';
+import 'package:depistazmu/models/symptom.dart';
 
 class SymptomRepository {
   final dbName = 'symptoms';

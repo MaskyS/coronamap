@@ -1,4 +1,4 @@
-import 'package:coronamapp/models/condition.dart';
+import 'package:depistazmu/models/condition.dart';
 import 'package:mobx/mobx.dart';
 part 'conditions_step_store.g.dart';
 

@@ -1,6 +1,6 @@
-import 'package:coronamapp/config/app_localizations.dart';
-import 'package:coronamapp/models/symptom.dart';
-import 'package:coronamapp/stores/symptoms_step_store.dart';
+import 'package:depistazmu/config/app_localizations.dart';
+import 'package:depistazmu/models/symptom.dart';
+import 'package:depistazmu/stores/symptoms_step_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';

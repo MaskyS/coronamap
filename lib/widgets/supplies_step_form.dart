@@ -1,7 +1,7 @@
-import 'package:coronamapp/config/app_localizations.dart';
-import 'package:coronamapp/models/necessity.dart';
-import 'package:coronamapp/store_state_enum.dart';
-import 'package:coronamapp/stores/supplies_step_store.dart';
+import 'package:depistazmu/config/app_localizations.dart';
+import 'package:depistazmu/models/necessity.dart';
+import 'package:depistazmu/store_state_enum.dart';
+import 'package:depistazmu/stores/supplies_step_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';

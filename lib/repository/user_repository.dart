@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:coronamapp/models/user.dart';
-import 'package:coronamapp/utils/utils.dart';
+import 'package:depistazmu/models/user.dart';
+import 'package:depistazmu/utils/utils.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class UserRepository {

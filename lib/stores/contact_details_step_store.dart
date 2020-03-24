@@ -1,9 +1,9 @@
-import 'package:coronamapp/models/address.dart';
-import 'package:coronamapp/models/gender.dart';
-import 'package:coronamapp/models/user.dart';
+import 'package:depistazmu/models/address.dart';
+import 'package:depistazmu/models/gender.dart';
+import 'package:depistazmu/models/user.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:mobx/mobx.dart';
-import 'package:coronamapp/district_enum.dart';
+import 'package:depistazmu/district_enum.dart';
 import 'package:validators/validators.dart';
 
 part 'contact_details_step_store.g.dart';
