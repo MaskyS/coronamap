@@ -1,6 +1,6 @@
 {
   "loading": "Sarzman...",
-  "step1_personal_details": "Information Personel",
+  "step1_personal_details": "Information pu contacter ou",
   "step2_pre_conditions": "Kondition pre-existan",
   "step3_symptoms": "Ou Sintom",
   "step_finish": "FINI",
@@ -8,6 +8,10 @@
   "step_back": "DERRIERE",
   "tooltip_report_button": "Raporte",
   "report_button": "TESTE POU COVID-19",
+  "test_button_label": "Mo pe senti moi malade",
+  "request_supplies_button": "Mo bizn manZ ek boir",
+  "request_supplies_label": "Si ena lezot necessiT ki ou bizn, choisir just ceki ou vraiem bizn",
+  "necessities_button": "Minister Integration social, Securite social ek Solidarite National in bien recevoir ou message. Nou p travay fort ek vite pu ki nu atteindre ou demane. Pa panike, kikn pu pren contact avek ou. Nou remercie ou pu ou collaboration ek support. SVP rest ou lacaz!",
   "must_fill_symptoms": "Ou sintom ki ou p gagne",
   "must_fill_date_infection": "Dat pou premie infection ou in gagne",
   "thank_report": "Ou gagn bane simptom lezer. Pa panike, mai pran souin ou la sante. Izole ou dan ou lakaz pou protez ou fami. Si ou santi deteriorasyon ou, ou pe gagn plis simptom, refair test la imediatman.",
@@ -66,7 +70,7 @@
   "body_ache": "Courbatir",
   "shortness_of_breath": "Esoufle",
   "call_emergency": "Apel secour",
-  "form_title": "Depistaz Covid-19",
+  "form_title": "Depistaz d'infection",
 
   "cooking_oil": "De l'huile",
   "water": "Delo",
