@@ -1,6 +1,7 @@
 import 'package:coronamapp/models/condition.dart';
 import 'package:coronamapp/models/gender.dart';
 import 'package:coronamapp/models/geolocation.dart';
+import 'package:coronamapp/models/necessity.dart';
 import 'package:coronamapp/models/symptom.dart';
 import 'package:coronamapp/models/address.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -17,6 +18,7 @@ class User {
   String homeNumber;
   List<Symptom> symptoms;
   List<Condition> preExistingConditions;
+  List<Necessity> necessities;
   Address address;
   DateTime firstSymptomDate;
   DateTime dob;
@@ -33,6 +35,7 @@ class User {
     this.phoneNumber,
     this.homeNumber,
     this.preExistingConditions,
+    this.necessities,
     this.symptoms,
     this.address,
     this.firstSymptomDate,
