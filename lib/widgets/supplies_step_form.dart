@@ -43,7 +43,8 @@ class _SuppliesStepFormState extends State<SuppliesStepForm> {
           child: Column(
             children: <Widget>[
               Text(
-                "Choose your necessities", // Translate
+                AppLocalizations.of(context)
+                    .translate("form_choose_necessities"),
                 style: TextStyle(fontSize: 16, color: Colors.black54),
               ),
               SizedBox(height: 20),
