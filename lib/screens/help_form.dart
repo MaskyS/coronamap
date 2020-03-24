@@ -129,9 +129,10 @@ class _HelpFormState extends State<HelpForm> {
 
       setState(() {
         _store.setStore(user);
-        _isLoaded = true;
       });
     }
+
+    _store.setStore(user);
   }
 
   /// ! TODO Extract all Stepper/Geolocation logic into a store.
