@@ -141,7 +141,6 @@ class _HomePageState extends State<HomePage>
       floatingActionButton: BoomMenu(
         backgroundColor: Colors.orange,
         animatedIconTheme: IconThemeData(size: 22.0),
-        overlayVisible: true,
         overlayColor: Colors.black,
         overlayOpacity: 0.7,
         fabMenuBorder: RoundedRectangleBorder(
