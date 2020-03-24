@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'help_form_store.dart';
+part of 'supplies_step_store.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,14 +8,14 @@ part of 'help_form_store.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
-mixin _$NecessitiesStore on _NecessitiesStoreBase, Store {
+mixin _$SuppliesStepStore on _SuppliesStepStoreBase, Store {
   Computed<StoreState> _$stateComputed;
 
   @override
   StoreState get state =>
       (_$stateComputed ??= Computed<StoreState>(() => super.state)).value;
 
-  final _$necessitiesAtom = Atom(name: '_NecessitiesStoreBase.necessities');
+  final _$necessitiesAtom = Atom(name: '_SuppliesStepStoreBase.necessities');
 
   @override
   List<Necessity> get necessities {
@@ -33,7 +33,7 @@ mixin _$NecessitiesStore on _NecessitiesStoreBase, Store {
   }
 
   final _$chosenNecessitiesAtom =
-      Atom(name: '_NecessitiesStoreBase.chosenNecessities');
+      Atom(name: '_SuppliesStepStoreBase.chosenNecessities');
 
   @override
   List<Necessity> get chosenNecessities {
@@ -51,7 +51,7 @@ mixin _$NecessitiesStore on _NecessitiesStoreBase, Store {
   }
 
   final _$otherNecessitiesAtom =
-      Atom(name: '_NecessitiesStoreBase.otherNecessities');
+      Atom(name: '_SuppliesStepStoreBase.otherNecessities');
 
   @override
   String get otherNecessities {
@@ -69,7 +69,7 @@ mixin _$NecessitiesStore on _NecessitiesStoreBase, Store {
   }
 
   final _$_necessitiesFutureAtom =
-      Atom(name: '_NecessitiesStoreBase._necessitiesFuture');
+      Atom(name: '_SuppliesStepStoreBase._necessitiesFuture');
 
   @override
   ObservableFuture<List<Necessity>> get _necessitiesFuture {

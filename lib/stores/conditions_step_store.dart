@@ -1,10 +1,10 @@
 import 'package:coronamapp/models/condition.dart';
 import 'package:mobx/mobx.dart';
-part 'step2_store.g.dart';
+part 'conditions_step_store.g.dart';
 
-class Step2Store = _Step2StoreBase with _$Step2Store;
+class ConditionsStepStore = _ConditionsStepStoreBase with _$ConditionsStepStore;
 
-abstract class _Step2StoreBase with Store {
+abstract class _ConditionsStepStoreBase with Store {
   final List<Condition> preExistingConditionList = [
     Condition(label: 'Asthma', ref: 'asthma'),
     Condition(label: 'Diabetes', ref: 'diabetes'),

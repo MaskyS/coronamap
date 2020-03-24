@@ -11,12 +11,12 @@ import 'package:coronamapp/models/geolocation.dart';
 import 'package:coronamapp/models/user.dart';
 import 'package:coronamapp/repository/user_repository.dart';
 import 'package:coronamapp/constants/routes.dart';
-import 'package:coronamapp/stores/step1_store.dart';
-import 'package:coronamapp/stores/step2_store.dart';
-import 'package:coronamapp/stores/step3_store.dart';
-import 'package:coronamapp/widgets/step1_form.dart';
-import 'package:coronamapp/widgets/step2_form.dart';
-import 'package:coronamapp/widgets/step3_form.dart';
+import 'package:coronamapp/stores/contact_details_step_store.dart';
+import 'package:coronamapp/stores/conditions_step_store.dart';
+import 'package:coronamapp/stores/symptoms_step_store.dart';
+import 'package:coronamapp/widgets/contact_details_step_form.dart';
+import 'package:coronamapp/widgets/conditions_step_form.dart';
+import 'package:coronamapp/widgets/symptoms_step_form.dart';
 
 class SymptomsForm extends StatefulWidget {
   @override
@@ -29,9 +29,9 @@ class _SymptomsFormState extends State<SymptomsForm> {
   final s3Index = 2;
 
   var _currentStep = 0;
-  Step1Store _store;
-  Step2Store _step2Store;
-  Step3Store _step3Store;
+  ContactDetailsStepStore _store;
+  ConditionsStepStore _step2Store;
+  SymptomsStepStore _step3Store;
 
   Geo.LocationData _locationData;
   String _positionBasedAddress;
@@ -80,9 +80,9 @@ class _SymptomsFormState extends State<SymptomsForm> {
   /// ! TODO Extract all Stepper/Geolocation logic into a store.
   @override
   Widget build(BuildContext context) {
-    _store = Provider.of<Step1Store>(context);
-    _step2Store = Provider.of<Step2Store>(context);
-    _step3Store = Provider.of<Step3Store>(context);
+    _store = Provider.of<ContactDetailsStepStore>(context);
+    _step2Store = Provider.of<ConditionsStepStore>(context);
+    _step3Store = Provider.of<SymptomsStepStore>(context);
 
     if (!_isLoaded)
       return Container(

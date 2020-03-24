@@ -1,19 +1,15 @@
 import 'package:coronamapp/constants/routes.dart';
-import 'package:coronamapp/models/necessity.dart';
 import 'package:coronamapp/models/user.dart';
 import 'package:coronamapp/repository/user_repository.dart';
-import 'package:coronamapp/store_state_enum.dart';
-import 'package:coronamapp/stores/help_form_store.dart';
-import 'package:coronamapp/stores/step1_store.dart';
-import 'package:coronamapp/widgets/step1_form.dart';
+import 'package:coronamapp/stores/supplies_step_store.dart';
+import 'package:coronamapp/stores/contact_details_step_store.dart';
+import 'package:coronamapp/widgets/contact_details_step_form.dart';
+import 'package:coronamapp/widgets/supplies_step_form.dart';
 import 'package:flutter/material.dart';
 
 import 'package:coronamapp/config/app_localizations.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:provider/provider.dart';
-// import 'package:provider/provider.dart';
 
 class HelpForm extends StatefulWidget {
   @override
@@ -25,8 +21,8 @@ class _HelpFormState extends State<HelpForm> {
   final s2Index = 1;
   var _currentStep = 0;
 
-  Step1Store _store;
-  NecessitiesStore _necessitiesStore;
+  ContactDetailsStepStore _store;
+  SuppliesStepStore _necessitiesStore;
 
   User user;
   var userRepo = UserRepository();
@@ -41,8 +37,8 @@ class _HelpFormState extends State<HelpForm> {
   /// ! TODO Extract all Stepper/Geolocation logic into a store.
   @override
   Widget build(BuildContext context) {
-    _store = Provider.of<Step1Store>(context);
-    _necessitiesStore = Provider.of<NecessitiesStore>(context);
+    _store = Provider.of<ContactDetailsStepStore>(context);
+    _necessitiesStore = Provider.of<SuppliesStepStore>(context);
 
     if (!_isLoaded)
       return Container(
@@ -72,8 +68,8 @@ class _HelpFormState extends State<HelpForm> {
             state: getStepState(s1Index),
           ),
           Step(
-            content: NecessitiesForm(),
-            title: Text(_currentStep == s2Index ? 'Needed Supplies' : ''),
+            content: SuppliesStepForm(),
+            title: Text(_currentStep == s2Index ? 'Needed Supplies' : ''), // TODO Translate!
             isActive: _currentStep == s2Index,
             state: getStepState(s2Index),
           ),
@@ -222,88 +218,6 @@ class _HelpFormState extends State<HelpForm> {
           ),
         ],
       ),
-    );
-  }
-}
-
-class NecessitiesForm extends StatefulWidget {
-  @override
-  _NecessitiesFormState createState() => _NecessitiesFormState();
-}
-
-class _NecessitiesFormState extends State<NecessitiesForm> {
-  NecessitiesStore _store;
-
-  // TODO extract and make this common for every widget.
-  final _baseDeco = InputDecoration(
-    fillColor: Colors.grey.shade100,
-    filled: true,
-    border: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(10),
-      borderSide: BorderSide(width: 0.0, style: BorderStyle.none),
-    ),
-    labelStyle: TextStyle(fontSize: 18),
-  );
-
-  @override
-  void initState() {
-    super.initState();
-    _store = Provider.of<NecessitiesStore>(context, listen: false);
-    _store.getNecessitiesFromFirestore();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        FormBuilder(
-          child: Column(
-            children: <Widget>[
-              Text(
-                "Choose your necessities", // Translate
-                style: TextStyle(fontSize: 16, color: Colors.black54),
-              ),
-              SizedBox(height: 20),
-              Observer(builder: (_) {
-                if (_store.state == StoreState.loading ||
-                    _store.state == StoreState.initial) {
-                  return Center(child: CircularProgressIndicator());
-                }
-                return FormBuilderCheckboxList(
-                  attribute: 'necessities',
-                  initialValue: <Necessity>[],
-                  options: _store.necessities
-                      .map(
-                        (e) => FormBuilderFieldOption(
-                          value: e,
-                          child: Text(
-                            AppLocalizations.of(context).translate(e.ref),
-                            style: TextStyle(fontSize: 16),
-                          ),
-                        ),
-                      )
-                      .toList(),
-                  onChanged: (v) {
-                    _store.chosenNecessities = v as List<Necessity>;
-                  },
-                );
-              }),
-              SizedBox(height: 20),
-              Observer(builder: (_) {
-                return FormBuilderTextField(
-                  attribute: 'other_necessities',
-                  initialValue: _store.otherNecessities,
-                  onChanged: (v) => _store.otherNecessities = v,
-                  decoration: _baseDeco.copyWith(labelText: 'Other'),
-                  validators: [
-                    FormBuilderValidators.required(errorText: 'required')
-                  ], // TODO!
-                );
-              }),
-            ],
-          ),
-        ),
-      ],
     );
   }
 }

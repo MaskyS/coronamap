@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'step3_store.dart';
+part of 'symptoms_step_store.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,7 +8,7 @@ part of 'step3_store.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
-mixin _$Step3Store on _Step3StoreBase, Store {
+mixin _$SymptomsStepStore on _SymptomsStepStoreBase, Store {
   Computed<bool> _$canCompleteFormComputed;
 
   @override
@@ -21,7 +21,8 @@ mixin _$Step3Store on _Step3StoreBase, Store {
   StoreState get state =>
       (_$stateComputed ??= Computed<StoreState>(() => super.state)).value;
 
-  final _$chosenSymptomsAtom = Atom(name: '_Step3StoreBase.chosenSymptoms');
+  final _$chosenSymptomsAtom =
+      Atom(name: '_SymptomsStepStoreBase.chosenSymptoms');
 
   @override
   List<Symptom> get chosenSymptoms {
@@ -39,7 +40,7 @@ mixin _$Step3Store on _Step3StoreBase, Store {
   }
 
   final _$_symptomsListFutureAtom =
-      Atom(name: '_Step3StoreBase._symptomsListFuture');
+      Atom(name: '_SymptomsStepStoreBase._symptomsListFuture');
 
   @override
   ObservableFuture<List<Symptom>> get _symptomsListFuture {
@@ -58,7 +59,7 @@ mixin _$Step3Store on _Step3StoreBase, Store {
         name: '${_$_symptomsListFutureAtom.name}_set');
   }
 
-  final _$errorMessageAtom = Atom(name: '_Step3StoreBase.errorMessage');
+  final _$errorMessageAtom = Atom(name: '_SymptomsStepStoreBase.errorMessage');
 
   @override
   String get errorMessage {
@@ -75,7 +76,7 @@ mixin _$Step3Store on _Step3StoreBase, Store {
     }, _$errorMessageAtom, name: '${_$errorMessageAtom.name}_set');
   }
 
-  final _$symptomsListAtom = Atom(name: '_Step3StoreBase.symptomsList');
+  final _$symptomsListAtom = Atom(name: '_SymptomsStepStoreBase.symptomsList');
 
   @override
   List<Symptom> get symptomsList {
@@ -92,7 +93,7 @@ mixin _$Step3Store on _Step3StoreBase, Store {
     }, _$symptomsListAtom, name: '${_$symptomsListAtom.name}_set');
   }
 
-  final _$firstDateAtom = Atom(name: '_Step3StoreBase.firstDate');
+  final _$firstDateAtom = Atom(name: '_SymptomsStepStoreBase.firstDate');
 
   @override
   DateTime get firstDate {
@@ -110,7 +111,7 @@ mixin _$Step3Store on _Step3StoreBase, Store {
   }
 
   final _$chosenSymptomsErrorTextAtom =
-      Atom(name: '_Step3StoreBase.chosenSymptomsErrorText');
+      Atom(name: '_SymptomsStepStoreBase.chosenSymptomsErrorText');
 
   @override
   String get chosenSymptomsErrorText {
@@ -130,7 +131,7 @@ mixin _$Step3Store on _Step3StoreBase, Store {
   }
 
   final _$firstDateErrorTextAtom =
-      Atom(name: '_Step3StoreBase.firstDateErrorText');
+      Atom(name: '_SymptomsStepStoreBase.firstDateErrorText');
 
   @override
   String get firstDateErrorText {
@@ -148,7 +149,7 @@ mixin _$Step3Store on _Step3StoreBase, Store {
     }, _$firstDateErrorTextAtom, name: '${_$firstDateErrorTextAtom.name}_set');
   }
 
-  final _$riskAtom = Atom(name: '_Step3StoreBase.risk');
+  final _$riskAtom = Atom(name: '_SymptomsStepStoreBase.risk');
 
   @override
   Risk get risk {
@@ -174,36 +175,36 @@ mixin _$Step3Store on _Step3StoreBase, Store {
         .run(() => super.getSymptomsFromFirestore());
   }
 
-  final _$_Step3StoreBaseActionController =
-      ActionController(name: '_Step3StoreBase');
+  final _$_SymptomsStepStoreBaseActionController =
+      ActionController(name: '_SymptomsStepStoreBase');
 
   @override
   void calculateRisk(int age, bool hasPreExistingConditions) {
-    final _$actionInfo = _$_Step3StoreBaseActionController.startAction();
+    final _$actionInfo = _$_SymptomsStepStoreBaseActionController.startAction();
     try {
       return super.calculateRisk(age, hasPreExistingConditions);
     } finally {
-      _$_Step3StoreBaseActionController.endAction(_$actionInfo);
+      _$_SymptomsStepStoreBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void validateChosenSymptoms(List<Symptom> values) {
-    final _$actionInfo = _$_Step3StoreBaseActionController.startAction();
+    final _$actionInfo = _$_SymptomsStepStoreBaseActionController.startAction();
     try {
       return super.validateChosenSymptoms(values);
     } finally {
-      _$_Step3StoreBaseActionController.endAction(_$actionInfo);
+      _$_SymptomsStepStoreBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void validateFirstDate(DateTime dateTime) {
-    final _$actionInfo = _$_Step3StoreBaseActionController.startAction();
+    final _$actionInfo = _$_SymptomsStepStoreBaseActionController.startAction();
     try {
       return super.validateFirstDate(dateTime);
     } finally {
-      _$_Step3StoreBaseActionController.endAction(_$actionInfo);
+      _$_SymptomsStepStoreBaseActionController.endAction(_$actionInfo);
     }
   }
 

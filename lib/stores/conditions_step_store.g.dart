@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'step2_store.dart';
+part of 'conditions_step_store.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,7 +8,7 @@ part of 'step2_store.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
-mixin _$Step2Store on _Step2StoreBase, Store {
+mixin _$ConditionsStepStore on _ConditionsStepStoreBase, Store {
   Computed<bool> _$hasConditionsComputed;
 
   @override
@@ -17,7 +17,7 @@ mixin _$Step2Store on _Step2StoreBase, Store {
           .value;
 
   final _$chosenConditionsListAtom =
-      Atom(name: '_Step2StoreBase.chosenConditionsList');
+      Atom(name: '_ConditionsStepStoreBase.chosenConditionsList');
 
   @override
   List<Condition> get chosenConditionsList {
@@ -36,16 +36,17 @@ mixin _$Step2Store on _Step2StoreBase, Store {
         name: '${_$chosenConditionsListAtom.name}_set');
   }
 
-  final _$_Step2StoreBaseActionController =
-      ActionController(name: '_Step2StoreBase');
+  final _$_ConditionsStepStoreBaseActionController =
+      ActionController(name: '_ConditionsStepStoreBase');
 
   @override
   dynamic setConditions(List<Condition> conditions) {
-    final _$actionInfo = _$_Step2StoreBaseActionController.startAction();
+    final _$actionInfo =
+        _$_ConditionsStepStoreBaseActionController.startAction();
     try {
       return super.setConditions(conditions);
     } finally {
-      _$_Step2StoreBaseActionController.endAction(_$actionInfo);
+      _$_ConditionsStepStoreBaseActionController.endAction(_$actionInfo);
     }
   }
 

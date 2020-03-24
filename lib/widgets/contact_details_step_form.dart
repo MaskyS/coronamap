@@ -1,6 +1,6 @@
 import 'package:coronamapp/config/app_localizations.dart';
 import 'package:coronamapp/district_enum.dart';
-import 'package:coronamapp/stores/step1_store.dart';
+import 'package:coronamapp/stores/contact_details_step_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
@@ -17,7 +17,7 @@ class Step1Form extends StatefulWidget {
 }
 
 class _Step1FormState extends State<Step1Form> {
-  Step1Store _store;
+  ContactDetailsStepStore _store;
   final _baseDeco = InputDecoration(
     fillColor: Colors.grey.shade100,
     filled: true,
@@ -31,7 +31,7 @@ class _Step1FormState extends State<Step1Form> {
   @override
   void initState() {
     super.initState();
-    _store = Provider.of<Step1Store>(context, listen: false);
+    _store = Provider.of<ContactDetailsStepStore>(context, listen: false);
     _store.setupValidations();
   }
 
