@@ -1,24 +1,23 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:coronamapp/models/symptom.dart';
-import 'package:coronamapp/models/user.dart';
+import 'package:coronamapp/models/necessity.dart';
 
-class SymptomRepository {
-  final dbName = 'symptoms';
+class NecessityRepository {
+  final dbName = 'necessities';
 
-  Future<Symptom> findByRef(String ref) {
+  Future<Necessity> findByRef(String ref) {
     return Firestore.instance
         .collection(dbName)
         .where('ref', isEqualTo: ref)
         .getDocuments()
         .then((snapshot) {
       return snapshot.documents
-          .map((doc) => Symptom.fromJson(doc.data['symptom']))
+          .map((doc) => Necessity.fromJson(doc.data['necessity']))
           .toList()
           .first;
     });
   }
 
-  Future<List<Symptom>> getAllWithLimit({int limit = 10}) {
+  Future<List<Necessity>> getAllWithLimit({int limit = 10}) {
     return Firestore.instance
         .collection(dbName)
         .limit(limit)
@@ -26,7 +25,7 @@ class SymptomRepository {
         .then(
       (snapshot) {
         return snapshot.documents.map((doc) {
-          return Symptom.fromJson(doc.data['symptom']);
+          return Necessity.fromJson(doc.data['necessity']);
         }).toList();
       },
     );

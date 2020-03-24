@@ -1,4 +1,6 @@
 import 'package:coronamapp/constants/routes.dart';
+import 'package:coronamapp/screens/help_form.dart';
+import 'package:coronamapp/stores/help_form_store.dart';
 import 'package:coronamapp/stores/step2_store.dart';
 import 'package:coronamapp/stores/step1_store.dart';
 import 'package:coronamapp/screens/home.dart';
@@ -23,7 +25,7 @@ class Router {
             risk: risk,
           ),
         );
-      case Routes.formPage:
+      case Routes.detectionPage:
         return MaterialPageRoute(
           builder: (_) => MultiProvider(
             providers: [
@@ -36,6 +38,16 @@ class Router {
         );
       case Routes.splashPage:
         return MaterialPageRoute(builder: (_) => Splash());
+      case Routes.suppliesPage:
+        return MaterialPageRoute(
+          builder: (_) => MultiProvider(
+            providers: [
+              Provider<Step1Store>(create: (_) => Step1Store()),
+              Provider<NecessitiesStore>(create: (_) => NecessitiesStore()),
+            ],
+            child: HelpForm(),
+          ),
+        );
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(
