@@ -34,6 +34,9 @@ abstract class _Step1Store with Store {
   @observable
   Address address = Address();
 
+  @observable
+  String email;
+
   @computed
   String get fullName => firstName + lastName;
 
@@ -45,6 +48,7 @@ abstract class _Step1Store with Store {
   User get userPersonalFormData => User.fromForm(
         firstName: firstName,
         lastName: lastName,
+        email: email,
         dob: dob,
         age: age,
         gender: Gender.create(label: gender, ref: gender),
@@ -63,6 +67,7 @@ abstract class _Step1Store with Store {
     lastName = user.lastName;
     gender = user.gender?.ref;
     dob = user.dob;
+    email = user.email;
     phoneNoText = user.phoneNumber;
     homeNoText = user.homeNumber;
     address = user.address ?? Address();
@@ -74,11 +79,17 @@ abstract class _Step1Store with Store {
       reaction((_) => lastName, validateLastName),
       reaction((_) => dob, validateDob),
       reaction((_) => gender, validateGender),
+      reaction((_) => email, validateEmail),
       reaction((_) => phoneNoText, validatePhoneNo),
       reaction((_) => homeNoText, validateHomeNo),
       reaction((_) => address.line1, validateLine1),
       reaction((_) => address.region, validateRegion),
     ];
+  }
+
+  @action
+  Future validateEmail(String value) async {
+    error.email = null;
   }
 
   @action
@@ -221,6 +232,9 @@ abstract class _StepErrorState with Store {
   String gender;
 
   @observable
+  String email;
+
+  @observable
   String line1;
 
   @observable
@@ -234,5 +248,6 @@ abstract class _StepErrorState with Store {
       gender != null ||
       phoneNo != null ||
       line1 != null ||
-      region != null;
+      region != null ||
+      email != null;
 }

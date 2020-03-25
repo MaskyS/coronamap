@@ -161,6 +161,30 @@ mixin _$Step1Store on _Step1Store, Store {
     }, _$addressAtom, name: '${_$addressAtom.name}_set');
   }
 
+  final _$emailAtom = Atom(name: '_Step1Store.email');
+
+  @override
+  String get email {
+    _$emailAtom.context.enforceReadPolicy(_$emailAtom);
+    _$emailAtom.reportObserved();
+    return super.email;
+  }
+
+  @override
+  set email(String value) {
+    _$emailAtom.context.conditionallyRunInAction(() {
+      super.email = value;
+      _$emailAtom.reportChanged();
+    }, _$emailAtom, name: '${_$emailAtom.name}_set');
+  }
+
+  final _$validateEmailAsyncAction = AsyncAction('validateEmail');
+
+  @override
+  Future<dynamic> validateEmail(String value) {
+    return _$validateEmailAsyncAction.run(() => super.validateEmail(value));
+  }
+
   final _$validateFirstNameAsyncAction = AsyncAction('validateFirstName');
 
   @override
@@ -262,7 +286,7 @@ mixin _$Step1Store on _Step1Store, Store {
   @override
   String toString() {
     final string =
-        'error: ${error.toString()},firstName: ${firstName.toString()},lastName: ${lastName.toString()},dob: ${dob.toString()},gender: ${gender.toString()},phoneNoText: ${phoneNoText.toString()},homeNoText: ${homeNoText.toString()},address: ${address.toString()},fullName: ${fullName.toString()},age: ${age.toString()},canMoveToNextPage: ${canMoveToNextPage.toString()}';
+        'error: ${error.toString()},firstName: ${firstName.toString()},lastName: ${lastName.toString()},dob: ${dob.toString()},gender: ${gender.toString()},phoneNoText: ${phoneNoText.toString()},homeNoText: ${homeNoText.toString()},address: ${address.toString()},email: ${email.toString()},fullName: ${fullName.toString()},age: ${age.toString()},canMoveToNextPage: ${canMoveToNextPage.toString()}';
     return '{$string}';
   }
 }
@@ -376,6 +400,23 @@ mixin _$StepErrorState on _StepErrorState, Store {
     }, _$genderAtom, name: '${_$genderAtom.name}_set');
   }
 
+  final _$emailAtom = Atom(name: '_StepErrorState.email');
+
+  @override
+  String get email {
+    _$emailAtom.context.enforceReadPolicy(_$emailAtom);
+    _$emailAtom.reportObserved();
+    return super.email;
+  }
+
+  @override
+  set email(String value) {
+    _$emailAtom.context.conditionallyRunInAction(() {
+      super.email = value;
+      _$emailAtom.reportChanged();
+    }, _$emailAtom, name: '${_$emailAtom.name}_set');
+  }
+
   final _$line1Atom = Atom(name: '_StepErrorState.line1');
 
   @override
@@ -413,7 +454,7 @@ mixin _$StepErrorState on _StepErrorState, Store {
   @override
   String toString() {
     final string =
-        'firstName: ${firstName.toString()},lastName: ${lastName.toString()},phoneNo: ${phoneNo.toString()},homeNo: ${homeNo.toString()},age: ${age.toString()},gender: ${gender.toString()},line1: ${line1.toString()},region: ${region.toString()},hasErrors: ${hasErrors.toString()}';
+        'firstName: ${firstName.toString()},lastName: ${lastName.toString()},phoneNo: ${phoneNo.toString()},homeNo: ${homeNo.toString()},age: ${age.toString()},gender: ${gender.toString()},email: ${email.toString()},line1: ${line1.toString()},region: ${region.toString()},hasErrors: ${hasErrors.toString()}';
     return '{$string}';
   }
 }

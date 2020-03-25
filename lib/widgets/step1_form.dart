@@ -117,6 +117,7 @@ class _Step1FormState extends State<Step1Form> {
                           );
                           return DatePicker.showDatePicker(
                             context,
+                            locale: Localizations.localeOf(context).languageCode == "en" ? LocaleType.en : LocaleType.fr,
                             showTitleActions: true,
                             minTime: DateTime(1900, 5, 5),
                             maxTime: DateTime(2019, 12),

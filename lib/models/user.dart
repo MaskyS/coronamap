@@ -20,6 +20,7 @@ class User {
   Address address;
   DateTime firstSymptomDate;
   DateTime dob;
+  String email;
   int age;
   DateTime createdAt;
   DateTime updatedAt;
@@ -35,6 +36,7 @@ class User {
     this.preExistingConditions,
     this.symptoms,
     this.address,
+    this.email,
     this.firstSymptomDate,
     this.dob,
     this.age,
@@ -50,6 +52,7 @@ class User {
     this.phoneNumber,
     this.homeNumber,
     this.address,
+    this.email,
     this.dob,
     this.age,
     this.createdAt,

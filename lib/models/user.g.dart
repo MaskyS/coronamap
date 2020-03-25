@@ -29,6 +29,7 @@ User _$UserFromJson(Map<String, dynamic> json) {
     address: json['address'] == null
         ? null
         : Address.fromJson(json['address'] as Map<String, dynamic>),
+    email: json['email'] as String,
     firstSymptomDate: json['firstSymptomDate'] == null
         ? null
         : DateTime.parse(json['firstSymptomDate'] as String),
@@ -56,6 +57,7 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'address': instance.address,
       'firstSymptomDate': instance.firstSymptomDate?.toIso8601String(),
       'dob': instance.dob?.toIso8601String(),
+      'email': instance.email,
       'age': instance.age,
       'createdAt': instance.createdAt?.toIso8601String(),
       'updatedAt': instance.updatedAt?.toIso8601String(),

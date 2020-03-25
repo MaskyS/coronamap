@@ -46,7 +46,6 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
       List<dynamic> points = json.decode(response.body);
 
       points.forEach((value) {
-        print(value);
         markers.add(Marker(
           anchorPos: AnchorPos.align(AnchorAlign.center),
           height: 30,
@@ -57,9 +56,11 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
 
       });
 
-      setState(() {
-        markers = List.from(markers);
-      });
+      if (mounted) {
+        setState(() {
+          markers = List.from(markers);
+        });
+      }
     } else {
 
       throw Exception('Failed to load markers');

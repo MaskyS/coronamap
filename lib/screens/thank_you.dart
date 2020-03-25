@@ -64,7 +64,7 @@ class _ThankYouFormState extends State<ThankYouForm> {
                     ),
                     // ! TODO Use location-specific hotlines instead
                     FlatButton.icon(
-                      onPressed: () => UrlLauncher.launch("tel://114"),
+                      onPressed: () => UrlLauncher.launch("tel://15"),
                       icon: Container(
                         margin: EdgeInsets.symmetric(vertical: 10),
                         child: Icon(Icons.call),
