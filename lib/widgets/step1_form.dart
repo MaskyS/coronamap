@@ -233,6 +233,21 @@ class _Step1FormState extends State<Step1Form> {
                   ),
                 );
               }),
+              SizedBox(height: 20),
+              Observer(builder: (_) {
+                return FormBuilderTextField(
+                  attribute: 'email',
+                  initialValue: _store.email,
+                  onChanged: (v) => _store.email = v,
+                  decoration: _baseDeco.copyWith(
+                    labelText: "Email",
+                    errorText: _store.email == null
+                        ? null
+                        : AppLocalizations.of(context)
+                        .translate(_store.error.email),
+                  ),
+                );
+              }),
             ],
           ),
         ),
