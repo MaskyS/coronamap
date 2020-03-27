@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "997427785224",
-    "firebase_url": "https://corona-mapp.firebaseio.com",
-    "project_id": "corona-mapp",
-    "storage_bucket": "corona-mapp.appspot.com"
+    "project_number": "811864431564",
+    "firebase_url": "https://corona-mapp-re.firebaseio.com",
+    "project_id": "corona-mapp-re",
+    "storage_bucket": "corona-mapp-re.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:997427785224:android:6091b1ecf1d87ece6b6bbd",
+        "mobilesdk_app_id": "1:811864431564:android:e9b8c0687bb17e1ba45b69",
         "android_client_info": {
-          "package_name": "mu.cyberstorm.coronamapp"
+          "package_name": "re.coronamapp.app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "997427785224-t0bt31vcmlh7omp5t16fq9oikf90l4o5.apps.googleusercontent.com",
+          "client_id": "811864431564-oergj237h0661t5399g1k7qvprp9tvbc.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyApFgmr_K6JO3Ga_S4enbKne_u1nBPi2MI"
+          "current_key": "AIzaSyC4oqgFac4Z31dm2Rg9_tcPVh2-GUbnNcw"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "997427785224-t0bt31vcmlh7omp5t16fq9oikf90l4o5.apps.googleusercontent.com",
+              "client_id": "811864431564-oergj237h0661t5399g1k7qvprp9tvbc.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

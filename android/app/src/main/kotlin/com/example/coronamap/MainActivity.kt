@@ -1,4 +1,4 @@
-package mu.cyberstorm.coronamapp
+package re.coronamapp.app
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity
