@@ -42,7 +42,9 @@ class _SymptomsFormState extends State<SymptomsForm> {
   @override
   void initState() {
     super.initState();
-    getFirebaseData();
+    if (mounted) {
+      getFirebaseData();
+    }
   }
 
   Future<void> getFirebaseData() async {
