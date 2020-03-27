@@ -27,7 +27,7 @@ class _ThankYouFormState extends State<ThankYouForm> {
             flex: 3,
             child: getIcon(widget.risk),
           ),
-          Spacer(flex: 1),
+          Spacer(flex: 2),
           Expanded(
             flex:5,
             child: Padding(
@@ -41,7 +41,7 @@ class _ThankYouFormState extends State<ThankYouForm> {
           ),
           Spacer(flex: 1),
           Expanded(
-            flex: 2,
+            flex: 3,
             child: Align(
               alignment: Alignment.bottomCenter,
               child: Padding(
