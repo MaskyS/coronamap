@@ -40,7 +40,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
   ];
 
   Future fetchPoints() async {
-    final response = await http.get('https://us-central1-corona-mapp.cloudfunctions.net/getAllLocation');
+    final response = await http.get('https://us-central1-corona-mapp-re.cloudfunctions.net/getAllLocation');
 
     if (response.statusCode == 200) {
       List<dynamic> points = json.decode(response.body);
