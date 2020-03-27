@@ -43,7 +43,12 @@ class _Step2FormState extends State<Step2Form> {
                         (e) => FormBuilderFieldOption(
                           value: e,
                           child: Text(
-                              AppLocalizations.of(context).translate(e.ref)),
+                            AppLocalizations.of(context).translate(e.ref),
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.black.withOpacity(0.8),
+                            ),
+                          ),
                         ),
                       )
                       .toList(),
