@@ -90,6 +90,7 @@ abstract class _Step1Store with Store {
   @action
   Future validateEmail(String value) async {
     error.email = null;
+    error.email = FormBuilderValidators.email(errorText: 'form_error_email')(value) ?? null;
   }
 
   @action

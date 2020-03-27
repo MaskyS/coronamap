@@ -43,6 +43,7 @@
   "form_error_address_line_1": "Address line 1 needed",
   "form_error_city": "City needed ",
   "form_error_city_alpha": "Must contain letters only",
+  "form_error_email": "Invalid format",
   "asthma": "Asthma",
   "chronic_heart_failure": "Chronic heart failure",
   "diabetes": "Diabetes",

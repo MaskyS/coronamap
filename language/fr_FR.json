@@ -43,6 +43,7 @@
   "form_error_address_line_1": "Adresse 1 obligatoire",
   "form_error_city": "Quartier requis",
   "form_error_city_alpha": "Doit être des lettres",
+  "form_error_email": "Format invalid",
   "asthma": "Asthme",
   "chronic_heart_failure": "Insuffisance cardiaque chronique",
   "diabetes": "Diabète",
