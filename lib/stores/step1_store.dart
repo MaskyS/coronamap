@@ -99,7 +99,7 @@ abstract class _Step1Store with Store {
     var requiredValidator =
         FormBuilderValidators.required(errorText: 'form_error_first_name');
     error.firstName = requiredValidator(value);
-    if (!isAlpha(value.replaceAll(' ', ''))) {
+    if (!isAlpha(value.replaceAll(' ', '').replaceAll('-', ''))) {
       error.firstName = "form_error_first_name_alpha";
     }
   }
@@ -112,7 +112,7 @@ abstract class _Step1Store with Store {
         FormBuilderValidators.required(errorText: 'form_error_last_name');
     error.lastName = requiredValidator(value);
 
-    if (!isAlpha(lastName.replaceAll(' ',''))) {
+    if (!isAlpha(lastName.replaceAll(' ','').replaceAll('-', ''))) {
       error.lastName = "form_error_last_name_alpha";
     }
   }
