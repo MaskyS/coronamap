@@ -71,5 +71,9 @@
   "rice": "Rice",
   "meat": "Meat",
   "vegetables": "Vegetables",
-  "first_aid_supplies": "First aid box"
+  "first_aid_supplies": "First aid box",
+
+  "no_connection": "No connection",
+  "no_connection_message": "It seems like you are offline. Please check your connectivity.",
+  "no_connection_button_close": "OK"
 }

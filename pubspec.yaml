@@ -45,6 +45,8 @@ dependencies:
   flutter_map: any
   flutter_map_marker_cluster: any
   http: any
+  connectivity: ^0.4.8+2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -70,5 +70,9 @@
   "rice": "Diri",
   "meat": "La viande",
   "vegetables": "legumes",
-  "first_aid_supplies": "kit premier secour"
+  "first_aid_supplies": "kit premier secour",
+
+  "no_connection": "Ou pa konecte.",
+  "no_connection_message": "Ou pena konesion internet. Esay enkor enn foi avec internet active",
+  "no_connection_button_close": "OK"
 }

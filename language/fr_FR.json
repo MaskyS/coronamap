@@ -71,5 +71,9 @@
   "rice": "Du riz",
   "meat": "La viande",
   "vegetables": "Des Légumes",
-  "first_aid_supplies": "Kit de premiers secours"
+  "first_aid_supplies": "Kit de premiers secours",
+
+  "no_connection": "Aucune connexion.",
+  "no_connection_message": "Il semble que vous n'avez pas de connexion en cours. Vérifiez que vous êtes connecté.",
+  "no_connection_button_close": "OK"
 }

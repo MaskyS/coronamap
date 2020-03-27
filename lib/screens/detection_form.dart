@@ -1,3 +1,4 @@
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:coronamapp/risk_enum.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -43,8 +44,41 @@ class _SymptomsFormState extends State<SymptomsForm> {
   void initState() {
     super.initState();
     if (mounted) {
-      getFirebaseData();
+      checkIfConnected().then((active) {
+        if (!active) {
+          handleNoConnection(context);
+        } else {
+          getFirebaseData();
+        }
+      });
     }
+  }
+
+  static Future<bool> checkIfConnected() async {
+    var connectivityResult = await Connectivity().checkConnectivity();
+    return (connectivityResult != ConnectivityResult.none);
+  }
+
+  void handleNoConnection(BuildContext context) async {
+    await showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (_) => AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        title: Text(
+          AppLocalizations.of(context).translate("no_connection"),
+          textAlign: TextAlign.center,
+        ),
+        content: Text(AppLocalizations.of(context).translate("no_connection_message")),
+        actions: <Widget>[
+          FlatButton(
+            child: Text(AppLocalizations.of(context).translate("no_connection_button_close")),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
+        ],
+      ),
+    );
+    Navigator.of(context).pop();
   }
 
   Future<void> getFirebaseData() async {
