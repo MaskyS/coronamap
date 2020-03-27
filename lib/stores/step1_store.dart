@@ -95,26 +95,21 @@ abstract class _Step1Store with Store {
   @action
   Future validateFirstName(String value) async {
     error.firstName = null;
-
-    var requiredValidator =
-        FormBuilderValidators.required(errorText: 'form_error_first_name');
-    error.firstName = requiredValidator(value);
-    if (!isAlpha(value.replaceAll(' ', '').replaceAll('-', ''))) {
-      error.firstName = "form_error_first_name_alpha";
-    }
+    error.firstName = FormBuilderValidators.required(
+            errorText: 'form_error_first_name')(value) ??
+        FormBuilderValidators.pattern(
+            r"^[a-zA-ZÀ-ÿ ,.\'-]+$",
+            errorText: "form_error_first_name_alpha")(value);
   }
 
   @action
   Future validateLastName(String value) async {
     error.lastName = null;
 
-    var requiredValidator =
-        FormBuilderValidators.required(errorText: 'form_error_last_name');
-    error.lastName = requiredValidator(value);
-
-    if (!isAlpha(lastName.replaceAll(' ','').replaceAll('-', ''))) {
-      error.lastName = "form_error_last_name_alpha";
-    }
+    error.lastName = FormBuilderValidators.required(
+            errorText: 'form_error_last_name')(value) ??
+        FormBuilderValidators.pattern(r"^[a-zA-ZÀ-ÿ ,.\'-]+$",
+            errorText: "form_error_first_name_alpha")(value);
   }
 
   @action
