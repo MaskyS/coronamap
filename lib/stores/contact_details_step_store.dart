@@ -8,7 +8,8 @@ import 'package:validators/validators.dart';
 
 part 'contact_details_step_store.g.dart';
 
-class ContactDetailsStepStore = _ContactDetailsStepStore with _$ContactDetailsStepStore;
+class ContactDetailsStepStore = _ContactDetailsStepStore
+    with _$ContactDetailsStepStore;
 
 abstract class _ContactDetailsStepStore with Store {
   @observable
@@ -87,25 +88,20 @@ abstract class _ContactDetailsStepStore with Store {
   Future validateFirstName(String value) async {
     error.firstName = null;
 
-    var requiredValidator =
-        FormBuilderValidators.required(errorText: 'form_error_first_name');
-    error.firstName = requiredValidator(value);
-    if (!isAlpha(value.replaceAll(' ', ''))) {
-      error.firstName = "form_error_first_name_alpha";
-    }
+    error.firstName = FormBuilderValidators.required(
+            errorText: 'form_error_first_name')(value) ??
+        FormBuilderValidators.pattern(r"^[a-zA-ZÀ-ÿ ,.\'-]+$",
+            errorText: "form_error_first_name_alpha")(value);
   }
 
   @action
   Future validateLastName(String value) async {
     error.lastName = null;
 
-    var requiredValidator =
-        FormBuilderValidators.required(errorText: 'form_error_last_name');
-    error.lastName = requiredValidator(value);
-
-    if (!isAlpha(lastName.replaceAll(' ',''))) {
-      error.lastName = "form_error_last_name_alpha";
-    }
+    error.lastName = FormBuilderValidators.required(
+            errorText: 'form_error_last_name')(value) ??
+        FormBuilderValidators.pattern(r"^[a-zA-ZÀ-ÿ ,.\'-]+$",
+            errorText: "form_error_first_name_alpha")(value);
   }
 
   @action
