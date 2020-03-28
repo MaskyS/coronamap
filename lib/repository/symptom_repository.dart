@@ -14,8 +14,8 @@ class SymptomRepository {
         });
   }
 
-  Future<List<Symptom>> getAllWithLimit({int limit = 10}) {
-    
+  Future<List<Symptom>> getAllWithLimit({int limit = 20}) {
+
     return Firestore.instance
         .collection(dbName)
         .limit(limit)

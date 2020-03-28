@@ -120,7 +120,7 @@ abstract class _Step3StoreBase with Store {
   Future<void> getSymptomsFromFirestore() async {
     try {
       _symptomsListFuture =
-          ObservableFuture(SymptomRepository().getAllWithLimit(limit: 20));
+          ObservableFuture(SymptomRepository().getAllWithLimit());
       symptomsList = await _symptomsListFuture;
     } catch (e) {
       print(e);
