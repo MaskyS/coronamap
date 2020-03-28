@@ -127,7 +127,7 @@ class _SymptomsFormState extends State<SymptomsForm> {
       );
     return Scaffold(
       appBar: AppBar(
-          title: Text(AppLocalizations.of(context).translate("form_title"))),
+          title: Text(AppLocalizations.of(context).translate("test_form_title"))),
       body: Stepper(
         physics: ClampingScrollPhysics(),
         type: StepperType.horizontal,
