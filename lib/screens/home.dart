@@ -49,9 +49,9 @@ class _HomePageState extends State<HomePage>
           height: 30,
           width: 30,
           point: LatLng(
-              value['position'][1],
-              value['position'][
-                  0]), // Mapbox read Long and lat last, here its lat then long... (shrug)
+            value['position'][1],
+            value['position'][0],
+          ), // Mapbox read Long and lat last, here its lat then long... (shrug)
           builder: (ctx) => marker,
         ));
       });

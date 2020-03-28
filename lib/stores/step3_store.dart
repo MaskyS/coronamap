@@ -42,22 +42,23 @@ abstract class _Step3StoreBase with Store {
   void calculateRisk(int age, bool hasPreExistingConditions) {
     if (chosenSymptoms.isEmpty) return;
     int sum;
-    sum = chosenSymptoms.fold<int>(
-        0, (previousValue, element) => previousValue + (element.riskFactor ?? 0));
+    sum = chosenSymptoms.fold<int>(0,
+        (previousValue, element) => previousValue + (element.riskFactor ?? 0));
 
-    if ((age > 60) && (hasPreExistingConditions)) {
-      risk = Risk.severe;
-    }
-
-    int severeSum = 20;
-    int atRiskSum = 15;
+    int severeSum;
+    int atRiskSum;
 
     if (age > 60) {
+      if (hasPreExistingConditions) {
+        risk = Risk.severe;
+        return;
+      }
+
       severeSum = 10;
-      atRiskSum = 0;
-    } else if (hasPreExistingConditions) {
-      severeSum = 15;
       atRiskSum = 9;
+    } else {
+      severeSum = (hasPreExistingConditions) ? 15 : 20;
+      atRiskSum = (hasPreExistingConditions) ? 9 : 14;
     }
 
     if (sum > severeSum) {
