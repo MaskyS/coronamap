@@ -68,7 +68,8 @@
   "fever": "Fièvre",
   "body_ache": "Courbatures",
   "shortness_of_breath": "Essoufflement",
-
+  "loss_of_smell": "Perte d'odorat",
+  "loss_of_taste": "Perte de gout",
   "call_emergency": "Appeler les urgences",
   "test_form_title": "Détection d'infection",
   "supplies_form_title": "Soliciter des fournitures",

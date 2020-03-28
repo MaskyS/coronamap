@@ -68,6 +68,8 @@
   "fever": "Fever",
   "body_ache": "Body ache",
   "shortness_of_breath": "Shortness of breath",
+  "loss_of_smell": "Loss of smell",
+  "loss_of_taste": "Loss of taste",
   "call_emergency": "Call SAMU",
   "test_form_title": "Infection Detection",
   "supplies_form_title": "Request Supplies",
