@@ -62,10 +62,13 @@
   "fever": "Fièvre",
   "body_ache": "Courbatures",
   "shortness_of_breath": "Essoufflement",
-
-  "call_emergency": "Appeler le 15",
-  "form_title": "Covid-19 Dépistage",
-
+  "loss_of_smell": "Perte d'odorat",
+  "loss_of_taste": "Perte de gout",
+  "call_emergency": "Appeler les urgences",
+  "test_form_title": "Détection d'infection",
+  "supplies_form_title": "Soliciter des fournitures",
+  "other_label": "Autre",
+  "emergency_label": "Est-ce cela une urgence?",
   "cooking_oil": "Huile de cuisson",
   "water": "L'eau",
   "flour": "La farine",

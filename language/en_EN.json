@@ -62,10 +62,13 @@
   "fever": "Fever",
   "body_ache": "Body ache",
   "shortness_of_breath": "Shortness of breath",
-
-  "call_emergency": "Call SAMU on 15",
-  "form_title": "Covid-19 Detection",
-
+  "loss_of_smell": "Loss of smell",
+  "loss_of_taste": "Loss of taste",
+  "call_emergency": "Call SAMU",
+  "test_form_title": "Infection Detection",
+  "supplies_form_title": "Request Supplies",
+  "other_label": "Other",
+  "emergency_label": "Is this an emergency?",
   "cooking_oil": "Cooking oil",
   "water": "Water",
   "flour": "Flour",

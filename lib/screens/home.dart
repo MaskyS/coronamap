@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 
 import 'package:coronamapp/config/app_localizations.dart';
@@ -16,7 +15,8 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin {
+class _HomePageState extends State<HomePage>
+    with SingleTickerProviderStateMixin {
   AnimationController _controller;
   Widget marker = Container(
     child: Center(
@@ -27,20 +27,18 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
     ),
     width: 10,
     height: 10,
-    decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: Colors.red
-    ),
+    decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.red),
   );
 
   List<Marker> markers = [];
   int pointIndex;
   List points = [
-    LatLng(-21.1151,55.5364),
+    LatLng(-21.1151, 55.5364),
   ];
 
   Future fetchPoints() async {
-    final response = await http.get('https://us-central1-corona-mapp-re.cloudfunctions.net/getAllLocation');
+    final response = await http.get(
+        'https://us-central1-corona-mapp-re.cloudfunctions.net/getAllLocation');
 
     if (response.statusCode == 200) {
       List<dynamic> points = json.decode(response.body);
@@ -50,10 +48,12 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
           anchorPos: AnchorPos.align(AnchorAlign.center),
           height: 30,
           width: 30,
-          point: LatLng(value['position'][1], value['position'][0]), // Mapbox read Long and lat last, here its lat then long... (shrug)
+          point: LatLng(
+              value['position'][1],
+              value['position'][
+                  0]), // Mapbox read Long and lat last, here its lat then long... (shrug)
           builder: (ctx) => marker,
         ));
-
       });
 
       if (mounted) {
@@ -62,7 +62,6 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
         });
       }
     } else {
-
       throw Exception('Failed to load markers');
     }
   }
@@ -77,6 +76,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
     fetchPoints();
     super.initState();
   }
+
   @override
   void dispose() {
     _controller.dispose();
@@ -107,7 +107,8 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
         ),
         layers: [
           TileLayerOptions(
-            urlTemplate: "https://api.mapbox.com/styles/v1/brunobernard-cyberstorm/ck83ewn0t60en1imfefnq6rmz/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiYnJ1bm9iZXJuYXJkLWN5YmVyc3Rvcm0iLCJhIjoiY2s4M2RoZDMzMGVtcjNrcXRpaDR5NTNsNyJ9.k5tTHoB34znEr6sJkpvHFA",
+            urlTemplate:
+                "https://api.mapbox.com/styles/v1/brunobernard-cyberstorm/ck83ewn0t60en1imfefnq6rmz/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiYnJ1bm9iZXJuYXJkLWN5YmVyc3Rvcm0iLCJhIjoiY2s4M2RoZDMzMGVtcjNrcXRpaDR5NTNsNyJ9.k5tTHoB34znEr6sJkpvHFA",
           ),
           MarkerClusterLayerOptions(
             maxClusterRadius: 120,
@@ -142,7 +143,8 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
         onPressed: () async {
           Navigator.pushNamed(context, Routes.formPage);
         },
-        tooltip: AppLocalizations.of(context).translate("tooltip_report_button"),
+        tooltip:
+            AppLocalizations.of(context).translate("tooltip_report_button"),
         label: Text(AppLocalizations.of(context).translate("report_button")),
         backgroundColor: Colors.orange,
       ),
