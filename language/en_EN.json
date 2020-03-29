@@ -33,6 +33,7 @@
   "form_choose_pre_condition": "Please choose your pre-existing conditions:",
   "form_choose_symptom": "Please choose your symptoms",
   "form_choose_necessities": "Please choose your necessities",
+  "form_other_symptoms": "Other symptoms",
   "form_date_infection": "Enter date symptoms first appeared :",
   "form_error_first_name": "First name needed",
   "form_error_last_name": "Last name needed",

@@ -21,6 +21,9 @@ abstract class _SymptomsStepStoreBase with Store {
   @observable
   List<Symptom> symptomsList = <Symptom>[];
 
+  @observable
+  String otherSymptoms;
+
   /// First date symptoms observed.
   @observable
   DateTime firstDate;
@@ -42,8 +45,8 @@ abstract class _SymptomsStepStoreBase with Store {
   void calculateRisk(int age, bool hasPreExistingConditions) {
     if (chosenSymptoms.isEmpty) return;
     int sum;
-    sum = chosenSymptoms.fold<int>(
-        0, (previousValue, element) => previousValue + (element.riskFactor ?? 0));
+    sum = chosenSymptoms.fold<int>(0,
+        (previousValue, element) => previousValue + (element.riskFactor ?? 0));
 
     if ((age > 60) && (hasPreExistingConditions)) {
       risk = Risk.severe;
@@ -92,10 +95,8 @@ abstract class _SymptomsStepStoreBase with Store {
 
   @action
   void validateChosenSymptoms(List<Symptom> values) {
-    if (values == null) {
+    if (values == null && otherSymptoms == null) {
       chosenSymptomsErrorText = "must_fill_symptoms";
-    } else {
-      chosenSymptomsErrorText = values.length < 1 ? 'must_fill_symptoms' : null;
     }
   }
 

@@ -93,6 +93,24 @@ mixin _$SymptomsStepStore on _SymptomsStepStoreBase, Store {
     }, _$symptomsListAtom, name: '${_$symptomsListAtom.name}_set');
   }
 
+  final _$otherSymptomsAtom =
+      Atom(name: '_SymptomsStepStoreBase.otherSymptoms');
+
+  @override
+  String get otherSymptoms {
+    _$otherSymptomsAtom.context.enforceReadPolicy(_$otherSymptomsAtom);
+    _$otherSymptomsAtom.reportObserved();
+    return super.otherSymptoms;
+  }
+
+  @override
+  set otherSymptoms(String value) {
+    _$otherSymptomsAtom.context.conditionallyRunInAction(() {
+      super.otherSymptoms = value;
+      _$otherSymptomsAtom.reportChanged();
+    }, _$otherSymptomsAtom, name: '${_$otherSymptomsAtom.name}_set');
+  }
+
   final _$firstDateAtom = Atom(name: '_SymptomsStepStoreBase.firstDate');
 
   @override
@@ -211,7 +229,7 @@ mixin _$SymptomsStepStore on _SymptomsStepStoreBase, Store {
   @override
   String toString() {
     final string =
-        'chosenSymptoms: ${chosenSymptoms.toString()},errorMessage: ${errorMessage.toString()},symptomsList: ${symptomsList.toString()},firstDate: ${firstDate.toString()},chosenSymptomsErrorText: ${chosenSymptomsErrorText.toString()},firstDateErrorText: ${firstDateErrorText.toString()},risk: ${risk.toString()},canCompleteForm: ${canCompleteForm.toString()},state: ${state.toString()}';
+        'chosenSymptoms: ${chosenSymptoms.toString()},errorMessage: ${errorMessage.toString()},symptomsList: ${symptomsList.toString()},otherSymptoms: ${otherSymptoms.toString()},firstDate: ${firstDate.toString()},chosenSymptomsErrorText: ${chosenSymptomsErrorText.toString()},firstDateErrorText: ${firstDateErrorText.toString()},risk: ${risk.toString()},canCompleteForm: ${canCompleteForm.toString()},state: ${state.toString()}';
     return '{$string}';
   }
 }
