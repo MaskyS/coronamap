@@ -53,7 +53,8 @@ class _Step3FormState extends State<Step3Form> {
                 options: _store.symptomsList
                     .map((e) => FormBuilderFieldOption(
                           value: e,
-                          child: Text(AppLocalizations.of(context).translate(e.ref)),
+                          child: Text(
+                              AppLocalizations.of(context).translate(e.ref)),
                         ))
                     .toList(),
                 spacing: 10,
@@ -65,11 +66,28 @@ class _Step3FormState extends State<Step3Form> {
                   _store.chosenSymptoms = temp;
                 },
                 decoration: _baseDeco.copyWith(
-                  labelText: AppLocalizations.of(context).translate("form_choose_symptom"),
-                  errorText: _store.chosenSymptomsErrorText == null  ? null :  AppLocalizations.of(context).translate(_store.chosenSymptomsErrorText),
+                  labelText: AppLocalizations.of(context)
+                      .translate("form_choose_symptom"),
+                  errorText: _store.chosenSymptomsErrorText == null
+                      ? null
+                      : AppLocalizations.of(context)
+                          .translate(_store.chosenSymptomsErrorText),
                 ),
               );
             });
+          }),
+          SizedBox(height: 10),
+          Observer(builder: (_) {
+            return FormBuilderTextField(
+              attribute:
+                  AppLocalizations.of(context).translate("form_other_symptom"),
+              initialValue: _store.otherSymptoms,
+              onChanged: (v) => _store.otherSymptoms = v,
+              decoration: _baseDeco.copyWith(
+                labelText: AppLocalizations.of(context)
+                    .translate("form_other_symptom"),
+              ),
+            );
           }),
           SizedBox(height: 30),
           Observer(builder: (_) {
@@ -82,8 +100,12 @@ class _Step3FormState extends State<Step3Form> {
               initialValue: _store.firstDate,
               onChanged: (v) => _store.firstDate = v,
               decoration: _baseDeco.copyWith(
-                labelText: AppLocalizations.of(context).translate("form_date_infection"),
-                errorText: _store.firstDateErrorText == null  ? null :  AppLocalizations.of(context).translate(_store.firstDateErrorText),
+                labelText: AppLocalizations.of(context)
+                    .translate("form_date_infection"),
+                errorText: _store.firstDateErrorText == null
+                    ? null
+                    : AppLocalizations.of(context)
+                        .translate(_store.firstDateErrorText),
               ),
             );
           }),

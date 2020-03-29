@@ -26,6 +26,7 @@
   "form_address_line_2": "Street Name 2",
   "form_city": "City﹡",
   "form_choose_pre_condition": "Please choose your pre-existing conditions:",
+  "form_other_symptom": "Other Symptoms",
   "form_choose_symptom": "Please choose your symptoms",
   "form_date_infection": "When you start to feel sick:",
   "form_error_first_name": "First name needed",
@@ -76,7 +77,7 @@
   "meat": "Meat",
   "vegetables": "Vegetables",
   "first_aid_supplies": "First aid box",
-
+  "thanks_report_msg": "Thank you for reporting.",
   "no_connection": "No connection",
   "no_connection_message": "It seems like you are offline. Please check your connectivity.",
   "no_connection_button_close": "OK"

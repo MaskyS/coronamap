@@ -15,6 +15,11 @@ mixin _$Step3Store on _Step3StoreBase, Store {
   bool get canCompleteForm => (_$canCompleteFormComputed ??=
           Computed<bool>(() => super.canCompleteForm))
       .value;
+  Computed<bool> _$hasSymptomsComputed;
+
+  @override
+  bool get hasSymptoms =>
+      (_$hasSymptomsComputed ??= Computed<bool>(() => super.hasSymptoms)).value;
   Computed<StoreState> _$stateComputed;
 
   @override
@@ -36,6 +41,23 @@ mixin _$Step3Store on _Step3StoreBase, Store {
       super.chosenSymptoms = value;
       _$chosenSymptomsAtom.reportChanged();
     }, _$chosenSymptomsAtom, name: '${_$chosenSymptomsAtom.name}_set');
+  }
+
+  final _$otherSymptomsAtom = Atom(name: '_Step3StoreBase.otherSymptoms');
+
+  @override
+  String get otherSymptoms {
+    _$otherSymptomsAtom.context.enforceReadPolicy(_$otherSymptomsAtom);
+    _$otherSymptomsAtom.reportObserved();
+    return super.otherSymptoms;
+  }
+
+  @override
+  set otherSymptoms(String value) {
+    _$otherSymptomsAtom.context.conditionallyRunInAction(() {
+      super.otherSymptoms = value;
+      _$otherSymptomsAtom.reportChanged();
+    }, _$otherSymptomsAtom, name: '${_$otherSymptomsAtom.name}_set');
   }
 
   final _$_symptomsListFutureAtom =
@@ -188,16 +210,6 @@ mixin _$Step3Store on _Step3StoreBase, Store {
   }
 
   @override
-  void validateChosenSymptoms(List<Symptom> values) {
-    final _$actionInfo = _$_Step3StoreBaseActionController.startAction();
-    try {
-      return super.validateChosenSymptoms(values);
-    } finally {
-      _$_Step3StoreBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   void validateFirstDate(DateTime dateTime) {
     final _$actionInfo = _$_Step3StoreBaseActionController.startAction();
     try {
@@ -210,7 +222,7 @@ mixin _$Step3Store on _Step3StoreBase, Store {
   @override
   String toString() {
     final string =
-        'chosenSymptoms: ${chosenSymptoms.toString()},errorMessage: ${errorMessage.toString()},symptomsList: ${symptomsList.toString()},firstDate: ${firstDate.toString()},chosenSymptomsErrorText: ${chosenSymptomsErrorText.toString()},firstDateErrorText: ${firstDateErrorText.toString()},risk: ${risk.toString()},canCompleteForm: ${canCompleteForm.toString()},state: ${state.toString()}';
+        'chosenSymptoms: ${chosenSymptoms.toString()},otherSymptoms: ${otherSymptoms.toString()},errorMessage: ${errorMessage.toString()},symptomsList: ${symptomsList.toString()},firstDate: ${firstDate.toString()},chosenSymptomsErrorText: ${chosenSymptomsErrorText.toString()},firstDateErrorText: ${firstDateErrorText.toString()},risk: ${risk.toString()},canCompleteForm: ${canCompleteForm.toString()},hasSymptoms: ${hasSymptoms.toString()},state: ${state.toString()}';
     return '{$string}';
   }
 }

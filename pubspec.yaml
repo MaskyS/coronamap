@@ -46,6 +46,7 @@ dependencies:
   flutter_map_marker_cluster: any
   http: any
   connectivity: ^0.4.8+2
+  flushbar: 1.9.1
 
 dev_dependencies:
   flutter_test:

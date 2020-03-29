@@ -27,6 +27,7 @@
   "form_city": "Ville/Village﹡",
   "form_choose_pre_condition": "Choissisez vos conditions pre-existantes:",
   "form_choose_symptom": "Vos symptômes",
+  "form_other_symptom": "D'autres symptômes",
   "form_date_infection": "Quand cela a-t-il commencé ?",
   "form_error_first_name": "Prénom requis",
   "form_error_last_name": "Nom requis",
@@ -76,7 +77,7 @@
   "meat": "La viande",
   "vegetables": "Des Légumes",
   "first_aid_supplies": "Kit de premiers secours",
-
+  "thanks_report_msg": "Merci pour votre rapport.",
   "no_connection": "Aucune connexion.",
   "no_connection_message": "Il semble que vous n'avez pas de connexion en cours. Vérifiez que vous êtes connecté.",
   "no_connection_button_close": "OK"

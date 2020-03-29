@@ -16,6 +16,7 @@ class User {
   String phoneNumber;
   String homeNumber;
   List<Symptom> symptoms;
+  String otherSymptoms;
   List<Condition> preExistingConditions;
   Address address;
   DateTime firstSymptomDate;
@@ -35,6 +36,7 @@ class User {
     this.homeNumber,
     this.preExistingConditions,
     this.symptoms,
+    this.otherSymptoms,
     this.address,
     this.email,
     this.firstSymptomDate,

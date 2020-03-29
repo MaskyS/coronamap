@@ -27,6 +27,7 @@
   "form_city": "Ville/Villaz﹡",
   "form_choose_pre_condition": "Chosir ou ban konditions pre-existants:",
   "form_choose_symptom": "Ou Sintom",
+  "form_other_symptom": "Lezot Sintom",
   "form_date_infection": "Kan sa in comencer?",
   "form_error_first_name": "Bizin Prenom",
   "form_error_last_name": "Bizin Nom",
@@ -76,7 +77,7 @@
   "meat": "La viande",
   "vegetables": "legumes",
   "first_aid_supplies": "kit premier secour",
-
+  "thanks_report_msg": "Merci pu ou rapport.",
   "no_connection": "Ou pa konecte.",
   "no_connection_message": "Ou pena konesion internet. Esay enkor enn foi avec internet active",
   "no_connection_button_close": "OK"

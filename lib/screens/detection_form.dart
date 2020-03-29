@@ -1,4 +1,5 @@
 import 'package:connectivity/connectivity.dart';
+import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:coronamapp/risk_enum.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -69,10 +70,12 @@ class _SymptomsFormState extends State<SymptomsForm> {
           AppLocalizations.of(context).translate("no_connection"),
           textAlign: TextAlign.center,
         ),
-        content: Text(AppLocalizations.of(context).translate("no_connection_message")),
+        content: Text(
+            AppLocalizations.of(context).translate("no_connection_message")),
         actions: <Widget>[
           FlatButton(
-            child: Text(AppLocalizations.of(context).translate("no_connection_button_close")),
+            child: Text(AppLocalizations.of(context)
+                .translate("no_connection_button_close")),
             onPressed: () => Navigator.of(context).pop(),
           ),
         ],
@@ -127,7 +130,8 @@ class _SymptomsFormState extends State<SymptomsForm> {
       );
     return Scaffold(
       appBar: AppBar(
-          title: Text(AppLocalizations.of(context).translate("test_form_title"))),
+          title:
+              Text(AppLocalizations.of(context).translate("test_form_title"))),
       body: Stepper(
         physics: ClampingScrollPhysics(),
         type: StepperType.horizontal,
@@ -189,10 +193,13 @@ class _SymptomsFormState extends State<SymptomsForm> {
           context: context,
           barrierDismissible: false,
           builder: (context) {
-            user.symptoms = _step3Store.chosenSymptoms;
-            user.firstSymptomDate = _step3Store.firstDate;
-            _step3Store.calculateRisk(_store.age, _step2Store.hasConditions);
-            user.risk = _step3Store.risk.value;
+            if (_step3Store.hasSymptoms) {
+              user.symptoms = _step3Store.chosenSymptoms;
+              user.otherSymptoms = _step3Store.otherSymptoms;
+              user.firstSymptomDate = _step3Store.firstDate;
+              _step3Store.calculateRisk(_store.age, _step2Store.hasConditions);
+              user.risk = _step3Store.risk.value;
+            }
             _getCurrentLocation().then(
               (value) {
                 user.location = Location(
@@ -219,11 +226,20 @@ class _SymptomsFormState extends State<SymptomsForm> {
         );
 
         userRepo.save(user);
-        Navigator.pushReplacementNamed(
-          context,
-          Routes.thankYouPage,
-          arguments: _step3Store.risk,
-        );
+        if (_step3Store.hasSymptoms) {
+          Navigator.pushReplacementNamed(
+            context,
+            Routes.thankYouPage,
+            arguments: _step3Store.risk,
+          );
+        } else {
+          Navigator.of(context).pop();
+          Flushbar(
+            message:
+                AppLocalizations.of(context).translate('thanks_report_msg'),
+            duration: Duration(seconds: 3),
+          )..show(context);
+        }
       }
     }
   }

@@ -13,6 +13,9 @@ abstract class _Step3StoreBase with Store {
   List<Symptom> chosenSymptoms = [];
 
   @observable
+  String otherSymptoms;
+
+  @observable
   ObservableFuture<List<Symptom>> _symptomsListFuture;
 
   @observable
@@ -31,12 +34,27 @@ abstract class _Step3StoreBase with Store {
   @observable
   String firstDateErrorText;
 
+  @observable
+  Risk risk;
+
   @computed
   bool get canCompleteForm =>
       chosenSymptomsErrorText == null && firstDateErrorText == null;
 
-  @observable
-  Risk risk;
+  @computed
+  bool get hasSymptoms => chosenSymptoms.isNotEmpty || otherSymptoms != null;
+
+  @computed
+  StoreState get state {
+    if (_symptomsListFuture == null ||
+        _symptomsListFuture.status == FutureStatus.rejected) {
+      return StoreState.initial;
+    }
+
+    return _symptomsListFuture.status == FutureStatus.pending
+        ? StoreState.loading
+        : StoreState.loaded;
+  }
 
   @action
   void calculateRisk(int age, bool hasPreExistingConditions) {
@@ -70,43 +88,23 @@ abstract class _Step3StoreBase with Store {
     }
   }
 
-  @computed
-  StoreState get state {
-    if (_symptomsListFuture == null ||
-        _symptomsListFuture.status == FutureStatus.rejected) {
-      return StoreState.initial;
-    }
-
-    return _symptomsListFuture.status == FutureStatus.pending
-        ? StoreState.loading
-        : StoreState.loaded;
-  }
-
   List<ReactionDisposer> _disposers;
 
   void setupValidations() {
     _disposers = [
-      reaction((_) => chosenSymptoms, validateChosenSymptoms),
       reaction((_) => firstDate, validateFirstDate),
     ];
   }
 
-  @action
-  void validateChosenSymptoms(List<Symptom> values) {
-    if (values == null) {
-      chosenSymptomsErrorText = "must_fill_symptoms";
-    } else {
-      chosenSymptomsErrorText = values.length < 1 ? 'must_fill_symptoms' : null;
-    }
-  }
 
   @action
   void validateFirstDate(DateTime dateTime) {
-    firstDateErrorText = dateTime == null ? 'must_fill_date_infection' : null;
+    if (hasSymptoms) {
+      firstDateErrorText = dateTime == null ? 'must_fill_date_infection' : null;
+    }
   }
 
   void validateAll() {
-    validateChosenSymptoms(chosenSymptoms);
     validateFirstDate(firstDate);
   }
 
