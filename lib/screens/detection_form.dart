@@ -103,7 +103,6 @@ class _SymptomsFormState extends State<SymptomsForm> {
 
         if (user.symptoms != null) {
           _step3Store
-            ..chosenSymptoms = user.symptoms
             ..firstDate = user.firstSymptomDate;
         }
       });
