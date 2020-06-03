@@ -39,6 +39,14 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>YES</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Your Location</string>
+	<key>NSLocationUsageDescription</key>
+	<string>Location ST</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Testing</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 </dict>
