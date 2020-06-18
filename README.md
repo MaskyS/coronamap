@@ -1,5 +1,5 @@
 # DepistazMu
-This was a project created at the outset of the coronavirus crisis in Mauritius.
+This was a project created at the outset of the coronavirus crisis in Mauritius & Reunion.
 
 <p align="center">
 <img src="20200330_135452-COLLAGE.jpg" height="600">
@@ -13,6 +13,7 @@ Features That Were Implemented:
   - Request essential supplies (food, gas, etc)
   - Analysis of symptoms to predict probability of testing positive
 
+Backend: Firestore + Mapbox
 ## Getting Started
 
 This project is a starting point for a Flutter application.
