@@ -1,6 +1,10 @@
-# depistazmu
+# DepistazMu
+This was a project created at the outset of the coronavirus crisis in Mauritius.
 
-A new Flutter project.
+Features That Were Implemented: 
+  - Reported cases heatmap
+  - Request essential supplies (food, gas, etc)
+  - Analysis of symptoms to predict probability of testing positive
 
 ## Getting Started
 
