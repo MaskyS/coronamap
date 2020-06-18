@@ -1,6 +1,13 @@
 # DepistazMu
 This was a project created at the outset of the coronavirus crisis in Mauritius.
 
+<p align="center">
+<img src="20200330_135452-COLLAGE.jpg" height="600">
+<img src="20200323_175012-COLLAGE.jpg" height="600">
+<img src="20200330_135535-COLLAGE.jpg" height="600">
+<img src="20200331_234315-COLLAGE.jpg" height="600">
+</p>
+
 Features That Were Implemented: 
   - Reported cases heatmap
   - Request essential supplies (food, gas, etc)
